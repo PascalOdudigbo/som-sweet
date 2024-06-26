@@ -1,5 +1,7 @@
+import { NavChildFooterLayout } from "@/components";
+
 export default function Home() {
   return (
-    <h1>HI</h1>
+    <NavChildFooterLayout children={<h1>Hi</h1>}/>
   );
 }

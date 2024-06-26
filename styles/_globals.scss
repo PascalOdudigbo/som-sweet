@@ -2,12 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kavoon&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 :root {
     --font-playfair: "Playfair Display", serif;
     --font-inter: "Inter", sans-serif;
     --font-kavoon:  "Kavoon", serif;
     --font-questrial: "Questrial", sans-serif;
+    --font-openSans:  "Open Sans", sans-serif;
 
     --color-periwinkle: #AFACFB;
     --color-black: #000000;
@@ -57,3 +59,31 @@ a {
         transform: translateY(0);
     }
 }
+
+
+// REUSABLES
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex_column_center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_row_center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
