@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev && sass --watch --update --style=expanded styles/scss:styles/css",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -21,6 +21,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "prisma": "^5.16.0",
+    "sass": "^1.77.6",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }
