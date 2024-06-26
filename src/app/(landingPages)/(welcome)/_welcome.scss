@@ -1,0 +1,41 @@
+.welcome_main_container {
+
+    .welcome_text_and_image_container {
+        background-color: var(--color-lavenderPink);
+        height: 90vh;
+        width: 90%;
+        justify-content: space-between;
+
+        .welcome_text_button_container {
+            width: 45%;
+            margin-left: 20px;
+            .welcome_text {
+                font-size: 68px;
+                margin-bottom: 20px;
+            }
+
+            .welcome_shop_button {
+                width: 120px;
+                height: 45px;
+                border-radius: 5px;
+                background-color: var(--color-periwinkle);
+                border: none;
+                font-family: var(--font-questrial);
+                font-size: 14px;
+
+                &:hover{
+                    background-color: var(--color-cerulean);
+                    color: white;
+                }
+            }
+        }
+
+        .welcome_image{
+            width: 48%;
+            height: 100%;
+            object-fit: scale-down;
+        }
+
+    }
+
+}
