@@ -6,13 +6,69 @@
         background-color: var(--color-periwinkle);
         width: 100%;
         height: 62.5px;
-        justify-content: space-around;
+        justify-content: space-between;
 
         .nav_site_title{
             font-family: var(--font-kavoon);
             font-size: 32px;
             font-weight: 800;
             color: var(--color-white);
+            margin-left: 40px;
+            cursor: pointer;
+        }
+
+        .nav_dropdown_cart_container{
+            justify-content: space-between;
+            width: 10%;
+            margin-right: 40px;
+
+            .nav_badge_cart_container{
+                .nav_badge{
+                    font-size: 14px;
+                    font-family: var(--font-kavoon);
+                }
+            }
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+
+    .nav_bottom_sub_container{
+        width: 100%;
+        justify-content: space-between;
+        height: 96px;
+
+        .nav_page_links_container{
+            width: 25%;
+            margin-left: 40px;
+            justify-content: space-between;
+
+            .nav_page_link{
+                font-family: var(--font-questrial);
+                font-size: 14px;
+
+                &:hover{
+                    color: var(--color-cerulean);
+                }
+            }
+            
+        }
+
+        .nav_socials_container{
+            width: 25%;
+            margin-right: 40px;
+            justify-content: space-between;
+
+            .nav_socials_link{
+                font-family: var(--font-questrial);
+                font-size: 14px;
+
+                &:hover{
+                    color: var(--color-cerulean);
+                }
+            }
         }
     }
 }
