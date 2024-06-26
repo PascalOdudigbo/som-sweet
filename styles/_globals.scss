@@ -85,5 +85,14 @@ a {
     align-items: center;
 }
 
+.playfair_shadow_title{
+    color: var(--color-white);
+    font-family: var(--font-playfair);
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 1px var(--color-black);
+}
+
 
 
