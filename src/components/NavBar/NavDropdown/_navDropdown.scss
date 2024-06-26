@@ -1,0 +1,59 @@
+.nav_dropdown_main_container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    .images_container {
+        width: 80px;
+        height: 28px;
+        justify-content: space-between;
+
+    }
+
+    .nav_content_container {
+        border: 1px solid var(--color-black);
+        background-color: var(--color-white);
+        width: 178px;
+        height: 238px;
+        position: absolute;
+        z-index: 1px;
+        display: none;
+
+        .nav_dropdown_item {
+            width: 140px;
+            height: 33px;
+            text-align: left;
+            font-family: var(--font-questrial);
+
+            &:hover{
+                color: var(--color-cerulean);
+            }
+        }
+
+        .nav_content_login_container {
+            border-top: 1px solid var(--color-black);
+            margin-top: 10px;
+
+            .nav_dropdown_logout_item {
+                width: 140px;
+                height: 33px;
+                text-align: left;
+                font-family: var(--font-questrial);
+                &:hover{
+                    color: red;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        .navArrowImage {
+            content: url('../../../assets/icons/downIcon.png');
+        }
+        
+        .nav_content_container{
+            display: flex;
+        }
+
+    }
+}
