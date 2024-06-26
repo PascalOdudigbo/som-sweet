@@ -7,7 +7,7 @@ function Footer() {
     <div className='footer_main_container flex_column_center'>
       <section className='footer_sub_container flex_row_center'>
         <section className='opening_hours_container flex_column'>
-          <h1 className='playfair_shadow_title'>OPENING HOURS</h1>
+          <h1 className='footer_section_title playfair_shadow_title'>OPENING HOURS</h1>
           <span className='flex_row_center'><p className='opening_hour'><b>Mon - Fri:</b> 9am - 6pm</p></span>
           <span className='flex_row_center'><p className='opening_hour'><b>Saturday:</b> 9am - 4pm</p></span>
           <span className='flex_row_center'><p className='opening_hour'><b>Sunday:</b> Closed</p></span>
@@ -21,10 +21,10 @@ function Footer() {
         </section>
 
         <section className='footer_contact_container'>
-          <h1 className='playfair_shadow_title'>PHONE</h1>
+          <h1 className='footer_section_title playfair_shadow_title'>PHONE</h1>
           <p className='footer_phone'>+44793870248</p>
 
-          <h1 className='playfair_shadow_title'>OUR LOCATION</h1>
+          <h1 className='footer_section_title playfair_shadow_title'>OUR LOCATION</h1>
           <p className='footer_location'>GL4 5XL, Old Rothman Road, Glasgow</p>
         </section>
 

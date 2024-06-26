@@ -7,3 +7,10 @@ export {default as cartIcon} from "./icons/cartIcon.png"
 
 export {default as cakeBg} from "./images/cakeBg.png"
 export {default as donutsBg} from "./images/donutsBg.png"
+export {default as berryBg} from "./images/berryBg.png";
+export {default as breadBg} from "./images/breadBg.png"
+export {default as breadBg2} from "./images/breadBg2.png"
+export {default as brownieBg} from "./images/brownieBg.png"
+
+export {default as aboutUsImg1} from "./images/aboutUsImg1.jpg"
+export {default as aboutUsImg2} from "./images/aboutUsImg2.jpg"

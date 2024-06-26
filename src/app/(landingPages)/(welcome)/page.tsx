@@ -2,10 +2,10 @@
 import React, {useState, useEffect} from 'react'
 import "./_welcome.scss"
 import Image from 'next/image'
-import {cakeBg, donutsBg} from '../../../assets'
+import {berryBg, breadBg, breadBg2, brownieBg, cakeBg, donutsBg} from '@/assets'
 
 function Welcome() {
-  const images = [cakeBg, donutsBg];
+  const images = [berryBg, breadBg, breadBg2, brownieBg, cakeBg, donutsBg];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

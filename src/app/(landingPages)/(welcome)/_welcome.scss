@@ -3,7 +3,7 @@
     .welcome_text_and_image_container {
         background-color: var(--color-lavenderPink);
         height: 90vh;
-        width: 90%;
+        width: 80%;
         justify-content: space-between;
 
         .welcome_text_button_container {
@@ -22,6 +22,7 @@
                 border: none;
                 font-family: var(--font-questrial);
                 font-size: 14px;
+                box-shadow: 1px 1px 1px var(--color-black);
 
                 &:hover{
                     background-color: var(--color-cerulean);
@@ -31,9 +32,11 @@
         }
 
         .welcome_image{
-            width: 48%;
+            width: 50%;
             height: 100%;
-            object-fit: scale-down;
+            object-fit: cover;
+            padding: 0;
+            right: 0;
         }
 
     }
