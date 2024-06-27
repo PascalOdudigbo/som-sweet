@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 function AboutUs() {
   return (
-    <main className='aboutus_main_container page_container flex_column_center'>
+    <main id="aboutus" className='aboutus_main_container page_container flex_column_center'>
       <p className='aboutus_page_title'>ABOUT US</p>
       <section className='aboutus_subsection1 flex_row'>
         <Image className='aboutus_img1' src={aboutUsImg1} alt='about us' />

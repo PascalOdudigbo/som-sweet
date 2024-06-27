@@ -10,29 +10,17 @@
             width: 45%;
             margin-left: 20px;
             .welcome_text {
-                font-size: 68px;
+                font-size: 58px;
                 margin-bottom: 20px;
             }
 
             .welcome_shop_button {
                 width: 120px;
-                height: 45px;
-                border-radius: 5px;
-                background-color: var(--color-periwinkle);
-                border: none;
-                font-family: var(--font-questrial);
-                font-size: 14px;
-                box-shadow: 1px 1px 1px var(--color-black);
-
-                &:hover{
-                    background-color: var(--color-cerulean);
-                    color: white;
-                }
             }
         }
 
         .welcome_image{
-            width: 50%;
+            width: 54%;
             height: 100%;
             object-fit: cover;
             padding: 0;

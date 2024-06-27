@@ -11,7 +11,7 @@ function Welcome() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(intervalId); // Clear interval on component unmount
   }, []);
@@ -22,7 +22,7 @@ function Welcome() {
       <section className='welcome_text_and_image_container flex_row_center'>
         <section className='welcome_text_button_container flex_column'>
           <h1 className='welcome_text playfair_shadow_title'>INDULGE IN THE SWEETEST MOMENTS</h1>
-          <button className='welcome_shop_button'>PLACE ORDER</button>
+          <button className='welcome_shop_button border_button'>PLACE ORDER</button>
         </section>
 
         <Image className='welcome_image' src={images[currentIndex]} alt='welcome'/>

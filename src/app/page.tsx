@@ -1,12 +1,12 @@
 import { NavChildFooterLayout } from "@/components";
-import {AboutUs, Welcome} from "./(landingPages)";
+import {AboutUs, ContactUs, Welcome} from "./(landingPages)";
 
 export default function Home() {
   return (
     <NavChildFooterLayout>
       <Welcome/>
       <AboutUs/>
-
+      <ContactUs/>
     </NavChildFooterLayout>
   );
 }

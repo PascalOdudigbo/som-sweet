@@ -17,6 +17,7 @@
     --color-grey: #AAAAAA;
     --color-cerulean: #007991;
     --color-white: #FFFFFF;
+    --color-red: #FD0C29;
 }
 
 * {
@@ -113,4 +114,20 @@ a {
     width: 100%;
     min-height: 100vh;
 
+}
+
+.border_button {
+    width: 120px;
+    height: 45px;
+    border-radius: 5px;
+    background-color: var(--color-periwinkle);
+    border: none;
+    font-family: var(--font-questrial);
+    font-size: 14px;
+    box-shadow: 1px 1px 1px var(--color-black);
+
+    &:hover{
+        background-color: var(--color-cerulean);
+        color: white;
+    }
 }
