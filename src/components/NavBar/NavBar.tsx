@@ -28,14 +28,14 @@ function NavBar() {
         <section className='nav_page_links_container flex_row'>
           <Link className='nav_page_link' href="/">HOME</Link>
           <Link className='nav_page_link' href="/store">STORE</Link>
-          <Link className='nav_page_link' href="#aboutus">ABOUT US</Link>
+          <Link className='nav_page_link' href="/#aboutus">ABOUT US</Link>
           <Link className='nav_page_link' href="/#contactus">CONTACT US</Link>
         </section>
 
         <section className='nav_socials_container flex_row'>
           <Link className='nav_socials_link' href="/">INSTAGRAM</Link>
           <Link className='nav_socials_link' href="/store">FACEBOOK</Link>
-          <Link className='nav_socials_link' href="#aboutus">TIKTOK</Link>
+          <Link className='nav_socials_link' href="/#aboutus">TIKTOK</Link>
           <Link className='nav_socials_link' href="/#contactus">YOITUBE</Link>
         </section>
 

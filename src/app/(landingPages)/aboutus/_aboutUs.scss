@@ -1,66 +1,83 @@
-.aboutus_main_container{
+.aboutus_main_container {
+    @keyframes left_to_right {
+        from {
+            position: absolute;
+            top:0;
+            left: 0;
+        }
 
-    .aboutus_page_title{
+        to {
+            position: relative;
+            top:auto;
+            left: auto;
+        }
+
+    }
+
+    .aboutus_page_title {
         font-family: var(--font-questrial);
         font-size: 30px;
     }
 
-    .aboutus_subsection1{
+    .aboutus_subsection1 {
         width: 100%;
         margin-top: 30px;
         justify-content: space-evenly;
 
-        .aboutus_img1{
+        .aboutus_img1 {
             width: 480px;
             height: 680px;
             object-fit: scale-down;
         }
 
-        .top_text_section{
+        .top_text_section {
             width: 40%;
 
-            .top_text_section_title{
+            .top_text_section_title {
                 font-size: 40px;
                 text-align: right;
             }
 
-            .top_text_section_text{
+            .top_text_section_text {
                 font-family: var(--font-questrial);
                 font-size: 28px;
                 text-align: right;
+                animation-name: left_to_right;
+                animation-duration: 4s;
             }
         }
 
-        
+
     }
 
-    .aboutus_subsection2{
+    .aboutus_subsection2 {
         width: 100%;
         margin-top: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 5%;
         justify-content: space-evenly;
 
-        .aboutus_img2{
+        .aboutus_img2 {
             width: 480px;
             height: 680px;
             object-fit: scale-down;
         }
 
-        .bottom_text_section{
+        .bottom_text_section {
             width: 40%;
 
-            .bottom_text_section_title{
+            .bottom_text_section_title {
                 font-size: 40px;
                 text-align: left;
+                
             }
 
-            .bottom_text_section_text{
+            .bottom_text_section_text {
                 font-family: var(--font-questrial);
                 font-size: 28px;
                 text-align: left;
             }
         }
 
-        
+
     }
 }

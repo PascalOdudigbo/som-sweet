@@ -9,20 +9,21 @@
 
     .latestTreats_page_text {
         font-family: var(--font-questrial);
-        font-size: 28px;
+        font-size: 24px;
         text-align: center;
+        width: 80%;
     }
 
-    .products_container{
+    .products_container {
         width: 90%;
         margin-top: 40px;
         justify-content: space-evenly;
         ;
     }
 
-    .view_all_button{
+    .view_all_button {
         margin-top: 20px;
-        margin-bottom: 10%;
+        margin-bottom: 5%;
         width: 132px;
     }
 }

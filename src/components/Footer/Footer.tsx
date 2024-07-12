@@ -17,7 +17,7 @@ function Footer() {
           <Link className='footer_link' href="/store">Store</Link>
           <Link className='footer_link' href="/#aboutus">About Us</Link>
           <Link className='footer_link' href="">Store Policies</Link>
-          <Link className='footer_link' href="/contact-us">Contact Us</Link>
+          <Link className='footer_link' href="/#contactus">Contact Us</Link>
         </section>
 
         <section className='footer_contact_container'>

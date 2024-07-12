@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -31,6 +28,7 @@ model User {
   addresses Address[]
   orders    Order[]
   reviews   ProductReview[]
+  wishlist  String[]  // New wishlist field
 }
 
 model Address {
@@ -49,9 +47,11 @@ model Address {
 }
 
 model Category {
-  id       Int       @id @default(autoincrement())
-  name     String
-  products Product[]
+  id           Int       @id @default(autoincrement())
+  name         String
+  image        String    // New image field
+  imagePublicId String   // New imagePublicId field
+  products     Product[]
 }
 
 model Product {
@@ -67,14 +67,30 @@ model Product {
   images      ProductImage[]
   reviews     ProductReview[]
   orderItems  OrderItem[]
+  offers      Offer[]           // New offers field
+}
+
+model Offer {
+  id            Int       @id @default(autoincrement())
+  productId     Int
+  name          String
+  discountPercentage         Float
+  description   String
+  validFrom     DateTime  @default(now())
+  validUntil    DateTime  
+  image         String    // New image field
+  imagePublicId String    // New imagePublicId field
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model ProductVariation {
   id            Int              @id @default(autoincrement())
   productId     Int
   name          String
-  price         Float
-  stock         Int              @default(0)
+  discountPercentage         Float
+  validFrom     DateTime              @default(now())
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
   product       Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
@@ -82,12 +98,12 @@ model ProductVariation {
 }
 
 model ProductImage {
-  id        Int      @id @default(autoincrement())
-  productId Int
-  imageUrl  String
+  id            Int      @id @default(autoincrement())
+  productId     Int
+  imageUrl      String
   imagePublicId String
-  createdAt DateTime @default(now())
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model ProductReview {
@@ -162,4 +178,22 @@ model Return {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   orderItem    OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
+}
+
+model SocialMediaLink { // New model for social media links
+  id            Int       @id @default(autoincrement())
+  platform      String    // e.g., Facebook, Twitter, etc.
+  url           String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Business { // Business model to link with social media links
+  id              Int               @id @default(autoincrement())
+  name            String
+  welcomeText     String?
+  phone           String
+  location        String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 }
