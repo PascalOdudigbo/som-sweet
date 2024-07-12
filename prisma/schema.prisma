@@ -10,25 +10,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Role {
-  id        Int    @id @default(autoincrement())
-  roleName  String
-  users     User[]
+model User {
+  id            Int             @id @default(autoincrement())
+  username      String          @unique
+  email         String          @unique
+  password      String
+  roleId        Int
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  role          Role            @relation(fields: [roleId], references: [id])
+  addresses     Address[]
+  orders        Order[]
+  reviews       ProductReview[]
+  wishlist      Product[]       @relation("UserWishlist")
+  stripeCustomerId String?
 }
 
-model User {
-  id        Int       @id @default(autoincrement())
-  username  String    @unique
-  email     String    @unique
-  password  String
-  roleId    Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  role      Role      @relation(fields: [roleId], references: [id])
-  addresses Address[]
-  orders    Order[]
-  reviews   ProductReview[]
-  wishlist  String[]  // New wishlist field
+model Role {
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+  users    User[]
 }
 
 model Address {
@@ -47,11 +48,11 @@ model Address {
 }
 
 model Category {
-  id           Int       @id @default(autoincrement())
-  name         String
-  image        String    // New image field
-  imagePublicId String   // New imagePublicId field
-  products     Product[]
+  id            Int       @id @default(autoincrement())
+  name          String    @unique
+  image         String
+  imagePublicId String
+  products      Product[]
 }
 
 model Product {
@@ -60,41 +61,27 @@ model Product {
   description String?
   basePrice   Float
   categoryId  Int
+  active      Boolean           @default(true)
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
-  category    Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category    Category          @relation(fields: [categoryId], references: [id])
   variations  ProductVariation[]
   images      ProductImage[]
   reviews     ProductReview[]
   orderItems  OrderItem[]
-  offers      Offer[]           // New offers field
-}
-
-model Offer {
-  id            Int       @id @default(autoincrement())
-  productId     Int
-  name          String
-  discountPercentage         Float
-  description   String
-  validFrom     DateTime  @default(now())
-  validUntil    DateTime  
-  image         String    // New image field
-  imagePublicId String    // New imagePublicId field
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  discounts   Discount[]
+  wishlistedBy User[]           @relation("UserWishlist")
 }
 
 model ProductVariation {
-  id            Int              @id @default(autoincrement())
-  productId     Int
-  name          String
-  discountPercentage         Float
-  validFrom     DateTime              @default(now())
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-  product       Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
-  orderItems    OrderItem[]
+  id        Int        @id @default(autoincrement())
+  productId Int
+  name      String
+  price     Float
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  product   Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
 }
 
 model ProductImage {
@@ -106,11 +93,26 @@ model ProductImage {
   product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
+model Discount {
+  id              Int      @id @default(autoincrement())
+  productId       Int
+  name            String
+  description     String?
+  discountPercent Float
+  validFrom       DateTime @default(now())
+  validUntil      DateTime
+  imageUrl        String?
+  imagePublicId   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  product         Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
 model ProductReview {
   id        Int      @id @default(autoincrement())
   productId Int
   userId    Int
-  rating    Int      
+  rating    Int
   review    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -119,81 +121,60 @@ model ProductReview {
 }
 
 model Order {
-  id               Int         @id @default(autoincrement())
-  userId           Int
-  total            Float
-  status           String      @default("Pending")
+  id                Int         @id @default(autoincrement())
+  userId            Int
+  total             Float
+  status            String      @default("Pending")
   shippingAddressId Int
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  shippingAddress  Address     @relation(fields: [shippingAddressId], references: [id], onDelete: Cascade)
-  orderItems       OrderItem[]
-  payments         Payment[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingAddress   Address     @relation(fields: [shippingAddressId], references: [id])
+  orderItems        OrderItem[]
+  payment           Payment?
 }
 
 model OrderItem {
-  id          Int             @id @default(autoincrement())
+  id          Int               @id @default(autoincrement())
   orderId     Int
   productId   Int
   variationId Int?
   quantity    Int
   price       Float
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
-  order       Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product     Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
-  variation   ProductVariation? @relation(fields: [variationId], references: [id], onDelete: Cascade)
-  returns     Return[]
+  customText  String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  order       Order             @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product     Product           @relation(fields: [productId], references: [id])
+  variation   ProductVariation? @relation(fields: [variationId], references: [id])
 }
 
 model Payment {
-  id              Int       @id @default(autoincrement())
-  orderId         Int
+  id              Int      @id @default(autoincrement())
+  orderId         Int      @unique
   stripePaymentId String
   amount          Float
   currency        String
   status          String
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  order           Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  refunds         Refund[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  order           Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
 }
 
-model Refund {
-  id            Int       @id @default(autoincrement())
-  paymentId     Int
-  stripeRefundId String
-  amount        Float
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  payment       Payment   @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+model Business {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?
+  phone       String
+  email       String
+  address     String
+  socialLinks SocialMedia[]
 }
 
-model Return {
-  id           Int       @id @default(autoincrement())
-  orderItemId  Int
-  reason       String
-  status       String    @default("Pending")
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  orderItem    OrderItem @relation(fields: [orderItemId], references: [id], onDelete: Cascade)
-}
-
-model SocialMediaLink { // New model for social media links
-  id            Int       @id @default(autoincrement())
-  platform      String    // e.g., Facebook, Twitter, etc.
-  url           String
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-}
-
-model Business { // Business model to link with social media links
-  id              Int               @id @default(autoincrement())
-  name            String
-  welcomeText     String?
-  phone           String
-  location        String
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+model SocialMedia {
+  id         Int      @id @default(autoincrement())
+  businessId Int
+  name       String
+  url        String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }

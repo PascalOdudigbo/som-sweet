@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { discountPhoto } from '@/assets'
 import Image from 'next/image'
 import "./_store.scss"
-import { CategoryType, OfferType, ProductType } from '../utils/allModelTypes'
-import { testCategories, testOffers, testProducts } from '../utils/allTestData'
+import { CategoryType, DiscountType, ProductType } from '../utils/allModelTypes'
+import { testCategories, testDiscounts, testProducts } from '../utils/allTestData'
 import Category from '@/components/Category/Category'
 import { filterIcon } from '@/assets'
 
 function Store() {
-  const [offers, setOffers] = useState<OfferType[]>(testOffers)
-  const [targetOffer, setTargetOffer] = useState<OfferType>(offers[0])
+  const [discounts, setDiscounts] = useState<DiscountType[]>(testDiscounts)
+  const [targetDiscount, setTargetDiscount] = useState<DiscountType>(discounts[0])
   const [categories, setCategories] = useState<CategoryType[]>(testCategories)
   const [products, setProducts] = useState<ProductType[]>(testProducts)
 
@@ -20,10 +20,10 @@ function Store() {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTargetOffer(targetOffer => {
-        const currentIndex = offers.indexOf(targetOffer);
-        const nextIndex = (currentIndex + 1) % offers.length;
-        return offers[nextIndex];
+      setTargetDiscount(targetDiscount => {
+        const currentIndex = discounts.indexOf(targetDiscount);
+        const nextIndex = (currentIndex + 1) % discounts.length;
+        return discounts[nextIndex];
       });
     }, 6000);
 
@@ -39,8 +39,8 @@ function Store() {
           <h1 className='section_title'>OFFERS</h1>
 
           <div className='image_title_button_container flex_column_center'>
-            <h1 className='offer_name playfair_shadow_title'>{targetOffer.name}</h1>
-            <img className='offer_image' src={targetOffer.image} alt={targetOffer.name} title={targetOffer.description} />
+            <h1 className='offer_name playfair_shadow_title'>{targetDiscount.name}</h1>
+            <img className='offer_image' src={targetDiscount.imageUrl} alt={targetDiscount.name} title={targetDiscount.description} />
             <button className='shop_offers_button border_button'>SHOP NOW</button>
           </div>
         </section>

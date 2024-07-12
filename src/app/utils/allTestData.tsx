@@ -1,4 +1,4 @@
-import { CategoryType, OfferType, ProductType } from "./allModelTypes";
+import { CategoryType, DiscountType, ProductType } from "./allModelTypes";
 
 export const testProducts: ProductType[] = [
     {
@@ -7,6 +7,7 @@ export const testProducts: ProductType[] = [
         description: "A rich and moist Strawberry cake.",
         basePrice: 20.0,
         categoryId: 1,
+        active: true,
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-06-01T00:00:00Z"),
         images: [
@@ -25,6 +26,7 @@ export const testProducts: ProductType[] = [
         description: "A classic glazed donut.",
         basePrice: 2.5,
         categoryId: 2,
+        active: true,
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-06-01T00:00:00Z"),
         images: [
@@ -43,6 +45,7 @@ export const testProducts: ProductType[] = [
         description: "A light and airy chocolate fudge shortcake.",
         basePrice: 18.0,
         categoryId: 1,
+        active: true,
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-06-01T00:00:00Z"),
         images: [
@@ -61,6 +64,7 @@ export const testProducts: ProductType[] = [
         description: "A flavourful cake packed with fresh orange goodness.",
         basePrice: 3.0,
         categoryId: 3,
+        active: true,
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-06-01T00:00:00Z"),
         images: [
@@ -79,6 +83,7 @@ export const testProducts: ProductType[] = [
         description: "A classic French baguette with a crispy crust.",
         basePrice: 3.5,
         categoryId: 4,
+        active: true,
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-06-01T00:00:00Z"),
         images: [
@@ -97,6 +102,7 @@ export const testProducts: ProductType[] = [
         description: "A sweet roll with cinnamon and icing.",
         basePrice: 4.0,
         categoryId: 5,
+        active: true,
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-06-01T00:00:00Z"),
         images: [
@@ -174,16 +180,16 @@ export const testCategories: CategoryType[] = [
 ];
 
 
-export const testOffers: OfferType[] = [
+export const testDiscounts: DiscountType[] = [
     {
         id: 1,
         productId: 1,
         name: "Summer Special",
-        discountPercentage: 20,
+        discountPercent: 20,
         description: "Get 20% off on all cakes during the summer season!",
         validFrom: new Date("2023-06-01T00:00:00Z"),
         validUntil: new Date("2023-08-31T23:59:59Z"),
-        image: "https://realfood.tesco.com/media/images/Honeycomb-CakeLGH-3b066737-5935-4812-83c7-1457ed599010-0-1400x919.jpg",
+        imageUrl: "https://realfood.tesco.com/media/images/Honeycomb-CakeLGH-3b066737-5935-4812-83c7-1457ed599010-0-1400x919.jpg",
         imagePublicId: "summer-special",
         createdAt: new Date("2023-05-25T00:00:00Z"),
         updatedAt: new Date("2023-05-25T00:00:00Z"),
@@ -192,11 +198,11 @@ export const testOffers: OfferType[] = [
         id: 2,
         productId: 2,
         name: "Buy One Get One Free",
-        discountPercentage: 50,
+        discountPercent: 50,
         description: "Buy one glazed donut and get another one for free!",
         validFrom: new Date("2023-01-01T00:00:00Z"),
         validUntil: new Date("2023-12-31T23:59:59Z"),
-        image: "https://www.moneysavingexpert.com/content/dam/krispykreme.jpg",
+        imageUrl: "https://www.moneysavingexpert.com/content/dam/krispykreme.jpg",
         imagePublicId: "bogo-donut",
         createdAt: new Date("2023-01-01T00:00:00Z"),
         updatedAt: new Date("2023-01-01T00:00:00Z"),
@@ -205,13 +211,89 @@ export const testOffers: OfferType[] = [
         id: 3,
         productId: 4,
         name: "Holiday Special",
-        discountPercentage: 15,
+        discountPercent: 15,
         description: "Enjoy a 15% discount on all cupcakes this holiday season!",
         validFrom: new Date("2023-12-01T00:00:00Z"),
         validUntil: new Date("2023-12-31T23:59:59Z"),
-        image: "https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2024-06/national-cupcake-day-te-240610-72bdcd.jpg",
+        imageUrl: "https://media-cldnry.s-nbcnews.com/image/upload/rockcms/2024-06/national-cupcake-day-te-240610-72bdcd.jpg",
         imagePublicId: "holiday-cupcakes",
         createdAt: new Date("2023-11-15T00:00:00Z"),
         updatedAt: new Date("2023-11-15T00:00:00Z"),
     }
 ];
+
+export const testStrawberryCake: ProductType = {
+    id: 1,
+    name: "Strawberry Cake",
+    description: "A delightful, moist cake bursting with fresh strawberry flavor, layered with smooth cream cheese frosting, and adorned with juicy strawberry slices.",
+    basePrice: 30.0,
+    categoryId: 1,
+    active: true,
+    createdAt: new Date("2023-01-01T00:00:00Z"),
+    updatedAt: new Date("2023-07-15T00:00:00Z"),
+    variations: [
+      {
+        id: 1,
+        productId: 1,
+        name: "1kg",
+        price: 30.0,
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+        updatedAt: new Date("2023-01-01T00:00:00Z"),
+      },
+      {
+        id: 2,
+        productId: 1,
+        name: "1.5kg",
+        price: 45.0,
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+        updatedAt: new Date("2023-01-01T00:00:00Z"),
+      },
+      {
+        id: 3,
+        productId: 1,
+        name: "2kg",
+        price: 60.0,
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+        updatedAt: new Date("2023-01-01T00:00:00Z"),
+      },
+      {
+        id: 4,
+        productId: 1,
+        name: "2.5kg",
+        price: 75.0,
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+        updatedAt: new Date("2023-01-01T00:00:00Z"),
+      },
+      {
+        id: 5,
+        productId: 1,
+        name: "3kg",
+        price: 90.0,
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+        updatedAt: new Date("2023-01-01T00:00:00Z"),
+      },
+    ],
+    images: [
+      {
+        id: 1,
+        productId: 1,
+        imageUrl: "https://example.com/strawberry-cake-whole.jpg",
+        imagePublicId: "strawberry-cake-whole",
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+      },
+      {
+        id: 2,
+        productId: 1,
+        imageUrl: "https://example.com/strawberry-cake-slice.jpg",
+        imagePublicId: "strawberry-cake-slice",
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+      },
+      {
+        id: 3,
+        productId: 1,
+        imageUrl: "https://example.com/strawberry-cake-closeup.jpg",
+        imagePublicId: "strawberry-cake-closeup",
+        createdAt: new Date("2023-01-01T00:00:00Z"),
+      },
+    ],
+  };

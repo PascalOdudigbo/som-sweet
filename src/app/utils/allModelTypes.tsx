@@ -1,6 +1,6 @@
 export type RoleType = {
   id: number;
-  roleName: string;
+  name: string;
   users?: UserType[];
 };
 
@@ -16,14 +16,15 @@ export type UserType = {
   addresses?: AddressType[];
   orders?: OrderType[];
   reviews?: ProductReviewType[];
-  wishlist?: string[];
+  wishlist?: ProductType[];
+  stripeCustomerId?: string;
 };
 
 export type AddressType = {
   id: number;
   userId: number;
   addressLine1: string;
-  addressLine2?: string | null;
+  addressLine2?: string;
   city: string;
   state: string;
   postalCode: string;
@@ -45,9 +46,10 @@ export type CategoryType = {
 export type ProductType = {
   id: number;
   name: string;
-  description?: string | null;
+  description?: string;
   basePrice: number;
   categoryId: number;
+  active: boolean;
   createdAt: Date;
   updatedAt: Date;
   category?: CategoryType;
@@ -55,21 +57,8 @@ export type ProductType = {
   images?: ProductImageType[];
   reviews?: ProductReviewType[];
   orderItems?: OrderItemType[];
-  offers?: OfferType[];
-};
-
-export type OfferType = {
-  id: number;
-  productId: number;
-  name: string;
-  discountPercentage: number;
-  description: string;
-  validFrom: Date;
-  validUntil: Date;
-  image: string;
-  imagePublicId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  discounts?: DiscountType[];
+  wishlistedBy?: UserType[];
 };
 
 export type ProductVariationType = {
@@ -77,7 +66,6 @@ export type ProductVariationType = {
   productId: number;
   name: string;
   price: number;
-  stock: number;
   createdAt: Date;
   updatedAt: Date;
   product?: ProductType;
@@ -93,12 +81,27 @@ export type ProductImageType = {
   product?: ProductType;
 };
 
+export type DiscountType = {
+  id: number;
+  productId: number;
+  name: string;
+  description?: string;
+  discountPercent: number;
+  validFrom: Date;
+  validUntil: Date;
+  imageUrl?: string;
+  imagePublicId?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  product?: ProductType;
+};
+
 export type ProductReviewType = {
   id: number;
   productId: number;
   userId: number;
   rating: number;
-  review?: string | null;
+  review?: string;
   createdAt: Date;
   updatedAt: Date;
   product?: ProductType;
@@ -116,22 +119,22 @@ export type OrderType = {
   user?: UserType;
   shippingAddress?: AddressType;
   orderItems?: OrderItemType[];
-  payments?: PaymentType[];
+  payment?: PaymentType;
 };
 
 export type OrderItemType = {
   id: number;
   orderId: number;
   productId: number;
-  variationId?: number | null;
+  variationId?: number;
   quantity: number;
   price: number;
+  customText?: string;
   createdAt: Date;
   updatedAt: Date;
   order?: OrderType;
   product?: ProductType;
-  variation?: ProductVariationType | null;
-  returns?: ReturnType[];
+  variation?: ProductVariationType;
 };
 
 export type PaymentType = {
@@ -144,43 +147,22 @@ export type PaymentType = {
   createdAt: Date;
   updatedAt: Date;
   order?: OrderType;
-  refunds?: RefundType[];
-};
-
-export type RefundType = {
-  id: number;
-  paymentId: number;
-  stripeRefundId: string;
-  amount: number;
-  createdAt: Date;
-  updatedAt: Date;
-  payment?: PaymentType;
-};
-
-export type ReturnType = {
-  id: number;
-  orderItemId: number;
-  reason: string;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-  orderItem?: OrderItemType;
-};
-
-export type SocialMediaLinkType = {
-  id: number;
-  platform: string;
-  url: string;
-  createdAt: Date;
-  updatedAt: Date;
 };
 
 export type BusinessType = {
   id: number;
   name: string;
-  welcomeText?: string | null;
+  description?: string;
   phone: string;
-  location: string;
-  createdAt: Date;
-  updatedAt: Date;
+  email: string;
+  address: string;
+  socialLinks?: SocialMediaType[];
+};
+
+export type SocialMediaType = {
+  id: number;
+  businessId: number;
+  name: string;
+  url: string;
+  business?: BusinessType;
 };
