@@ -7,6 +7,7 @@ export {default as FormInput} from "./FormInput/FormInput";
 export {default as TextArea} from "./TextArea/TextArea";
 export {default as Product} from "./Product/Product";
 export {default as Category} from "./Category/Category";
-
+export {default as CustomRating} from "./CustomRating/CustomRating";
+export {default as MinimizableLayout} from "./layouts/MinimizableLayout/MinimizableLayout";
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

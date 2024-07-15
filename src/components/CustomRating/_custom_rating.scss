@@ -1,0 +1,17 @@
+.rating_wrapper{
+    width: 155px;
+    margin-bottom: 10px;
+
+    .rating_text {
+        font-family: var(--font-questrial);
+        font-size: 18px;
+        text-align: left;
+        width: 80%;
+    }
+
+    .rating{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

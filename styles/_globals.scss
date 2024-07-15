@@ -11,13 +11,13 @@
     --font-questrial: "Questrial", sans-serif;
     --font-openSans:  "Open Sans", sans-serif;
 
-    --color-periwinkle: #AFACFB;
+    --color-periwinkle: #B8B5E4;
     --color-black: #000000;
-    --color-lavenderPink: #FFBEE6;
+    --color-lavenderPink: #FFD1EC;
     --color-grey: #AAAAAA;
     --color-dark_grey: #5C5C5C;
-    --color-cerulean: #007991;
-    --color-white: #FFFFFF;
+    --color-cerulean: #FF4D8D;
+    --color-white: #F9F9F9;
     --color-red: #FD0C29;
 }
 
@@ -133,6 +133,21 @@ a {
     }
 }
 
+.custom_button {
+    width: 120px;
+    height: 45px;
+    background-color: var(--color-periwinkle);
+    border: none;
+    font-family: var(--font-questrial);
+    font-size: 14px;
+    box-shadow: 1px 1px 1px var(--color-black);
+
+    &:hover{
+        background-color: var(--color-cerulean);
+        color: white;
+    }
+}
+
 .border_button_void {
     width: 120px;
     height: 45px;
@@ -153,3 +168,14 @@ a {
     font-family: var(--font-questrial);
     margin-bottom: 20px;
 }
+
+.active_border{
+    border: 2px solid var(--color-cerulean);
+}
+
+.active_link{
+    font-weight: bold;
+    color: var(--color-cerulean);
+}
+
+

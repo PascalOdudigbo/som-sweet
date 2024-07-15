@@ -165,6 +165,7 @@ model Business {
   id          Int           @id @default(autoincrement())
   name        String
   description String?
+  refundsPolicy String?
   phone       String
   email       String
   address     String

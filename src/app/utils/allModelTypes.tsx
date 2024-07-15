@@ -153,6 +153,7 @@ export type BusinessType = {
   id: number;
   name: string;
   description?: string;
+  refundsPolicy?: string;
   phone: string;
   email: string;
   address: string;
