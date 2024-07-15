@@ -42,7 +42,8 @@ function NavDropdown() {
         <DropdownItem text="My Account" path="/" />
 
         <section className='nav_content_login_container flex_column_center'>
-          <DropdownItem text="Login" path="/login" />
+          <DropdownItem text="Sign in" path="/signin" />
+          <DropdownItem text="Sign up" path="/signup" />
           <DropdownLogoutItem text="Log Out" path="/logout" />
         </section>
       </section>

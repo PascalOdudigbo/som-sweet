@@ -178,4 +178,35 @@ a {
     color: var(--color-cerulean);
 }
 
+.form_title {
+    font-family: var(--font-questrial);
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    margin-bottom: 40px;
+}
+
+.custom_large_button {
+    display: flex;
+    width: 100%;
+    height: 56px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 56px;
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.25) inset;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 32px;
+    background-color: var(--color-periwinkle);
+    border: none;
+    font-family: var(--font-questrial);
+
+    &:hover {
+        background-color: var(--color-cerulean);
+        color: white;
+    }
+}
+
 
