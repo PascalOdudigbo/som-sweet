@@ -1,9 +1,12 @@
+'use client'
 import React from 'react'
 import "./_latestTreats.scss"
 import { testProducts } from '@/app/utils/allTestData';
 import { Product } from '@/components';
+import { useRouter } from 'next/navigation';
 
 function LatestTreats() {
+    const route = useRouter()
     return (
         <main className='latestTreats_main_container page_container flex_column_center'>
             <p className='latestTreats_page_title'>OUR LATEST TREATS</p>
@@ -20,7 +23,7 @@ function LatestTreats() {
                 }
             </section>
 
-            <button className='view_all_button border_button'>VIEW ALL TREATS</button>
+            <button className='view_all_button border_button' onClick={()=>{route.push("/store/#products")}}>VIEW ALL TREATS</button>
 
 
         </main>

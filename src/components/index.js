@@ -9,5 +9,6 @@ export {default as Product} from "./Product/Product";
 export {default as Category} from "./Category/Category";
 export {default as CustomRating} from "./CustomRating/CustomRating";
 export {default as MinimizableLayout} from "./layouts/MinimizableLayout/MinimizableLayout";
+export {default as Recommendations} from "./Recommendations/Recommendations";
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

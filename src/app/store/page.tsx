@@ -69,7 +69,7 @@ function Store() {
           </div>
         </section>
 
-        <section className='shop_products_container flex_column_center'>
+        <section id='products' className='shop_products_container flex_column_center'>
           <div className='section_title_dropdown_container flex_row_center'>
             <h1 className='section_title'>EXPLORE OUR TASTY TREATS</h1>
             <Image className='filter_icon' src={filterIcon} alt='filter icon' title='Filter' />

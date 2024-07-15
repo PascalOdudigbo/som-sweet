@@ -5,7 +5,7 @@ import Image from 'next/image'
 import {berryBg, breadBg, breadBg2, brownieBg, cakeBg, donutsBg} from '@/assets'
 
 function Welcome() {
-  const images = [berryBg, breadBg, breadBg2, brownieBg, cakeBg, donutsBg];
+  const images = [cakeBg, brownieBg, donutsBg, breadBg, breadBg2, berryBg];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import './_product.scss'
 import Image from 'next/image'
 import { paymentsBg } from '@/assets'
-import { CustomRating, MinimizableLayout, NavChildFooterLayout, TextArea } from '@/components'
+import { CustomRating, MinimizableLayout, NavChildFooterLayout, Recommendations, TextArea } from '@/components'
 import { minusIcon, addIcon } from '@/assets'
 import { GetServerSideProps, NextPage } from 'next'
 import { useParams } from 'next/navigation'
@@ -179,8 +179,9 @@ function Product () {
 
 
           </section>
-
         </section>
+
+        <Recommendations product={product}/>
 
 
       </main>
