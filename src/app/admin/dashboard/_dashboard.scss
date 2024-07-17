@@ -1,0 +1,99 @@
+.portal_wrapper {
+  width: 100%;
+  height: 100vh;
+
+  .dashboard_content {
+    width: 98%;
+    height: 100vh;
+    padding: 2rem;
+    overflow-y: auto;
+
+    .dashboard_title {
+      margin-bottom: 3rem;
+      color: var(--color-black);
+    }
+
+    .dashboard_grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+
+      .dashboard_card {
+        background-color: var(--color-lavenderPink);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+        }
+
+        h2 {
+          font-family: var(--font-inter);
+          font-size: 1.2rem;
+          margin-bottom: 1rem;
+          color: #444;
+        }
+
+        p {
+          font-family: var(--font-inter);
+          margin: 0.5rem 0;
+          color: #666;
+        }
+
+        .dashboard_icon {
+          font-size: 2rem;
+          color: #FF4D8D;
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    .dashboard_chart {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+
+      h2 {
+        font-family: var(--font-questrial);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #444;
+      }
+    }
+
+    .dashboard_recent_activity {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      h2 {
+        font-family: var(--font-questrial);
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #444;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+          font-family: var(--font-inter);
+          padding: 0.5rem 0;
+          border-bottom: 1px solid #eee;
+          color: #666;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}

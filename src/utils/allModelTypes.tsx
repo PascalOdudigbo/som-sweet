@@ -10,6 +10,7 @@ export type UserType = {
   email: string;
   password: string;
   roleId: number;
+  active: boolean;
   createdAt: Date;
   updatedAt: Date;
   role?: RoleType;

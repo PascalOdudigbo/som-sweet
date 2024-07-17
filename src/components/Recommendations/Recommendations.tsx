@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import "./_recommendations.scss"
-import { testProducts } from '@/app/utils/allTestData';
+import { testProducts } from '@/utils/allTestData';
 import { Product } from '@/components';
-import { OrderType, ProductType } from '@/app/utils/allModelTypes';
+import { OrderType, ProductType } from '@/utils/allModelTypes';
 
 // Defining the Recommendations component props type
 interface RecommendationsType {

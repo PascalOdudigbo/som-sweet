@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import "./_latestTreats.scss"
-import { testProducts } from '@/app/utils/allTestData';
+import { testProducts } from '@/utils/allTestData';
 import { Product } from '@/components';
 import { useRouter } from 'next/navigation';
 

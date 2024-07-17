@@ -1,4 +1,4 @@
-import { CategoryType } from '@/app/utils/allModelTypes'
+import { CategoryType } from '@/utils/allModelTypes'
 import React from 'react'
 import "./_category.scss"
 

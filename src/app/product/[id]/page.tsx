@@ -1,6 +1,6 @@
 'use client'
-import { ProductImageType, ProductType, ProductVariationType } from '@/app/utils/allModelTypes'
-import { testBusiness, testProducts } from '@/app/utils/allTestData'
+import { ProductImageType, ProductType, ProductVariationType } from '@/utils/allModelTypes'
+import { testBusiness, testProducts } from '@/utils/allTestData'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import './_product.scss'
 import Image from 'next/image'

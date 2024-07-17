@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { discountPhoto } from '@/assets'
 import Image from 'next/image'
 import "./_store.scss"
-import { CategoryType, DiscountType, ProductType } from '../utils/allModelTypes'
-import { testCategories, testDiscounts, testProducts } from '../utils/allTestData'
+import { CategoryType, DiscountType, ProductType } from '../../utils/allModelTypes'
+import { testCategories, testDiscounts, testProducts } from '../../utils/allTestData'
 import Category from '@/components/Category/Category'
 import { filterIcon } from '@/assets'
 

@@ -1,5 +1,5 @@
 'use client'
-import { ProductType } from '@/app/utils/allModelTypes';
+import { ProductType } from '@/utils/allModelTypes';
 import Image from 'next/image';
 import React, { useMemo } from 'react'
 import "./_product.scss";
