@@ -4,7 +4,10 @@
     background-color: var(--color-white);
     border-radius: 5px;
     justify-content: space-between;
-    
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .searchIcon{
+        margin-left: 4px;
+    }
     .search_input{
         border: none;
         height: 32px;
@@ -18,7 +21,7 @@
         }
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus, &:active {
         border: 1px solid var(--color-black);
     }
 }

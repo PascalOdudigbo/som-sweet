@@ -15,7 +15,7 @@
     --color-black: #000000;
     --color-lavenderPink: #FFD1EC;
     --color-grey: #AAAAAA;
-    --color-dark_grey: #5C5C5C;
+    --color-dark_grey: #444;
     --color-cerulean: #FF4D8D;
     --color-white: #F9F9F9;
     --color-red: #FD0C29;
@@ -151,14 +151,16 @@ a {
 .border_button_void {
     width: 120px;
     height: 45px;
+    align-content: center;
     background-color: var(--color-white);
     border: 1px solid var(--color-black);
     font-family: var(--font-questrial);
     font-size: 14px;
 
     &:hover{
-        border: 1px solid var(--color-cerulean);
-        color: var(--color-cerulean);
+        border: 2px solid var(--color-cerulean);
+        color: var(--color-black);
+        font-weight: 800;
     }
 }
 

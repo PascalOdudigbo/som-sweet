@@ -1,6 +1,6 @@
 // app/api/adminDashboard/customer/route.ts
 import { NextResponse } from 'next/server';
-import { getCustomerStats } from '@/utils/pages/adminDashboard/adminDashboard';
+import { getCustomerStats } from '@/utils/adminDashboard';
 
 export async function GET() {
   try {

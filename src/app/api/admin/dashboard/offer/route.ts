@@ -1,6 +1,6 @@
 // /api/adminDashboard/offer
 import { NextResponse } from 'next/server';
-import { getOfferStats } from '@/utils/pages/adminDashboard/adminDashboard';
+import { getOfferStats } from '@/utils/adminDashboard';
 
 export async function GET() {
   try {

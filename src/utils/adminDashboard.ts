@@ -1,4 +1,4 @@
-import db from '../../../db/db';
+import db from '../db/db';
 
 // Staff data
 export async function getStaffStats() {

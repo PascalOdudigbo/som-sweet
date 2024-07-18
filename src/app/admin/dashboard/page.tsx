@@ -6,7 +6,7 @@ import { GiShoppingBag } from 'react-icons/gi'
 import { MdReviews } from 'react-icons/md'
 import { TbRosetteDiscountCheckFilled } from 'react-icons/tb'
 import "./_dashboard.scss"
-import {DashboardData} from '../../../utils/pages/adminDashboard/adminDashboardTypes'
+import {DashboardData} from '../../../utils/adminDashboardTypes'
 
 
 function Dashboard() {

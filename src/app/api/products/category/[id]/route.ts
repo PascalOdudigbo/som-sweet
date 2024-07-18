@@ -1,0 +1,19 @@
+// app/api/products/category/[id]/route.ts
+import db from '@/db/db';
+import { NextResponse } from 'next/server';
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  try {
+    const products = await db.product.findMany({
+      where: { categoryId: parseInt(params.id) },
+      include: {
+        images: true,
+        variations: true,
+      }
+    });
+    return NextResponse.json(products);
+  } catch (error) {
+    console.error('Failed to fetch products by category:', error);
+    return NextResponse.json({ error: 'Failed to fetch products by category' }, { status: 500 });
+  }
+}

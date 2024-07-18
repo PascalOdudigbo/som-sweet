@@ -11,6 +11,7 @@ export {default as CustomRating} from "./CustomRating/CustomRating";
 export {default as MinimizableLayout} from "./layouts/MinimizableLayout/MinimizableLayout";
 export {default as Recommendations} from "./Recommendations/Recommendations";
 export {default as FormInputWithIcon} from "./FormInputWithIcon/FormInputWithIcon";
+export {default as ProductRow} from "./ProductRow/ProductRow";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";
