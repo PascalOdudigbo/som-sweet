@@ -12,6 +12,8 @@ export {default as MinimizableLayout} from "./layouts/MinimizableLayout/Minimiza
 export {default as Recommendations} from "./Recommendations/Recommendations";
 export {default as FormInputWithIcon} from "./FormInputWithIcon/FormInputWithIcon";
 export {default as ProductRow} from "./ProductRow/ProductRow";
+export {default as ToastProvider} from "./ToastProvider/ToastProvider";
+export {default as CategoryRow} from "./CategoryRow/CategoryRow";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

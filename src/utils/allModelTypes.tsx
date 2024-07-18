@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type RoleType = {
   id: number;
   name: string;
@@ -39,8 +41,10 @@ export type AddressType = {
 export type CategoryType = {
   id: number;
   name: string;
-  image: string;
+  image: string | StaticImageData;
   imagePublicId: string;
+  createdAt: Date;
+  updatedAt: Date;
   products?: ProductType[];
 };
 

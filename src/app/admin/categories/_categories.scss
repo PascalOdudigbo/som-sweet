@@ -1,16 +1,18 @@
-.products_wrapper {
+.categories_wrapper {
     height: 100vh;
     padding: 2rem;
 
-    .add_product_link_wrapper {
+    .add_category_link_wrapper {
         width: 96%;
         justify-content: space-between;
+        margin-left: auto;
+        margin-right: auto;
 
         h2 {
             font-size: 1.5em;
         }
 
-        .add_product_link {
+        .add_category_link {
             text-align: center;
         }
     }
@@ -28,7 +30,7 @@
         margin-right: auto;
     }
 
-    .products_table {
+    .categories_table {
         margin-left: auto;
         margin-right: auto;
         width: 96%;
@@ -49,14 +51,14 @@
 
     }
 
-    .product_mobile_view {
+    .category_mobile_view {
         width: 98%;
         margin-left: auto;
         margin-right: auto;
         display: none;
     }
 
-    .no_products_text {
+    .no_categories_text {
         text-transform: capitalize;
         color: var(--color-grey);
         width: 100%;
@@ -67,6 +69,6 @@
     }
 }
 
-.products_table_wrapper::-webkit-scrollbar {
+.categories_table_wrapper::-webkit-scrollbar {
     display: none;
 }

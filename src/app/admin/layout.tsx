@@ -7,7 +7,7 @@ import { AiFillDashboard } from 'react-icons/ai'
 import { FaUser } from 'react-icons/fa'
 import { GiShoppingBag } from 'react-icons/gi'
 import { FaClipboardUser } from 'react-icons/fa6'
-import { MdReviews } from 'react-icons/md'
+import { MdCategory, MdReviews } from 'react-icons/md'
 import { TbRosetteDiscountCheckFilled } from 'react-icons/tb'
 import "./_layout.scss"
 import { NavBar } from '@/components'
@@ -23,6 +23,7 @@ const navLinks: NavLinkType[] = [
   { title: "Dashboard", icon: AiFillDashboard, route: "/admin/dashboard", badgeContent: '!' },
   { title: "Staff Management", icon: FaClipboardUser, route: "/admin/staff", badgeContent: 0 },
   { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: 3 },
+  { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },
   { title: "Products Management", icon: GiShoppingBag, route: "/admin/products", badgeContent: 0 },
   { title: "Offers Management", icon: TbRosetteDiscountCheckFilled, route: "", badgeContent: 0 },
   { title: "Order Management", icon: MdReviews, route: "", badgeContent: 0 },

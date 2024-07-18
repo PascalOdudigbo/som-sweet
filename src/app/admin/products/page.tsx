@@ -61,7 +61,7 @@ function Products() {
                 </thead>
 
                 <tbody className='table_body'>
-                    {products.map((product) => (
+                    {testProducts.map((product) => (
                         <ProductRow
                             key={product.id}
                             product={product}

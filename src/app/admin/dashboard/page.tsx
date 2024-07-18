@@ -83,7 +83,7 @@ function Dashboard() {
 
     return (
         <main className='dashboard_content'>
-            <h1 className='dashboard_title section_title'>Dashboard</h1>
+            <h2 className='dashboard_title section_title'>Dashboard</h2>
 
             <div className="dashboard_grid">
                 <div className="dashboard_card">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../../styles/_globals.scss";
+import { ToastProvider } from "@/components";
 
 export const metadata: Metadata = {
   title: "Som' Sweet",
@@ -13,8 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ToastProvider>
+          {children}
+        </ToastProvider>
+      </body>
     </html>
   );
-  
+
 }
