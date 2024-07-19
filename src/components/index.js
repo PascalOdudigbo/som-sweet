@@ -14,6 +14,8 @@ export {default as FormInputWithIcon} from "./FormInputWithIcon/FormInputWithIco
 export {default as ProductRow} from "./ProductRow/ProductRow";
 export {default as ToastProvider} from "./ToastProvider/ToastProvider";
 export {default as CategoryRow} from "./CategoryRow/CategoryRow";
+export {default as Dropdown} from "./Dropdown/Dropdown";
+export {default as Checkbox} from "./CheckBox/CheckBox";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

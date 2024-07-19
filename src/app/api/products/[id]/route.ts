@@ -1,17 +1,18 @@
-// app/api/products/[id]
-import db from '@/db/db';
 import { NextResponse } from 'next/server';
+import db from '@/db/db';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
     const product = await db.product.findUnique({
       where: { id: parseInt(params.id) },
       include: {
-        images: true,
+        category: true,
         variations: true,
+        images: true,
         reviews: true,
         orderItems: true,
         discounts: true,
+        wishlistedBy: true,
       }
     });
     if (!product) {
@@ -20,7 +21,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
     return NextResponse.json(product);
   } catch (error) {
     console.error('Failed to fetch product:', error);
-    return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch product', message: (error as Error).message }, { status: 500 });
   }
 }
 
@@ -29,36 +30,38 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     const data = await request.json();
     const product = await db.product.update({
       where: { id: parseInt(params.id) },
-      data,
-      include: {
-        images: true,
-        variations: true,
+      data: {
+        name: data.name,
+        description: data.description,
+        basePrice: data.basePrice,
+        categoryId: data.categoryId,
+        active: data.active,
       },
+      include: {
+        category: true,
+        variations: true,
+        images: true,
+        reviews: true,
+        orderItems: true,
+        discounts: true,
+        wishlistedBy: true,
+      }
     });
     return NextResponse.json(product);
   } catch (error) {
     console.error('Failed to update product:', error);
-    return NextResponse.json({ error: 'Failed to update product' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to update product', message: (error as Error).message }, { status: 500 });
   }
 }
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
-    // First, delete associated records
-    await db.productImage.deleteMany({
-      where: { productId: parseInt(params.id) },
-    });
-    await db.productVariation.deleteMany({
-      where: { productId: parseInt(params.id) },
-    });
-    
-    // Then delete the product
     await db.product.delete({
-      where: { id: parseInt(params.id) },
+      where: { id: parseInt(params.id) }
     });
     return NextResponse.json({ message: 'Product deleted successfully' });
   } catch (error) {
     console.error('Failed to delete product:', error);
-    return NextResponse.json({ error: 'Failed to delete product' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to delete product', message: (error as Error).message }, { status: 500 });
   }
 }

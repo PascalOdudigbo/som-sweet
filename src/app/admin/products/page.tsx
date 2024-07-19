@@ -4,23 +4,27 @@ import { ProductRow, Search } from '@/components'
 import Link from 'next/link'
 import { ProductType } from '@/utils/allModelTypes';
 import "./_products.scss"
-import { testProducts } from '@/utils/allTestData';
+import { getAllProducts, searchProducts } from '@/utils/productsManagement'
+import { showToast } from '@/utils/toast'
 
 function Products() {
     const [products, setProducts] = useState<ProductType[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch products from API
         async function fetchProducts() {
             try {
-                const response = await fetch('/api/admin/products');
-                const data = await response.json();
-                setProducts(data);
-                setFilteredProducts(data);
+                setIsLoading(true);
+                const fetchedProducts = await getAllProducts();
+                setProducts(fetchedProducts);
+                setFilteredProducts(fetchedProducts);
             } catch (error) {
                 console.error('Failed to fetch products:', error);
+                showToast('error', 'Failed to load products. Please try again.');
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -28,15 +32,17 @@ function Products() {
     }, []);
 
     useEffect(() => {
-        const filtered = products.filter(product => 
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const filtered = searchProducts(searchTerm, products);
         setFilteredProducts(filtered);
     }, [searchTerm, products]);
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <main className='products_wrapper'>
@@ -55,13 +61,14 @@ function Products() {
                         <th className="p__inter table_header">NAME</th>
                         <th className="p__inter table_header">DESCRIPTION</th>
                         <th className="p__inter table_header">BASE PRICE</th>
-                        <th className="p__inter table_header">AVAILABLE</th>
+                        <th className="p__inter table_header">CATEGORY</th>
+                        <th className="p__inter table_header">ACTIVE</th>
                         <th className="p__inter table_header">ACTION</th>
                     </tr>
                 </thead>
 
                 <tbody className='table_body'>
-                    {testProducts.map((product) => (
+                    {filteredProducts.map((product) => (
                         <ProductRow
                             key={product.id}
                             product={product}
@@ -71,17 +78,7 @@ function Products() {
                 </tbody>
             </table>
 
-            {/* <section className='product_mobile_view'>
-                {filteredProducts.map((product) => (
-                    <Product
-                        key={product.id}
-                        product={product}
-                        setProducts={setProducts}
-                    />
-                ))}
-            </section> */}
             {filteredProducts.length < 1 && <h3 className="p__inter no_products_text">NO PRODUCTS FOUND</h3>}
-
         </main>
     )
 }

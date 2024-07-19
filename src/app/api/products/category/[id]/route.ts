@@ -7,13 +7,18 @@ export async function GET(request: Request, { params }: { params: { id: string }
     const products = await db.product.findMany({
       where: { categoryId: parseInt(params.id) },
       include: {
-        images: true,
+        category: true,
         variations: true,
+        images: true,
+        reviews: true,
+        orderItems: true,
+        discounts: true,
+        wishlistedBy: true,
       }
     });
     return NextResponse.json(products);
   } catch (error) {
     console.error('Failed to fetch products by category:', error);
-    return NextResponse.json({ error: 'Failed to fetch products by category' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch products by category', message: (error as Error).message }, { status: 500 });
   }
 }
