@@ -20,14 +20,14 @@ export type UserType = {
   orders?: OrderType[];
   reviews?: ProductReviewType[];
   wishlist?: ProductType[];
-  stripeCustomerId?: string;
+  stripeCustomerId?: string | null;
 };
 
 export type AddressType = {
   id: number;
   userId: number;
   addressLine1: string;
-  addressLine2?: string;
+  addressLine2: string | null;
   city: string;
   state: string;
   postalCode: string;
@@ -51,7 +51,7 @@ export type CategoryType = {
 export type ProductType = {
   id: number;
   name: string;
-  description?: string;
+  description: string | null;
   basePrice: number;
   categoryId: number;
   active: boolean;
@@ -90,12 +90,12 @@ export type DiscountType = {
   id: number;
   productId: number;
   name: string;
-  description?: string;
+  description: string | null;
   discountPercent: number;
   validFrom: Date;
   validUntil: Date;
-  imageUrl?: string;
-  imagePublicId?: string;
+  imageUrl: string | null;
+  imagePublicId: string | null;
   createdAt: Date;
   updatedAt: Date;
   product?: ProductType;
@@ -106,7 +106,7 @@ export type ProductReviewType = {
   productId: number;
   userId: number;
   rating: number;
-  review?: string;
+  review: string | null;
   createdAt: Date;
   updatedAt: Date;
   product?: ProductType;
@@ -131,10 +131,10 @@ export type OrderItemType = {
   id: number;
   orderId: number;
   productId: number;
-  variationId?: number;
+  variationId: number | null;
   quantity: number;
   price: number;
-  customText?: string;
+  customText: string | null;
   createdAt: Date;
   updatedAt: Date;
   order?: OrderType;
@@ -157,8 +157,8 @@ export type PaymentType = {
 export type BusinessType = {
   id: number;
   name: string;
-  description?: string;
-  refundsPolicy?: string;
+  description: string | null;
+  refundsPolicy: string | null;
   phone: string;
   email: string;
   address: string;

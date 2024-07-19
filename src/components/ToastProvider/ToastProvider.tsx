@@ -21,6 +21,7 @@ export default function ToastProvider({ children }: ToastProviderProps) {
     <>
       {children}
       <ToastContainer
+        style={{ fontSize: "14px", zIndex: 1000 }}
         toastClassName={(context) =>
           `${contextClass[context?.type || "default"]} toast-base`
         }

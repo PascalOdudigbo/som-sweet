@@ -15,7 +15,7 @@ function Categories() {
         // Fetch categories from API
         async function fetchCategories() {
             try {
-                const response = await fetch('/api/admin/categories');
+                const response = await fetch('/api/categories');
                 const data = await response.json();
                 setCategories(data);
                 setFilteredCategories(data);
@@ -34,9 +34,7 @@ function Categories() {
         setFilteredCategories(filtered);
     }, [searchTerm, categories]);
 
-    const handleSearch = (term: string) => {
-        setSearchTerm(term);
-    };
+    
 
     return (
         <main className='categories_wrapper'>
@@ -61,9 +59,10 @@ function Categories() {
                 </thead>
 
                 <tbody className='table_body'>
-                    {testCategories.map((category) => (
+                    {filteredCategories.map((category, index) => (
                         <CategoryRow
                             key={category.id}
+                            index={index}
                             category={category}
                             setCategories={setCategories}
                         />

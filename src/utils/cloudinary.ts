@@ -13,7 +13,7 @@ export function handleImageFileChange(
     data.append('file', file);
     data.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME!);
     data.append('cloud_name', process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!);
-    data.append('folder', 'sum_sweet_products');
+    data.append("folder", "Oink_Oink_Product_Images");
   
     try {
       const response = await fetch(

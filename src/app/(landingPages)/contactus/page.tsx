@@ -73,7 +73,7 @@ function ContactUs() {
         </section>
       </section>
 
-      <iframe title="Som Sweet's Location" className='contactus_map' src={`https://www.google.com/maps/embed/v1/place?key=${process.env.GOOGLE_MAPS_API_KEY}&q=52.40790039969724,-1.4965874000000001`}/>
+      <iframe title="Som Sweet's Location" className='contactus_map' src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=52.40790039969724,-1.4965874000000001`}/>
     </main>
   )
 }
