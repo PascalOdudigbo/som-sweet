@@ -110,7 +110,7 @@ function Product () {
       <main className='product_container page_container flex_column_center'>
         <section className='images_and_data_container flex_row center'>
           <section className='product_images_container flex_column_center'>
-            <img className='product_target_image' src={targetImage} alt={product?.description} title={product?.name} />
+            <img className='product_target_image' src={targetImage} alt={product?.description ?? product?.name} title={product?.name} />
             <section className='product_images_container flex_row_center'>
               {
                 //mapping through the product images

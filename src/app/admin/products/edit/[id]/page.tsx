@@ -8,98 +8,137 @@ import { IconContext } from 'react-icons'
 import { BsImageFill } from 'react-icons/bs'
 import { AiFillDelete } from 'react-icons/ai'
 import { ProductType, CategoryType } from '@/utils/allModelTypes'
-import { uploadImageToCloudinary } from '@/utils/cloudinary'
-import { createProduct, addProductImage } from '@/utils/productsManagement'
+import { uploadImageToCloudinary, deleteCloudinaryImage } from '@/utils/cloudinary'
+import { getProductById, updateProduct, addProductImage, removeProductImage } from '@/utils/productsManagement'
 import { getAllCategories } from '@/utils/categoryManagement'
 import { showToast } from '@/utils/toast'
-import './_add.scss'
+import './_edit.scss'
+import Variations from '@/app/admin/variations/page'
 
-
-function AddProduct() {
-  const [product, setProduct] = useState<Partial<ProductType>>({
-    name: '',
-    description: '',
-    basePrice: 0,
-    categoryId: 0,
-    active: true,
-  })
+function EditProduct({ params }: { params: { id: string } }) {
+  const [product, setProduct] = useState<ProductType | null>(null)
   const [imageFiles, setImageFiles] = useState<File[]>([])
-  const [isLoading, setIsLoading] = useState(false)
   const [categories, setCategories] = useState<CategoryType[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<string | number>("");
+  const [selectedCategory, setSelectedCategory] = useState<string | number>("")
+  const [isLoading, setIsLoading] = useState(false)
+
   const router = useRouter()
   const uploadImagesRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const fetchCategories = async () => {
+    const fetchProductAndCategories = async () => {
       try {
-        const fetchedCategories = await getAllCategories()
+        const [fetchedProduct, fetchedCategories] = await Promise.all([
+          getProductById(parseInt(params.id)),
+          getAllCategories()
+        ])
+        setProduct(fetchedProduct)
         setCategories(fetchedCategories)
+        setSelectedCategory(fetchedProduct.category?.name || "")
       } catch (error) {
-        console.error('Failed to fetch categories:', error)
-        showToast('error', 'Failed to load categories. Please refresh the page.')
+        console.error('Failed to fetch product or categories:', error)
+        showToast('error', 'Failed to load product data. Please try again.')
       }
     }
 
-    fetchCategories()
-  }, [])
+    fetchProductAndCategories()
+  }, [params.id])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!product) return
+
     setIsLoading(true)
     window.scrollTo(0, 0)
 
     try {
-      const createdProduct = await createProduct(product as Omit<ProductType, 'id' | 'createdAt' | 'updatedAt' | 'variations' | 'images' | 'reviews' | 'orderItems' | 'discounts' | 'wishlistedBy'>)
+      const updatedProduct = await updateProduct(product.id, product)
 
+      // Handle new image uploads
       for (const imageFile of imageFiles) {
         const uploadedImage = await uploadImageToCloudinary(imageFile)
         if (uploadedImage) {
-          await addProductImage(createdProduct.id, uploadedImage.url, uploadedImage.publicId)
+          await addProductImage(updatedProduct.id, uploadedImage.url, uploadedImage.publicId)
         }
       }
 
-      showToast('success', `${createdProduct.name} product added successfully!`)
+      showToast('success', `${updatedProduct.name} updated successfully!`)
       router.push('/admin/products')
     } catch (error) {
-      console.error('Failed to add product:', error)
-      showToast('error', 'Failed to add product. Please try again.')
+      console.error('Failed to update product:', error)
+      showToast('error', 'Failed to update product. Please try again.')
     } finally {
       setIsLoading(false)
     }
   }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
     if (e.target.files) {
       setImageFiles(Array.from(e.target.files))
     }
   }
 
-  const removeImage = (index: number) => {
-    setImageFiles(imageFiles.filter((_, i) => i !== index))
+  const removeImage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, imageId: number, imagePublicId: string) => {
+    e.preventDefault();
+    
+    if (!product) return
+    console.log(product)
+    console.log(imagePublicId)
+    try {
+      await removeProductImage(product.id, imageId)
+      const imageDeleted = await deleteCloudinaryImage(imagePublicId)
+      if (imageDeleted){
+        setProduct({
+            ...product,
+            images: product?.images?.filter(img => img.id !== imageId)
+          })
+          showToast('success', 'Image removed successfully')
+      }
+    } catch (error) {
+      console.error('Failed to remove image:', error)
+      showToast('error', 'Failed to remove image. Please try again.')
+    }
   }
 
+  if (!product) return <div>Loading...</div>
+
   return (
-    <div className='add_product_wrapper'>
-      <header className='add_product_header flex_row_center'>
-        <h2 className='section_title add_product_header_title'>Add Product</h2>
+    <div className='edit_product_wrapper'>
+      <header className='edit_product_header flex_row_center'>
+        <h2 className='section_title edit_product_header_title'>Edit Product</h2>
         <Link href="/admin/products" className='back_link border_button_void'>BACK</Link>
       </header>
 
-      <form className='add_product_form' onSubmit={handleSubmit}>
-        <div className='add_product_content flex_column_center'>
+      <form className='edit_product_form' onSubmit={handleSubmit}>
+        <div className='edit_product_content flex_column_center'>
           <section className='image_section flex_column_justify_center'>
             <div className="product_images_container">
-              {imageFiles.map((file, index) => (
+              {product?.images?.map((image, index) => (
                 <div key={index} className="image_container">
                   <Image
-                    src={URL.createObjectURL(file)}
+                    src={image.imageUrl}
                     alt={`Product image ${index + 1}`}
                     width={100}
                     height={100}
                     priority={true}
                   />
-                  <button onClick={() => removeImage(index)} className="remove_image_btn">
+                  <button onClick={(e) => removeImage(e, image.id, image.imagePublicId)} className="remove_image_btn">
+                    <IconContext.Provider value={{ className: "remove_image_icon" }}>
+                      <AiFillDelete />
+                    </IconContext.Provider>
+                  </button>
+                </div>
+              ))}
+              {imageFiles.map((file, index) => (
+                <div key={`new-${index}`} className="image_container">
+                  <Image
+                    src={URL.createObjectURL(file)}
+                    alt={`New product image ${index + 1}`}
+                    width={100}
+                    height={100}
+                  />
+                  <button onClick={() => setImageFiles(imageFiles.filter((_, i) => i !== index))} className="remove_image_btn">
                     <IconContext.Provider value={{ className: "remove_image_icon" }}>
                       <AiFillDelete />
                     </IconContext.Provider>
@@ -136,7 +175,7 @@ function AddProduct() {
             <FormInput
               label='Name'
               inputType='text'
-              inputValue={product.name || ''}
+              inputValue={product.name}
               required={true}
               readonly={false}
               onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => setProduct({ ...product, name: e.target.value })}
@@ -152,45 +191,45 @@ function AddProduct() {
             <FormInput
               label='Base Price'
               inputType='number'
-              inputValue={product.basePrice?.toString() || ''}
+              inputValue={product.basePrice.toString()}
               required={true}
               readonly={false}
               onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => setProduct({ ...product, basePrice: parseFloat(e.target.value) })}
             />
             <Dropdown
               label='Category'
-              items={categories?.map(category => category.name) || []}
-              buttonText={selectedCategory.toLocaleString() || "Select a category"}
+              items={categories.map(category => category.name)}
+              buttonText={selectedCategory.toString() || "Select a category"}
               clickFunction={(item: string | number) => {
-                const selectedCategoryObject = categories?.find(cat => cat.name === item);
+                const selectedCategoryObject = categories.find(cat => cat.name === item);
                 if (selectedCategoryObject) {
-                  setProduct(prev => ({ ...prev, categoryId: selectedCategoryObject.id }));
+                  setProduct({ ...product, categoryId: selectedCategoryObject.id });
                 }
                 setSelectedCategory(item);
               }}
               required={true}
             />
-
           </section>
         </div>
 
         <div className='submit_button_section flex_column_justify_center'>
-          <button type="submit" className='custom_button add_product_form_button' disabled={isLoading}>
-            {isLoading ? 'Saving...' : 'SAVE'}
+          <button type="submit" className='custom_button edit_product_form_button' disabled={isLoading}>
+            {isLoading ? 'Saving...' : 'SAVE CHANGES'}
           </button>
 
           <Checkbox
-            label='Active'
+            label="ACTIVE"
             isChecked={product.active}
             onChange={(e) => setProduct({ ...product, active: e.target.checked })}
           />
-
-
         </div>
       </form>
 
+      <Variations productId={product?.id ?? 0}/>
+
+      
     </div>
   )
 }
 
-export default AddProduct
+export default EditProduct

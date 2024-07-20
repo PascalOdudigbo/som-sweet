@@ -1,12 +1,4 @@
-import { StaticImageData } from "next/image";
-
-export type RoleType = {
-  id: number;
-  name: string;
-  users?: UserType[];
-};
-
-export type UserType = {
+export interface UserType {
   id: number;
   username: string;
   email: string;
@@ -21,13 +13,20 @@ export type UserType = {
   reviews?: ProductReviewType[];
   wishlist?: ProductType[];
   stripeCustomerId?: string | null;
-};
+  cart?: CartType | null;
+}
 
-export type AddressType = {
+export interface RoleType {
+  id: number;
+  name: string;
+  users?: UserType[];
+}
+
+export interface AddressType {
   id: number;
   userId: number;
   addressLine1: string;
-  addressLine2: string | null;
+  addressLine2?: string | null;
   city: string;
   state: string;
   postalCode: string;
@@ -36,22 +35,22 @@ export type AddressType = {
   updatedAt: Date;
   user?: UserType;
   orders?: OrderType[];
-};
+}
 
-export type CategoryType = {
+export interface CategoryType {
   id: number;
   name: string;
-  image: string | StaticImageData;
+  image: string;
   imagePublicId: string;
   createdAt: Date;
   updatedAt: Date;
   products?: ProductType[];
-};
+}
 
-export type ProductType = {
+export interface ProductType {
   id: number;
   name: string;
-  description: string | null;
+  description?: string | null;
   basePrice: number;
   categoryId: number;
   active: boolean;
@@ -62,11 +61,12 @@ export type ProductType = {
   images?: ProductImageType[];
   reviews?: ProductReviewType[];
   orderItems?: OrderItemType[];
-  discounts?: DiscountType[];
+  discounts?: DiscountProductType[];
+  cartItems?: CartItemType[];
   wishlistedBy?: UserType[];
-};
+}
 
-export type ProductVariationType = {
+export interface ProductVariationType {
   id: number;
   productId: number;
   name: string;
@@ -74,46 +74,75 @@ export type ProductVariationType = {
   createdAt: Date;
   updatedAt: Date;
   product?: ProductType;
+  cartItems?: CartItemType[];
   orderItems?: OrderItemType[];
-};
+}
 
-export type ProductImageType = {
+export interface ProductImageType {
   id: number;
   productId: number;
   imageUrl: string;
   imagePublicId: string;
   createdAt: Date;
   product?: ProductType;
-};
+}
 
-export type DiscountType = {
+export interface DiscountType {
   id: number;
-  productId: number;
   name: string;
-  description: string | null;
+  description?: string | null;
   discountPercent: number;
   validFrom: Date;
   validUntil: Date;
-  imageUrl: string | null;
-  imagePublicId: string | null;
+  imageUrl?: string | null;
+  imagePublicId?: string | null;
   createdAt: Date;
   updatedAt: Date;
-  product?: ProductType;
-};
+  products?: DiscountProductType[];
+}
 
-export type ProductReviewType = {
+export interface DiscountProductType {
+  id: number;
+  productId: number;
+  discountId: number;
+  product?: ProductType;
+  discount?: DiscountType;
+}
+
+export interface ProductReviewType {
   id: number;
   productId: number;
   userId: number;
   rating: number;
-  review: string | null;
+  review?: string | null;
   createdAt: Date;
   updatedAt: Date;
   product?: ProductType;
   user?: UserType;
-};
+}
 
-export type OrderType = {
+export interface CartType {
+  id: number;
+  userId: number;
+  createdAt: Date;
+  updatedAt: Date;
+  user?: UserType;
+  items?: CartItemType[];
+}
+
+export interface CartItemType {
+  id: number;
+  cartId: number;
+  productId: number;
+  variationId?: number | null;
+  quantity: number;
+  customText?: string | null;
+  cart?: CartType;
+  product?: ProductType;
+  variation?: ProductVariationType | null;
+}
+
+export interface OrderType {
   id: number;
   userId: number;
   total: number;
@@ -124,25 +153,25 @@ export type OrderType = {
   user?: UserType;
   shippingAddress?: AddressType;
   orderItems?: OrderItemType[];
-  payment?: PaymentType;
-};
+  payment?: PaymentType | null;
+}
 
-export type OrderItemType = {
+export interface OrderItemType {
   id: number;
   orderId: number;
   productId: number;
-  variationId: number | null;
+  variationId?: number | null;
   quantity: number;
   price: number;
-  customText: string | null;
+  customText?: string | null;
   createdAt: Date;
   updatedAt: Date;
   order?: OrderType;
   product?: ProductType;
-  variation?: ProductVariationType;
-};
+  variation?: ProductVariationType | null;
+}
 
-export type PaymentType = {
+export interface PaymentType {
   id: number;
   orderId: number;
   stripePaymentId: string;
@@ -152,23 +181,23 @@ export type PaymentType = {
   createdAt: Date;
   updatedAt: Date;
   order?: OrderType;
-};
+}
 
-export type BusinessType = {
+export interface BusinessType {
   id: number;
   name: string;
-  description: string | null;
-  refundsPolicy: string | null;
+  description?: string | null;
+  refundsPolicy?: string | null;
   phone: string;
   email: string;
   address: string;
   socialLinks?: SocialMediaType[];
-};
+}
 
-export type SocialMediaType = {
+export interface SocialMediaType {
   id: number;
   businessId: number;
   name: string;
   url: string;
   business?: BusinessType;
-};
+}

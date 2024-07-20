@@ -16,6 +16,7 @@ export {default as ToastProvider} from "./ToastProvider/ToastProvider";
 export {default as CategoryRow} from "./CategoryRow/CategoryRow";
 export {default as Dropdown} from "./Dropdown/Dropdown";
 export {default as Checkbox} from "./CheckBox/CheckBox";
+export {default as VariationRow} from "./VariationRow/VariationRow";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

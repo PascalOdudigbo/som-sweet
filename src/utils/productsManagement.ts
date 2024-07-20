@@ -118,61 +118,11 @@ export async function removeProductImage(productId: number, imageId: number): Pr
     });
     if (!response.ok) {
       const errorData = await response.json();
+      console.log(errorData)
       throw new Error(`Failed to remove product image: ${errorData.message || response.statusText}`);
     }
   } catch (error) {
     console.error('Error in removeProductImage:', error);
-    throw error;
-  }
-}
-
-export async function addProductVariation(productId: number, variation: Omit<ProductVariationType, 'id' | 'productId'>): Promise<ProductVariationType> {
-  try {
-    const response = await fetch(`/api/products/${productId}/variations`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(variation),
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to add product variation: ${errorData.message || response.statusText}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error('Error in addProductVariation:', error);
-    throw error;
-  }
-}
-
-export async function updateProductVariation(productId: number, variationId: number, variation: Partial<Omit<ProductVariationType, 'id' | 'productId'>>): Promise<ProductVariationType> {
-  try {
-    const response = await fetch(`/api/products/${productId}/variations/${variationId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(variation),
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to update product variation: ${errorData.message || response.statusText}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error('Error in updateProductVariation:', error);
-    throw error;
-  }
-}
-
-export async function removeProductVariation(productId: number, variationId: number): Promise<void> {
-  try {
-    const response = await fetch(`/api/products/${productId}/variations/${variationId}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to remove product variation: ${errorData.message || response.statusText}`);
-    }
-  } catch (error) {
-    console.error('Error in removeProductVariation:', error);
     throw error;
   }
 }

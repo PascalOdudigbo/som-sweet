@@ -1,52 +1,32 @@
-// app/api/products/[id]/variations/route.ts
-import db from '@/db/db';
+// app/api/products/[productId]/variations/route.ts
+
 import { NextResponse } from 'next/server';
+import db from '@/db/db';
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  try {
+    const productId = parseInt(params.id);
+    const variations = await db.productVariation.findMany({
+      where: { productId },
+    });
+    return NextResponse.json(variations);
+  } catch (error) {
+    console.error('Failed to fetch product variations:', error);
+    return NextResponse.json({ error: 'Failed to fetch product variations' }, { status: 500 });
+  }
+}
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {
   try {
+    const productId = parseInt(params.id);
     const data = await request.json();
     const variation = await db.productVariation.create({
-      data: {
-        ...data,
-        productId: parseInt(params.id),
-      }
+      data: { ...data, productId },
     });
     return NextResponse.json(variation);
   } catch (error) {
-    console.error('Failed to add product variation:', error);
-    return NextResponse.json({ error: 'Failed to add product variation' }, { status: 500 });
+    console.error('Failed to create product variation:', error);
+    return NextResponse.json({ error: 'Failed to create product variation' }, { status: 500 });
   }
 }
 
-// app/api/products/[productId]/variations/[variationId]/route.ts
-export async function PUT(request: Request, { params }: { params: { productId: string, variationId: string } }) {
-  try {
-    const data = await request.json();
-    const variation = await db.productVariation.update({
-      where: {
-        id: parseInt(params.variationId),
-        productId: parseInt(params.productId),
-      },
-      data,
-    });
-    return NextResponse.json(variation);
-  } catch (error) {
-    console.error('Failed to update product variation:', error);
-    return NextResponse.json({ error: 'Failed to update product variation' }, { status: 500 });
-  }
-}
-
-export async function DELETE(request: Request, { params }: { params: { productId: string, variationId: string } }) {
-  try {
-    await db.productVariation.delete({
-      where: {
-        id: parseInt(params.variationId),
-        productId: parseInt(params.productId),
-      }
-    });
-    return NextResponse.json({ message: 'Variation deleted successfully' });
-  } catch (error) {
-    console.error('Failed to remove product variation:', error);
-    return NextResponse.json({ error: 'Failed to remove product variation' }, { status: 500 });
-  }
-}

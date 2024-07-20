@@ -25,6 +25,7 @@ model User {
   reviews       ProductReview[]
   wishlist      Product[]       @relation("UserWishlist")
   stripeCustomerId String?
+  cart          Cart?
 }
 
 model Role {
@@ -72,7 +73,8 @@ model Product {
   images      ProductImage[]
   reviews     ProductReview[]
   orderItems  OrderItem[]
-  discounts   Discount[]
+  discounts   DiscountProduct[]
+  cartItems   CartItem[]
   wishlistedBy User[]           @relation("UserWishlist")
 }
 
@@ -84,6 +86,7 @@ model ProductVariation {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   product   Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cartItems CartItem[]
   orderItems OrderItem[]
 }
 
@@ -97,18 +100,27 @@ model ProductImage {
 }
 
 model Discount {
-  id              Int      @id @default(autoincrement())
-  productId       Int
+  id              Int               @id @default(autoincrement())
   name            String
   description     String?
   discountPercent Float
-  validFrom       DateTime @default(now())
+  validFrom       DateTime          @default(now())
   validUntil      DateTime
   imageUrl        String?
   imagePublicId   String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  product         Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  products        DiscountProduct[]
+}
+
+model DiscountProduct {
+  productId  Int
+  discountId Int
+  product    Product  @relation(fields: [productId], references: [id])
+  discount   Discount @relation(fields: [discountId], references: [id])
+
+  @@unique([productId, discountId])
+  @@id([discountId, productId])
 }
 
 model ProductReview {
@@ -121,6 +133,29 @@ model ProductReview {
   updatedAt DateTime @updatedAt
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Cart {
+  id        Int         @id @default(autoincrement())
+  userId    Int         @unique
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  user      User        @relation(fields: [userId], references: [id])
+  items     CartItem[]
+}
+
+model CartItem {
+  id            Int               @id @default(autoincrement())
+  cartId        Int
+  productId     Int
+  variationId   Int?
+  quantity      Int
+  customText    String?
+  cart          Cart              @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product       Product           @relation(fields: [productId], references: [id])
+  variation     ProductVariation? @relation(fields: [variationId], references: [id])
+
+  @@unique([cartId, productId, variationId])
 }
 
 model Order {
