@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface UserType {
   id: number;
   username: string;
@@ -81,7 +83,7 @@ export interface ProductVariationType {
 export interface ProductImageType {
   id: number;
   productId: number;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   imagePublicId: string;
   createdAt: Date;
   product?: ProductType;
@@ -94,7 +96,7 @@ export interface DiscountType {
   discountPercent: number;
   validFrom: Date;
   validUntil: Date;
-  imageUrl?: string | null;
+  imageUrl?: string | null | StaticImageData;
   imagePublicId?: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -102,7 +104,6 @@ export interface DiscountType {
 }
 
 export interface DiscountProductType {
-  id: number;
   productId: number;
   discountId: number;
   product?: ProductType;

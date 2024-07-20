@@ -39,7 +39,7 @@ function AddVariation({ params }: { params: { id: string } }) {
         <div className='add_variation_wrapper'>
             <header className='add_variation_header flex_row_center'>
                 <h2 className='section_title add_variation_header_title'>Add Variation</h2>
-                <Link href={`/admin/products/${params.id}`} className='back_link border_button_void'>BACK</Link>
+                <Link href={`/admin/products/edit/${params.id}`} className='back_link border_button_void'>BACK</Link>
             </header>
 
             <form className='add_variation_form' onSubmit={handleSubmit}>

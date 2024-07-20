@@ -11,7 +11,11 @@ export async function GET() {
         images: true,
         reviews: true,
         orderItems: true,
-        discounts: true,
+        discounts: {
+          include: {
+            discount: true
+          }
+        },
         wishlistedBy: true,
       }
     });
@@ -39,7 +43,11 @@ export async function POST(request: Request) {
         images: true,
         reviews: true,
         orderItems: true,
-        discounts: true,
+        discounts: {
+          include: {
+            discount: true
+          }
+        },
         wishlistedBy: true,
       }
     });

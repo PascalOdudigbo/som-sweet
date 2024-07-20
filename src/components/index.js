@@ -17,6 +17,7 @@ export {default as CategoryRow} from "./CategoryRow/CategoryRow";
 export {default as Dropdown} from "./Dropdown/Dropdown";
 export {default as Checkbox} from "./CheckBox/CheckBox";
 export {default as VariationRow} from "./VariationRow/VariationRow";
+export {default as OfferRow} from "./OfferRow/OfferRow";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

@@ -56,6 +56,7 @@ function ProductRow({ product, setProducts }: ProductRowProps) {
           alt={product.name}
           width={50}
           height={50}
+          quality={80}
         />
       </td>
       <td className="row_cell">{product.name}</td>

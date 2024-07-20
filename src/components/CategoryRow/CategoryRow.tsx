@@ -50,7 +50,7 @@ function CategoryRow({index, category, setCategories }: CategoryRowProps) {
   return (
     <tr className="row_wrapper">
       <td className="row_cell">
-        <Image className='categoryImage' src={category.image} alt={category.name} width={200} height={200} priority={index < 3}/>
+        <Image className='categoryImage' src={category.image} alt={category.name} width={200} height={200} priority={index < 3} quality={80}/>
       </td>
       <td className="row_cell">{category.name}</td>
       <td className="row_cell">{category?.products?.length || 0}</td>

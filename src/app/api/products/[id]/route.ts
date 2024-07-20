@@ -11,7 +11,11 @@ export async function GET(request: Request, { params }: { params: { id: string }
         images: true,
         reviews: true,
         orderItems: true,
-        discounts: true,
+        discounts: {
+          include: {
+            discount: true
+          }
+        },
         wishlistedBy: true,
       }
     });
@@ -43,7 +47,11 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         images: true,
         reviews: true,
         orderItems: true,
-        discounts: true,
+        discounts: {
+          include: {
+            discount: true
+          }
+        },
         wishlistedBy: true,
       }
     });

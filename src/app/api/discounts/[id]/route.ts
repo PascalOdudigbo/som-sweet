@@ -3,6 +3,7 @@
 
 import { NextResponse } from 'next/server';
 import db from '@/db/db';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
@@ -29,9 +30,24 @@ export async function GET(request: Request, { params }: { params: { id: string }
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
     const data = await request.json();
+    console.log('Received update data:', data);
+
+    // Remove id, createdAt, and updatedAt from the data object
+    const { id, createdAt, updatedAt, products, ...updateData } = data;
+
+    // Ensure dates are properly formatted
+    if (updateData.validFrom) {
+      updateData.validFrom = new Date(updateData.validFrom);
+    }
+    if (updateData.validUntil) {
+      updateData.validUntil = new Date(updateData.validUntil);
+    }
+
+    console.log('Sanitized update data:', updateData);
+
     const discount = await db.discount.update({
       where: { id: parseInt(params.id) },
-      data,
+      data: updateData,
       include: {
         products: {
           include: {
@@ -40,10 +56,32 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         }
       }
     });
+
     return NextResponse.json(discount);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Failed to update discount:', error);
-    return NextResponse.json({ error: 'Failed to update discount' }, { status: 500 });
+
+    let errorMessage = 'An unknown error occurred';
+    let errorDetails = {};
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      errorDetails = { stack: error.stack };
+    }
+
+    if (error instanceof PrismaClientKnownRequestError) {
+      errorDetails = {
+        ...errorDetails,
+        code: error.code,
+        meta: error.meta,
+      };
+    }
+
+    return NextResponse.json({
+      error: 'Failed to update discount',
+      message: errorMessage,
+      details: errorDetails
+    }, { status: 500 });
   }
 }
 

@@ -25,7 +25,7 @@ const navLinks: NavLinkType[] = [
   { title: "Customers Management", icon: FaUser, route: "/admin/customers", badgeContent: 3 },
   { title: "Categories Management", icon: MdCategory, route: "/admin/categories", badgeContent: 0 },
   { title: "Products Management", icon: GiShoppingBag, route: "/admin/products", badgeContent: 0 },
-  { title: "Offers Management", icon: TbRosetteDiscountCheckFilled, route: "", badgeContent: 0 },
+  { title: "Offers Management", icon: TbRosetteDiscountCheckFilled, route: "/admin/offers", badgeContent: 0 },
   { title: "Order Management", icon: MdReviews, route: "", badgeContent: 0 },
 ];
 

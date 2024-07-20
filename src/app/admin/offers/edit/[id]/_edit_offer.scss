@@ -1,0 +1,133 @@
+.edit_offer_wrapper {
+    height: 100vh;
+    padding: 2rem;
+
+    .edit_offer_header {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .edit_offer_link {
+            text-align: center;
+        }
+    }
+
+    .edit_offer_form {
+        display: flex;
+        flex-direction: row;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
+        justify-content: space-between;
+        width: 96%;
+
+        .edit_offer_content {
+            width: 40%;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+            .image_section {
+                margin-top: 20px;
+                width: 90%;
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+                .offer_image {
+                    height: 220px;
+                    width: 420px;
+                    object-fit: cover;
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+                }
+
+                .upload_image_btn {
+                    width: max-content;
+
+                    &:hover {
+                        .icon_and_text_container {
+                            .upload_image_icon {
+                                color: var(--color-cerulean);
+                            }
+
+                            .button_text {
+                                margin-right: 5px;
+                                font-family: var(--font-inter);
+                                color: var(--color-cerulean);
+                            }
+                        }
+                    }
+
+                    .icon_and_text_container {
+                        .upload_image_icon {
+                            width: 25px;
+                            height: 25px;
+                            margin-left: 5px;
+                            margin-right: 5px;
+                        }
+
+                        .button_text {
+                            margin-right: 5px;
+                            font-family: var(--font-inter);
+                        }
+                    }
+                }
+
+                .image_type_text {
+                    font-family: var(--font-inter);
+                    font-weight: 800;
+                    margin-top: 25px;
+                    margin-bottom: 25px;
+                }
+            }
+        }
+
+        .form_inputs_section {
+            width: 90%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            // Additional styling for date inputs
+            input[type="datetime-local"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid var(--color-grey);
+                border-radius: 4px;
+                font-family: var(--font-inter);
+            }
+
+            // Styling for the discount percent input
+            input[type="number"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid var(--color-grey);
+                border-radius: 4px;
+                font-family: var(--font-inter);
+            }
+        }
+    }
+
+    .submit_button_section {
+        height: 250px;
+        width: 20%;
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        top: 0%;
+
+        .edit_offer_form_button {
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: var(--color-cerulean);
+            }
+        }
+    }
+}
