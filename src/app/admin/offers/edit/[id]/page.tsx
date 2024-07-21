@@ -12,6 +12,7 @@ import { deleteCloudinaryImage, uploadImageToCloudinary } from '@/utils/cloudina
 import "./_edit_offer.scss"
 import { getDiscountById, updateDiscount, handleImageFileChangeEditDiscount } from '@/utils/discountManagement'
 import { showToast } from '@/utils/toast'
+import OfferProducts from '../../products/page'
 
 function EditOffer({ params }: { params: { id: string } }) {
     const [discount, setDiscount] = useState<DiscountType | null>(null)
@@ -83,7 +84,7 @@ function EditOffer({ params }: { params: { id: string } }) {
         <div className='edit_offer_wrapper'>
             <header className='edit_offer_header flex_row_center'>
                 <h2 className='section_title edit_offer_header_title'>Edit Offer</h2>
-                <Link href={"/admin/offers"} className='edit_offer_link border_button_void'>BACK</Link>
+                <Link href={`/admin/offers/edit/${discount.id}`} className='edit_offer_link border_button_void'>BACK</Link>
             </header>
 
             <form className='edit_offer_form' onSubmit={handleSubmit}>
@@ -167,6 +168,8 @@ function EditOffer({ params }: { params: { id: string } }) {
                     <button type="submit" className='custom_button edit_offer_form_button'>UPDATE</button>
                 </div>
             </form>
+
+            <OfferProducts discountId={discount.id}/>
         </div>
     )
 }

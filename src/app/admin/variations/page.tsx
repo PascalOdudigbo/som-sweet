@@ -53,7 +53,7 @@ function Variations({ productId }: { productId: number }) {
                 <Link href={`/admin/products/${productId}/variations/add`} className='add_variation_link border_button_void'>ADD</Link>
             </section>
             <div className="search_wrapper">
-                <Search />
+                <Search onSearch={handleSearch}/>
             </div>
 
             <table className="variations_table">

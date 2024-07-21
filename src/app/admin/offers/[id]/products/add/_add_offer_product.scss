@@ -1,0 +1,54 @@
+.add_discount_product_wrapper {
+    min-height: 100vh;
+    padding: 2rem;
+
+    .add_discount_product_header {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        .back_link {
+            text-align: center;
+        }
+    }
+
+    .add_discount_product_form {
+        display: flex;
+        flex-direction: row;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25px;
+        justify-content: space-between;
+        width: 96%;
+
+        .add_discount_product_content {
+            width: 70%;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+            .form_inputs_section {
+                width: 90%;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                height: max-content;
+            }
+        }
+
+        .submit_button_section {
+            height: 250px;
+            width: 25%;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+            top: 0%;
+
+            .add_discount_product_form_button {
+                margin-bottom: 30px;
+            }
+        }
+    }
+}

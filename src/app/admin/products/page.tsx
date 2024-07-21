@@ -51,7 +51,7 @@ function Products() {
                 <Link href={"/admin/products/add"} className='add_product_link border_button_void'>ADD</Link>
             </section>
             <div className="search_wrapper">
-                <Search />
+                <Search onSearch={handleSearch}/>
             </div>
 
             <table className="products_table">

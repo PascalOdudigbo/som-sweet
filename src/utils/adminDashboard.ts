@@ -2,12 +2,31 @@ import db from '../db/db';
 
 // Staff data
 export async function getStaffStats() {
-  const totalStaff = await db.user.count({
-    where: { role: { name: 'staff' } }
+  const staffRoles = await db.role.findMany({
+    where: {
+      name: {
+        not: 'Customer' // Customer is the role name for non-staff users
+      }
+    },
+    select: { id: true }
   });
-  const activeStaff = await db.user.count({
-    where: { role: { name: 'staff' }, active: true }
-  });
+
+  const staffRoleIds = staffRoles.map(role => role.id);
+
+  const [totalStaff, activeStaff] = await Promise.all([
+    db.user.count({
+      where: {
+        roleId: { in: staffRoleIds }
+      }
+    }),
+    db.user.count({
+      where: {
+        roleId: { in: staffRoleIds },
+        active: true
+      }
+    })
+  ]);
+
   const inactiveStaff = totalStaff - activeStaff;
 
   return { totalStaff, activeStaff, inactiveStaff };

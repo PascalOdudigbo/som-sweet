@@ -35,6 +35,9 @@ function Categories() {
     }, [searchTerm, categories]);
 
     
+    const handleSearch = (term: string) => {
+        setSearchTerm(term);
+    };
 
     return (
         <main className='categories_wrapper'>
@@ -43,7 +46,7 @@ function Categories() {
                 <Link href={"/admin/categories/add"} className='add_category_link border_button_void'>ADD</Link>
             </section>
             <div className="search_wrapper">
-                <Search />
+                <Search onSearch={handleSearch}/>
             </div>
 
             <table className="categories_table">

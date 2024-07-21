@@ -1,11 +1,12 @@
-.products_wrapper {
-    height: 100vh;
+.discount_products_wrapper {
+    width: 100%;
     padding: 2rem;
+    margin-top: 30px;
 
     .add_product_link_wrapper {
+        width: 96%;
         margin-left: auto;
         margin-right: auto;
-        width: 96%;
         justify-content: space-between;
         margin-bottom: 2rem;
 
@@ -52,13 +53,6 @@
 
     }
 
-    .product_mobile_view {
-        width: 98%;
-        margin-left: auto;
-        margin-right: auto;
-        display: none;
-    }
-
     .no_products_text {
         text-transform: capitalize;
         color: var(--color-grey);
@@ -70,6 +64,6 @@
     }
 }
 
-.products_table_wrapper::-webkit-scrollbar {
+.discount_products_wrapper::-webkit-scrollbar {
     display: none;
 }

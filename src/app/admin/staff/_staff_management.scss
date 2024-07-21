@@ -1,8 +1,8 @@
-.products_wrapper {
-    height: 100vh;
+.staff_management_wrapper {
+    min-height: 100vh;
     padding: 2rem;
 
-    .add_product_link_wrapper {
+    .add_staff_link_wrapper {
         margin-left: auto;
         margin-right: auto;
         width: 96%;
@@ -13,7 +13,7 @@
             font-size: 1.5em;
         }
 
-        .add_product_link {
+        .add_staff_link {
             text-align: center;
         }
     }
@@ -31,7 +31,7 @@
         margin-right: auto;
     }
 
-    .products_table {
+    .staff_table, .role_table {
         margin-left: auto;
         margin-right: auto;
         width: 96%;
@@ -49,17 +49,9 @@
                 color: #444;
             }
         }
-
     }
 
-    .product_mobile_view {
-        width: 98%;
-        margin-left: auto;
-        margin-right: auto;
-        display: none;
-    }
-
-    .no_products_text {
+    .no_staff_text {
         text-transform: capitalize;
         color: var(--color-grey);
         width: 100%;
@@ -68,8 +60,4 @@
         margin-top: 40px;
         font-family: var(--font-inter);
     }
-}
-
-.products_table_wrapper::-webkit-scrollbar {
-    display: none;
 }

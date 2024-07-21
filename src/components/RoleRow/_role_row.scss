@@ -1,0 +1,119 @@
+.row_wrapper {
+    font-family: var(--font-questrial);
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--color-periwinkle);
+        color: white;
+        font-size: 18px;
+    }
+
+    .row_cell {
+        padding: 15px 10px;
+        min-width: 140px;
+        height: fit-content;
+        vertical-align: middle;
+        align-items: center;
+        text-align: left;
+        color: var(--color-dark_grey);
+        border-bottom: 1px solid var(--color-grey);
+
+        &:first-child {
+            padding-left: 20px;
+        }
+
+        &:last-child {
+            padding-right: 20px;
+        }
+
+        .edit_role_form {
+            display: flex;
+            align-items: center;
+
+            .edit_role_input {
+                flex-grow: 1;
+                padding: 5px;
+                height: 40px;
+                font-family: var(--font-openSans);
+                font-size: 15px;
+                margin-right: 10px;
+                border: 1px solid var(--color-grey);
+                border-radius: 4px;
+            }
+
+            .save_role_button, .cancel_role_button {
+                padding: 5px 10px;
+                margin-right: 5px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .save_role_button {
+                background-color: var(--color-cerulean);
+                color: white;
+            }
+
+            .cancel_role_button {
+                background-color: var(--color-grey);
+                color: white;
+            }
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            
+            .dropdown_icon {
+                cursor: pointer;
+                padding: 5px;
+                transition: border 0.3s ease;
+                color: var(--color-cerulean);
+                border: 1px solid var(--color-black);
+                font-size: 40px;
+
+                &:hover {
+                    border: 2px solid var(--color-cerulean);
+                    color: var(--color-black);
+                }
+            }
+
+            .dropdown_content {
+                display: none;
+                position: absolute;
+                right: 0;
+                background-color: var(--color-white);
+                min-width: 120px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                z-index: 1;
+                border-radius: 5px;
+                overflow: hidden;
+
+                .dropdown_item, .delete_btn {
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                    color: var(--color-dark_grey);
+                    transition: background-color 0.3s ease;
+                    cursor: pointer;
+                    text-align: left;
+                    border: none;
+                    background: none;
+                    width: 100%;
+                    font-size: 14px;
+                    font-family: var(--font-openSans);
+
+                    &:hover {
+                        background-color: var(--color-cerulean);
+                        color: black;
+                    }
+                }
+
+                .delete_btn:hover {
+                    background-color: var(--color-red);
+                    color: white;
+                }
+            }
+        }
+    }
+}
