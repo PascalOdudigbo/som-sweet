@@ -1,5 +1,3 @@
-// utils/roleManagement.ts
-
 import { RoleType } from './allModelTypes';
 
 export async function getAllRoles(): Promise<RoleType[]> {

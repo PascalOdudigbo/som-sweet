@@ -8,7 +8,9 @@ import { paymentsBg } from '@/assets'
 import { CustomRating, MinimizableLayout, NavChildFooterLayout, Recommendations, TextArea } from '@/components'
 import { minusIcon, addIcon } from '@/assets'
 import { GetServerSideProps, NextPage } from 'next'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { getProductById } from '@/utils/productsManagement'
+import { showToast } from '@/utils/toast'
 
 // Defining the product image props type
 interface ProductImageProps {
@@ -20,7 +22,7 @@ interface ProductImageProps {
 
 // Defining the product image sub-component
 const ProductImage: React.FC<ProductImageProps> = ({ image, isActive, productName, onClick }) => {
-  const handleClick = useCallback(() => onClick(image.imageUrl), [image.imageUrl, onClick]);
+  const handleClick = useCallback(() => onClick(image?.imageUrl?.toString()), [image.imageUrl, onClick]);
 
   // Conditional classes for the images
   const imageClass = useMemo(() => {
@@ -31,7 +33,7 @@ const ProductImage: React.FC<ProductImageProps> = ({ image, isActive, productNam
     <img
       key={image.id}
       className={imageClass}
-      src={image.imageUrl}
+      src={image?.imageUrl?.toString()}
       alt={productName}
       onClick={handleClick}
     />
@@ -79,20 +81,30 @@ function Product () {
   const [quantity, setQuantity] = useState<number>(1)
   const [customText, setCustomText] = useState<string>("")
 
+  // Defining the router variable function
+  const router = useRouter();
+
   useEffect(() => {
     const fetchProduct = async () => {
-      const productId = parseInt(params.id as string);
-      const fetchedProduct = testProducts.find(p => p.id === productId);
-      if (fetchedProduct) {
-        setProduct(fetchedProduct);
-        setTargetImage(fetchedProduct.images?.[0]?.imageUrl ?? "");
-        setTargetVariation(fetchedProduct.variations?.[0]);
-        setBusinessRefundPolicy(testBusiness.refundsPolicy || '');
-      }
-    };
-
-    fetchProduct();
-  }, [params.id]);
+        try {
+            const fetchedProduct = await getProductById(parseInt(params?.id.toString()))
+            if (fetchedProduct) {
+              setProduct(fetchedProduct);
+              setTargetImage(fetchedProduct?.images?.[0]?.imageUrl.toString() ?? "");
+              setTargetVariation(fetchedProduct.variations?.[0]);
+              setBusinessRefundPolicy(testBusiness.refundsPolicy || '');
+            } else {
+                showToast("error", "Product not found")
+                router.back();
+            }
+        } catch (error) {
+            console.error('Failed to fetch product:', error)
+            showToast("error", "Failed to fetch product")
+            router.back();
+        }
+    }
+    fetchProduct()
+}, [params.id, router])
 
   const displayPrice = useMemo(() => {
     const price = targetVariation?.price ?? product?.basePrice;
@@ -100,7 +112,7 @@ function Product () {
   }, [targetVariation, product?.basePrice]);
 
   if (!product) {
-    return <div>Loading...</div>; // Or any loading state you prefer
+    return <div>Loading...</div>; 
   }
 
 

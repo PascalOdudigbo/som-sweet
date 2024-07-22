@@ -20,13 +20,15 @@
             .product_images_container {
                 margin-top: 20px;
                 width: 520px;
+                overflow-x: scroll;
                 justify-content: space-evenly;
 
                 .product_image {
                     width: 120px;
                     height: 120px;
-                    border-radius: 10px;
+                    border-radius: 5px;
                     object-fit: cover;
+                    margin: 20px;
                     cursor: pointer;
 
                     &:hover {
@@ -46,32 +48,6 @@
 
         .product_data_container {
             width: 50%;
-
-            &::-webkit-scrollbar {
-                width: 10px;
-                cursor: pointer;
-            }
-
-            &::-webkit-scrollbar-track {
-                background: var(--color-white);
-                border-radius: 10px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                background: var(--color-periwinkle);
-                border-radius: 10px;
-
-                &:hover {
-                    background: var(--color-cerulean);
-                }
-            }
-
-           
-
-            // For Firefox
-            scrollbar-width: thin;
-            scrollbar-color: var(--color-periwinkle) var(--color-white);
-
 
             .product_name {
                 font-family: var(--font-inter);

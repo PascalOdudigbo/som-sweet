@@ -19,7 +19,7 @@ function Product({ product }: Props) {
 
     return (
         <main className='product_main_container flex_column' onClick={()=>{router.push(`/product/${product.id}`)}}>
-            <img className='product_image' src={product?.images ? product?.images[0]?.imageUrl : ""} alt={product?.name}/>
+            <Image className='product_image' src={product?.images ? product?.images[0]?.imageUrl : ""} alt={product?.name} width={180} height={180}/>
             <p className='product_name'>{product?.name}</p>
             <p className='product_description'>{productDescription}</p>
             <p className='product_price'>£{(parseFloat(product?.basePrice.toString())).toFixed(2)}</p>

@@ -1,11 +1,11 @@
 "use client";
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import "./_welcome.scss"
 import Image from 'next/image'
-import {berryBg, breadBg, breadBg2, brownieBg, cakeBg, donutsBg} from '@/assets'
+import { berryBg, breadBg, breadBg2, brownieBg, cakeBg, donutsBg } from '@/assets'
 
 function Welcome() {
-  const images = [cakeBg, brownieBg, donutsBg, breadBg, breadBg2, berryBg];
+  const images = [cakeBg, brownieBg, donutsBg, breadBg];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -21,13 +21,14 @@ function Welcome() {
     <main className='welcome_main_container page_container flex_column_justify_center'>
       <section className='welcome_text_and_image_container flex_row_center'>
         <section className='welcome_text_button_container flex_column'>
-          <h1 className='welcome_text playfair_shadow_title'>INDULGE IN THE SWEETEST MOMENTS</h1>
+          <h1 className='welcome_text kavoon_shadow_title'>Som' Sweet</h1>
+          <h2 className='welcome_subtext'>INDULGE IN THE SWEETEST MOMENTS</h2>
           <button className='welcome_shop_button border_button'>PLACE ORDER</button>
         </section>
 
-        <Image className='welcome_image' src={images[currentIndex]} alt='welcome'/>
+        <Image className='welcome_image' src={images[currentIndex]} alt='welcome' />
       </section>
-      
+
     </main>
   )
 }

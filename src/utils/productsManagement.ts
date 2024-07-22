@@ -136,3 +136,17 @@ export function searchProducts(searchTerm: string, products: ProductType[]): Pro
     );
   }
 }
+
+export async function getRecommendedProducts(productId: number): Promise<ProductType[]> {
+  try {
+    const response = await fetch(`/api/products/${productId}/recommendations`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Failed to fetch recommended products: ${errorData.error || response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error in getRecommendedProducts:', error);
+    throw error;
+  }
+}

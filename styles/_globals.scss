@@ -7,9 +7,9 @@
 :root {
     --font-playfair: "Playfair Display", serif;
     --font-inter: "Inter", sans-serif;
-    --font-kavoon:  "Kavoon", serif;
+    --font-kavoon: "Kavoon", serif;
     --font-questrial: "Questrial", sans-serif;
-    --font-openSans:  "Open Sans", sans-serif;
+    --font-openSans: "Open Sans", sans-serif;
 
     --color-periwinkle: #B8B5E4;
     --color-black: #000000;
@@ -26,6 +26,29 @@
     padding: 0;
     margin: 0;
     scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 18px;
+        cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--color-white);
+        border-radius: 18px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--color-periwinkle);
+        border-radius: 18px;
+
+        &:hover {
+            background: var(--color-cerulean);
+        }
+    }
+
+    // For Firefox
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-periwinkle) var(--color-white);
 }
 
 a {
@@ -85,28 +108,28 @@ a {
 }
 
 .toast-success {
-    background-color: #2563eb; /* bg-blue-600 */
+    background-color: #2563eb;
 }
 
 .toast-error {
-    background-color: #dc2626; /* bg-red-600 */
+    background-color: #dc2626;
 }
 
 .toast-info {
-    background-color: #4b5563; /* bg-gray-600 */
+    background-color: #4b5563;
 }
 
 .toast-warning {
-    background-color: #f97316; /* bg-orange-400 */
+    background-color: #f97316;
 }
 
 .toast-default {
-    background-color: #4f46e5; /* bg-indigo-600 */
+    background-color: #4f46e5;
 }
 
 .toast-dark {
-    background-color: #f9f9f9; /* bg-white-600 */
-    color: #d1d5db; /* font-gray-300 */
+    background-color: #f9f9f9;
+    color: #d1d5db;
 }
 
 /* Reusable Flexbox classes */
@@ -143,6 +166,14 @@ a {
 .playfair_shadow_title {
     color: var(--color-white);
     font-family: var(--font-playfair);
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 1px var(--color-black);
+}
+
+.kavoon_shadow_title {
+    color: var(--color-white);
+    font-family: var(--font-kavoon);
     font-weight: 800;
     margin-bottom: 10px;
     text-shadow: 1px 1px 1px var(--color-black);
@@ -254,4 +285,78 @@ a {
         background-color: var(--color-cerulean);
         color: white;
     }
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+    /* Mobile styles */
+    .border_button,
+    .custom_button,
+    .border_button_void {
+        width: 100%;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    .section_title {
+        font-size: 24px;
+    }
+
+    .form_title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .custom_large_button {
+        height: 48px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    /* Tablet styles */
+    .border_button,
+    .custom_button,
+    .border_button_void {
+        width: 110px;
+        height: 42px;
+        font-size: 13px;
+    }
+
+    .section_title {
+        font-size: 26px;
+    }
+
+    .form_title {
+        font-size: 38px;
+        margin-bottom: 30px;
+    }
+
+    .custom_large_button {
+        height: 52px;
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    /* Laptop styles */
+    .border_button,
+    .custom_button,
+    .border_button_void {
+        width: 115px;
+        height: 43px;
+    }
+
+    .section_title {
+        font-size: 28px;
+    }
+
+    .form_title {
+        font-size: 42px;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    /* Large laptop and desktop styles */
+    
 }

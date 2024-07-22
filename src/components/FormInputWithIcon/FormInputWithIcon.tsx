@@ -29,10 +29,15 @@ function FormInputWithIcon({ label, required, iconSrc, type, readOnly, hint, aut
                 <p>{label}</p>
                 {required && <p className='required_symbol'>*</p>}
             </div>
-            
+
             <div className='input_wrapper flex_row_center'>
-                <Image className='input_icon' src={iconSrc} alt={`${label} icon`} height={25} width={25}/>
-                <input className='input_textbox' type={type} readOnly={readOnly} placeholder={hint} value={value} onChange={handleChange} autoComplete={autoComplete}/>
+                <Image
+                    className='input_icon'
+                    src={iconSrc || ''}
+                    alt={`${label} icon`}
+                    height={25}
+                    width={25}
+                />                <input className='input_textbox' type={type} readOnly={readOnly} placeholder={hint} value={value} onChange={handleChange} autoComplete={autoComplete} />
             </div>
 
         </main>
