@@ -1,7 +1,6 @@
 'use client'
 import { NavChildFooterLayout, Product } from '@/components'
 import React, { useEffect, useState } from 'react'
-import { discountPhoto } from '@/assets'
 import Image from 'next/image'
 import "./_store.scss"
 import { CategoryType, DiscountType, ProductType } from '../../utils/allModelTypes'
@@ -66,24 +65,24 @@ function Store() {
   return (
     <NavChildFooterLayout>
       <main className='shop_main_container page_container flex_column_center'>
-        <section className='shop_offers_container flex_column'>
+        {discounts.length > 0 && <section className='shop_offers_container flex_column'>
           <h1 className='section_title'>OFFERS</h1>
           {targetDiscount && (
             <div className='image_title_button_container flex_column_center'>
               <h1 className='offer_name playfair_shadow_title'>{targetDiscount.name}</h1>
-              <img className='offer_image' src={targetDiscount.imageUrl ?? ""} alt={targetDiscount.name} title={targetDiscount.description ?? ""} />
+              <Image className='offer_image' src={targetDiscount.imageUrl ?? ""} alt={targetDiscount.name} title={targetDiscount.description ?? ""} height={400} width={1024} />
               <button className='shop_offers_button border_button'>SHOP NOW</button>
             </div>
           )}
-        </section>
+        </section>}
 
         <section className='shop_categories_container flex_column_center'>
           <div className='section_title_button_container flex_row_center'>
             <h1 className='section_title'>CATEGORIES</h1>
-            <button className='shop_categories_button border_button_void'
+            {categories.length > 4 && <button className='shop_categories_button border_button_void'
               onClick={() => setViewAllCategories(prev => !prev)}>
               {!viewAllCategories ? "VIEW ALL" : "MINIMIZE"}
-            </button>
+            </button>}
           </div>
 
           <div className='categories_container'>

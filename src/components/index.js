@@ -22,6 +22,7 @@ export {default as OfferProductsRow} from "./OfferProductsRow/OfferProductsRow";
 export {default as DropdownCheckbox} from "./DropdownCheckbox/DropdownCheckbox";
 export {default as StaffRow} from "./StaffRow/StaffRow";
 export {default as RoleRow} from "./RoleRow/RoleRow";
+export {default as Loading} from "./Loading/Loading";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

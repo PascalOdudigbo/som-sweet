@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import "./_latestTreats.scss"
-import { Product } from '@/components';
+import { Loading, Product } from '@/components';
 import { useRouter } from 'next/navigation';
 import { ProductType } from '@/utils/allModelTypes';
 import { getLatestProducts } from '@/utils/productsManagement';
@@ -30,7 +30,7 @@ function LatestTreats() {
     }, []);
 
     if (isLoading) {
-        return <div>Loading latest treats...</div>;
+        return <Loading/>
     }
 
     return (

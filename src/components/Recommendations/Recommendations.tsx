@@ -1,9 +1,9 @@
 'use client'
 import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import "./_recommendations.scss"
-import { Product } from '@/components';
+import { Loading, Product } from '@/components';
 import { ProductType } from '@/utils/allModelTypes';
-import { getRecommendedProducts } from '@/utils/productsManagement';
+import { getAllProducts } from '@/utils/productsManagement';
 import { showToast } from '@/utils/toast';
 
 interface RecommendationsType {
@@ -11,38 +11,79 @@ interface RecommendationsType {
 }
 
 const filterDescriptions = [
-    "Here are some similar treats for you to consider, based on price range.",
-    "Here are some similar treats for you to consider, based on category and price range.",
-    "Here are some similar treats for you to consider, based on category."
+    "Here are some similar treats for you to consider, these suggestions were filtered based on similarity in product price range.",
+    "Here are some similar treats for you to consider, these suggestions were filtered based on similarity in product category and price range.",
+    "Here are some similar treats for you to consider, these suggestions were filtered based on similarity in product category."
 ];
 
 function Recommendations({ product }: RecommendationsType) {
+    const [products, setProducts] = useState<ProductType[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
     const [filterIndex, setFilterIndex] = useState<number>(0);
     const [viewAllActive, setViewAllActive] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    const fetchRecommendations = useCallback(async () => {
-        setIsLoading(true);
-        try {
-            const recommendations = await getRecommendedProducts(product.id);
-            setFilteredProducts(recommendations);
-            // Randomly select a filter description
-            setFilterIndex(Math.floor(Math.random() * filterDescriptions.length));
-        } catch (error) {
-            console.error('Failed to fetch recommendations:', error);
-            showToast('error', 'Failed to load recommendations. Please try again.');
-        } finally {
-            setIsLoading(false);
+    const filterFunctions = useMemo(() => [
+        (products: ProductType[], targetProduct: ProductType) => products.filter(p =>
+            (p.basePrice >= targetProduct.basePrice - 5 && p.basePrice <= targetProduct.basePrice + 5) && (targetProduct.id !== p.id)
+        ),
+        (products: ProductType[], targetProduct: ProductType) => products.filter(p =>
+            (p.basePrice >= targetProduct.basePrice - 5 && p.basePrice <= targetProduct.basePrice + 5) &&
+            (p.categoryId === targetProduct.categoryId) && (targetProduct.id !== p.id)
+        ),
+        (products: ProductType[], targetProduct: ProductType) => products.filter(p => 
+            p.categoryId === targetProduct.categoryId && targetProduct.id !== p.id
+        )
+    ], []);
+
+    const applyFilter = useCallback((index: number, products: ProductType[]): boolean => {
+        const filteredResults = filterFunctions[index](products, product);
+        if (filteredResults.length > 0) {
+            setFilteredProducts(filteredResults);
+            return true;
         }
-    }, [product.id]);
+        return false;
+    }, [filterFunctions, product]);
+
+    const tryFilter = useCallback((products: ProductType[], attempts: number = 0) => {
+        if (attempts >= filterFunctions.length) {
+            setFilteredProducts([]);
+            setViewAllActive(true);
+            return;
+        }
+
+        const newFilterIndex = Math.floor(Math.random() * filterFunctions.length);
+        setFilterIndex(newFilterIndex);
+
+        if (!applyFilter(newFilterIndex, products)) {
+            tryFilter(products, attempts + 1);
+        }
+    }, [filterFunctions.length, applyFilter]);
 
     useEffect(() => {
-        fetchRecommendations();
-    }, [fetchRecommendations]);
+        const fetchAndFilterProducts = async () => {
+            setIsLoading(true);
+            try {
+                const fetchedProducts = await getAllProducts();
+                if (fetchedProducts) {
+                    setProducts(fetchedProducts);
+                    tryFilter(fetchedProducts);
+                } else {
+                    showToast("error", "Products not found");
+                }
+            } catch (error) {
+                console.error('Failed to fetch products:', error);
+                showToast("error", "Failed to fetch products");
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchAndFilterProducts();
+    }, [tryFilter]);
 
     if (isLoading) {
-        return <div>Loading recommendations...</div>;
+        return <Loading />;
     }
 
     return (
@@ -51,12 +92,15 @@ function Recommendations({ product }: RecommendationsType) {
             <p className='recommendations_page_text'>{filterDescriptions[filterIndex]}</p>
 
             <section className='products_container'>
-                {filteredProducts.slice(0, viewAllActive ? undefined : 4).map(product => (
-                    <Product
-                        key={product.id}
-                        product={product}
-                    />
-                ))}
+                {filteredProducts.map(product => {
+                    if (viewAllActive || filteredProducts.indexOf(product) <= 3) {
+                        return <Product
+                            key={product.id}
+                            product={product}
+                        />
+                    }
+                    return null;
+                })}
             </section>
             {
                 (!viewAllActive && filteredProducts.length > 4) && 

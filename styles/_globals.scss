@@ -205,7 +205,9 @@ a {
     &:hover {
         background-color: var(--color-cerulean);
         color: white;
-        font-size: 16px;
+        font-size: 15px;
+        width: 130px;
+        height: 55px;
         font-weight: 900;
     }
 }
@@ -291,13 +293,23 @@ a {
 
 /* Media Queries */
 @media screen and (max-width: 480px) {
+
     /* Mobile styles */
     .border_button,
     .custom_button,
     .border_button_void {
-        width: 100%;
-        height: 40px;
+        // width: 100%;
+        height: 35px;
+        width: max-content;
+        padding: 12px;
         font-size: 12px;
+
+        &:hover {
+            font-size: 13px;
+            width: max-content;
+            height: 35px;
+            
+        }
     }
 
     .section_title {
@@ -316,6 +328,7 @@ a {
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
+
     /* Tablet styles */
     .border_button,
     .custom_button,
@@ -341,6 +354,7 @@ a {
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+
     /* Laptop styles */
     .border_button,
     .custom_button,
@@ -360,5 +374,5 @@ a {
 
 @media screen and (min-width: 1025px) {
     /* Large laptop and desktop styles */
-    
+
 }

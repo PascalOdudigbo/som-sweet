@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import './_product.scss'
 import Image from 'next/image'
 import { paymentsBg } from '@/assets'
-import { CustomRating, MinimizableLayout, NavChildFooterLayout, Recommendations, TextArea } from '@/components'
+import { CustomRating, Loading, MinimizableLayout, NavChildFooterLayout, Recommendations, TextArea } from '@/components'
 import { minusIcon, addIcon } from '@/assets'
 import { GetServerSideProps, NextPage } from 'next'
 import { useParams, useRouter } from 'next/navigation'
@@ -112,7 +112,7 @@ function Product () {
   }, [targetVariation, product?.basePrice]);
 
   if (!product) {
-    return <div>Loading...</div>; 
+    return <Loading/>
   }
 
 
