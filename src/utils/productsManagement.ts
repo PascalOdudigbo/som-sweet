@@ -2,7 +2,9 @@ import { ProductType, ProductImageType, ProductVariationType } from "./allModelT
 
 export async function getAllProducts(): Promise<ProductType[]> {
   try {
-    const response = await fetch('/api/products');
+    const response = await fetch('/api/products', {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch products: ${errorData.message || response.statusText}`);
@@ -16,7 +18,9 @@ export async function getAllProducts(): Promise<ProductType[]> {
 
 export async function getProductById(id: number): Promise<ProductType> {
   try {
-    const response = await fetch(`/api/products/${id}`);
+    const response = await fetch(`/api/products/${id}`, {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch product: ${errorData.message || response.statusText}`);
@@ -30,7 +34,9 @@ export async function getProductById(id: number): Promise<ProductType> {
 
 export async function getProductsByCategory(categoryId: number): Promise<ProductType[]> {
   try {
-    const response = await fetch(`/api/products/category/${categoryId}`);
+    const response = await fetch(`/api/products/category/${categoryId}`, {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch products by category: ${errorData.message || response.statusText}`);
@@ -118,7 +124,6 @@ export async function removeProductImage(productId: number, imageId: number): Pr
     });
     if (!response.ok) {
       const errorData = await response.json();
-      console.log(errorData)
       throw new Error(`Failed to remove product image: ${errorData.message || response.statusText}`);
     }
   } catch (error) {
@@ -139,7 +144,9 @@ export function searchProducts(searchTerm: string, products: ProductType[]): Pro
 
 export async function getRecommendedProducts(productId: number): Promise<ProductType[]> {
   try {
-    const response = await fetch(`/api/products/${productId}/recommendations`);
+    const response = await fetch(`/api/products/${productId}/recommendations`, {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch recommended products: ${errorData.error || response.statusText}`);
@@ -153,7 +160,9 @@ export async function getRecommendedProducts(productId: number): Promise<Product
 
 export async function getLatestProducts(limit: number = 4): Promise<ProductType[]> {
   try {
-    const response = await fetch(`/api/products/latest?limit=${limit}`);
+    const response = await fetch(`/api/products/latest?limit=${limit}`, {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch latest products: ${errorData.error || response.statusText}`);

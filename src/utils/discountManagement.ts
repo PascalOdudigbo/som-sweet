@@ -4,7 +4,9 @@ import { DiscountType, ProductType } from './allModelTypes';
 
 export async function getAllDiscounts(): Promise<DiscountType[]> {
   try {
-    const response = await fetch('/api/discounts');
+    const response = await fetch('/api/discounts', {
+      next: { revalidate: 1800 } // Cache for 30 minutes
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch discounts: ${errorData.message || response.statusText}`);
@@ -18,7 +20,9 @@ export async function getAllDiscounts(): Promise<DiscountType[]> {
 
 export async function getDiscountById(id: number): Promise<DiscountType> {
   try {
-    const response = await fetch(`/api/discounts/${id}`);
+    const response = await fetch(`/api/discounts/${id}`, {
+      next: { revalidate: 1800 } // Cache for 30 minutes
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch discount: ${errorData.message || response.statusText}`);
@@ -118,7 +122,9 @@ export async function removeProductFromDiscount(discountId: number, productId: n
 
 export async function getProductsForDiscount(discountId: number): Promise<ProductType[]> {
   try {
-    const response = await fetch(`/api/discounts/${discountId}/products`);
+    const response = await fetch(`/api/discounts/${discountId}/products`, {
+      next: { revalidate: 1800 } // Cache for 30 minutes
+    });
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(`Failed to fetch products for discount: ${errorData.message || response.statusText}`);
@@ -129,6 +135,7 @@ export async function getProductsForDiscount(discountId: number): Promise<Produc
     throw error;
   }
 }
+
 
 export const handleImageFileChangeAddDiscount = (
   event: React.ChangeEvent<HTMLInputElement>,

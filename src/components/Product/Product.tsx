@@ -17,6 +17,7 @@ function Product({ product }: Props) {
 
     const router = useRouter();
 
+
     return (
         <div className='product_main_container' onClick={() => { router.push(`/product/${product.id}`) }}>
             <Image
@@ -25,7 +26,7 @@ function Product({ product }: Props) {
                 alt={product?.name}
                 width={400}
                 height={225}
-                // layout="responsive"
+            // layout="responsive"
             />
             <div className='product_content'>
                 <h3 className='product_name'>{product?.name}</h3>

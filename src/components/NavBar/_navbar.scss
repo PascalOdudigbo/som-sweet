@@ -28,7 +28,9 @@
         .nav_dropdown_cart_container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: space-between;
+            gap: 40px;
+            
 
             .nav_badge_cart_container {
                 position: relative;
@@ -136,10 +138,11 @@
     .nav_main_container {
         .nav_top_sub_container {
             .nav_site_title {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .nav_dropdown_cart_container {
+                gap: 20px;
                 .nav_mobile_menu {
                     display: block;
                     cursor: pointer;

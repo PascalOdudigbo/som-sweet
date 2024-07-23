@@ -14,7 +14,7 @@
         border: 1px solid var(--color-black);
         background-color: var(--color-white);
         width: 178px;
-        height: 238px;
+        max-height: 238px;
         position: absolute;
         z-index: 2;
         display: none;

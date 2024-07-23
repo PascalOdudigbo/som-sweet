@@ -17,24 +17,7 @@ export async function signUp(userData: { username: string; email: string; passwo
       throw error;
     }
   }
-
-export async function signIn(email: string, password: string): Promise<{ user: UserType, token: string }> {
-  try {
-    const response = await fetch('/api/users/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Failed to sign in: ${errorData.error || response.statusText}`);
-    }
-    return response.json();
-  } catch (error) {
-    console.error('Error in signIn:', error);
-    throw error;
-  }
-}
+  
 
 export async function getUserProfile(): Promise<UserType> {
   try {
@@ -49,3 +32,28 @@ export async function getUserProfile(): Promise<UserType> {
     throw error;
   }
 }
+
+export const parseJwt = (token: string) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+export const isLoggedIn = (): boolean => {
+  const token = localStorage.getItem('token');
+  if (!token) return false;
+
+  const decodedToken: any = parseJwt(token);
+  if (!decodedToken || Date.now() >= decodedToken.exp * 1000) {
+    localStorage.removeItem('token');
+    return false;
+  }
+
+  return true;
+};
+
+export const signOut = () => {
+  localStorage.removeItem('token');
+};

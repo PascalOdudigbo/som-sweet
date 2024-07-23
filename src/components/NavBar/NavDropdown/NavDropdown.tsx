@@ -3,29 +3,48 @@ import React, { FC } from 'react'
 import { profileIcon, upIcon } from "../../../assets";
 import "./_navDropdown.scss";
 import Link from 'next/link';
+import { UserType } from '@/utils/allModelTypes';
 
-// Defining the DropdownItem type
 type DropdownItemProps = {
   text: string;
   path: string;
 }
 
+type DropdownProps = {
+  user: UserType | null;
+}
 
-function NavDropdown() {
+const NavDropdown: FC<DropdownProps> = ({user}) => {
+  console.log(user)
+  const navLinksUser = [
+    { name: 'My Orders', href: '/orders' },
+    { name: 'My Addresses', href: `/addresses/${user?.id}` },
+    { name: 'My Account', href: `/account/${user?.id}` }
+  ];
 
-  // Creating a dropdown item subcomponent
-  const DropdownItem: FC<DropdownItemProps> = ({ text, path }) => {
-    return <Link className='nav_dropdown_item flex_row_center' href={path}>
+  const navLinksAdmin = [
+    { name: 'Dashboard', href: '/admin/dashboard' },
+    { name: 'My Addresses', href: `/addresses/${user?.id}` },
+    { name: 'My Account', href: `/account/${user?.id}` }
+  ];
+
+  const navLinks = [
+    { name: 'Sign In', href: '/signin' },
+    { name: 'Sign Up', href: `/signup` },
+    { name: 'Logout', href: '/logout' }
+  ];
+
+  const DropdownItem: FC<DropdownItemProps> = ({ text, path }) => (
+    <Link className='nav_dropdown_item flex_row_center' href={path}>
       {text}
     </Link>
-  }
+  );
 
-  // Creating a dropdown logout item subcomponent
-  const DropdownLogoutItem: FC<DropdownItemProps> = ({ text, path }) => {
-    return <Link className='nav_dropdown_logout_item flex_row_center' href={path}>
+  const DropdownLogoutItem: FC<DropdownItemProps> = ({ text, path }) => (
+    <Link className='nav_dropdown_logout_item flex_row_center' href={path}>
       {text}
     </Link>
-  }
+  );
 
   return (
     <div className='nav_dropdown_main_container flex_column_center'>
@@ -33,21 +52,22 @@ function NavDropdown() {
         <Image src={profileIcon} alt='profile icon' height={24} width={24} />
         <Image className="navArrowImage" src={upIcon} alt='arrow icon' height={24} width={24} />
       </section>
-
       <section className='nav_content_container flex_column_center'>
-        <DropdownItem text="My Orders" path="/" />
-        <DropdownItem text="My Addresses" path="/" />
-        <DropdownItem text="My Wallet" path="/" />
-        <DropdownItem text="My Wishlist" path="/" />
-        <DropdownItem text="My Account" path="/" />
-
+        {user?.role?.name.toLowerCase() === "customer" && navLinksUser.map((link, index) => (
+          <DropdownItem key={index} text={link.name} path={link.href} />
+        ))}
+        {user?.role?.name.toLowerCase() === "administrator" && navLinksAdmin.map((link, index) => (
+          <DropdownItem key={index} text={link.name} path={link.href} />
+        ))}
         <section className='nav_content_login_container flex_column_center'>
-          <DropdownItem text="Sign in" path="/signin" />
-          <DropdownItem text="Sign up" path="/signup" />
-          <DropdownLogoutItem text="Log Out" path="/logout" />
+          {!user?.id && navLinks.map((link, index) => 
+            link.name.toLowerCase() !== "logout" 
+              ? <DropdownItem key={index} text={link.name} path={link.href} />
+              : <DropdownLogoutItem key={index} text={link.name} path={link.href} />
+          )}
+          {user?.id && <DropdownLogoutItem text="Log Out" path="/logout" />}
         </section>
       </section>
-
     </div>
   )
 }

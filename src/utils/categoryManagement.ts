@@ -1,7 +1,9 @@
 import { CategoryType } from './allModelTypes'
 
 export async function getAllCategories(): Promise<CategoryType[]> {
-  const response = await fetch('/api/categories')
+  const response = await fetch('/api/categories', {
+    next: { revalidate: 86400 } // Cache for 24 hours
+  })
   if (!response.ok) {
     throw new Error('Failed to fetch categories')
   }
@@ -9,7 +11,9 @@ export async function getAllCategories(): Promise<CategoryType[]> {
 }
 
 export async function getCategoryById(id: number): Promise<CategoryType | null> {
-  const response = await fetch(`/api/categories/${id}`)
+  const response = await fetch(`/api/categories/${id}`, {
+    next: { revalidate: 86400 } // Cache for 24 hours
+  })
   if (!response.ok) {
     if (response.status === 404) {
       return null

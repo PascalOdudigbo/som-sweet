@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import "./_signin.scss"
 import { emailIcon, passwordIcon } from '@/assets'
-import { NavChildFooterLayout } from '@/components';
+import { Loading, NavChildFooterLayout } from '@/components';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { showToast } from '@/utils/toast';
-import { signIn } from '@/utils/userManagement';
+// Import the useAuth hook
+import { useAuth } from '@/contexts/AuthProvider'
 
 const FormInputWithIcon = dynamic(
   () => import('@/components/FormInputWithIcon/FormInputWithIcon'),
@@ -35,6 +36,8 @@ function SignIn() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
+  // Use the login function from the auth context
+  const { login } = useAuth(); 
 
   useEffect(() => {
     setMounted(true);
@@ -45,11 +48,9 @@ function SignIn() {
     setIsLoading(true);
 
     try {
-      const { user, token } = await signIn(email, password);
-      // Store the token in localStorage or a secure cookie
-      localStorage.setItem('token', token);
+      await login(email, password); // Use the login function from the auth context
       showToast('success', 'Signed in successfully');
-      router.push('/dashboard'); // Or wherever you want to redirect after successful login
+      router.push('/'); // Or wherever you want to redirect after successful login
     } catch (error) {
       console.error('Sign in failed:', error);
       showToast('error', 'Failed to sign in. Please check your credentials and try again.');
@@ -59,7 +60,7 @@ function SignIn() {
   };
 
   if (!mounted) {
-    return null; // or a loading spinner
+    return <Loading/>;
   }
 
   return (

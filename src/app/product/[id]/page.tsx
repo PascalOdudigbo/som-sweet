@@ -4,13 +4,13 @@ import { testBusiness, testProducts } from '@/utils/allTestData'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import './_product.scss'
 import Image from 'next/image'
-import { paymentsBg } from '@/assets'
+import { paymentsBg, minusIcon, addIcon } from '@/assets'
 import { CustomRating, Loading, MinimizableLayout, NavChildFooterLayout, Recommendations, TextArea } from '@/components'
-import { minusIcon, addIcon } from '@/assets'
-import { GetServerSideProps, NextPage } from 'next'
 import { useParams, useRouter } from 'next/navigation'
 import { getProductById } from '@/utils/productsManagement'
 import { showToast } from '@/utils/toast'
+import { addToCart } from '@/utils/cartManagement'
+import { useAuth } from '@/hooks/useAuth'
 
 // Defining the product image props type
 interface ProductImageProps {
@@ -69,7 +69,7 @@ const ProductQuantity: React.FC<{ quantity: number, setQuantity: React.Dispatch<
 
 }
 
-function Product () {
+function Product() {
   // The useParams hook to get the product id from the route path
   const params = useParams();
   // Defining state variables to handle dynamic
@@ -80,39 +80,75 @@ function Product () {
   const [targetVariation, setTargetVariation] = useState<ProductVariationType | undefined>();
   const [quantity, setQuantity] = useState<number>(1)
   const [customText, setCustomText] = useState<string>("")
+  const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+
 
   // Defining the router variable function
   const router = useRouter();
+  // getting the user data and loading status
+  const { user, loading, loadUserFromToken } = useAuth();
 
   useEffect(() => {
     const fetchProduct = async () => {
-        try {
-            const fetchedProduct = await getProductById(parseInt(params?.id.toString()))
-            if (fetchedProduct) {
-              setProduct(fetchedProduct);
-              setTargetImage(fetchedProduct?.images?.[0]?.imageUrl.toString() ?? "");
-              setTargetVariation(fetchedProduct.variations?.[0]);
-              setBusinessRefundPolicy(testBusiness.refundsPolicy || '');
-            } else {
-                showToast("error", "Product not found")
-                router.back();
-            }
-        } catch (error) {
-            console.error('Failed to fetch product:', error)
-            showToast("error", "Failed to fetch product")
-            router.back();
+      try {
+        const fetchedProduct = await getProductById(parseInt(params?.id.toString()))
+        if (fetchedProduct) {
+          setProduct(fetchedProduct);
+          setTargetImage(fetchedProduct?.images?.[0]?.imageUrl.toString() ?? "");
+          setTargetVariation(fetchedProduct.variations?.[0]);
+          setBusinessRefundPolicy(testBusiness.refundsPolicy || '');
+        } else {
+          showToast("error", "Product not found")
+          router.back();
         }
+      } catch (error) {
+        console.error('Failed to fetch product:', error)
+        showToast("error", "Failed to fetch product")
+        router.back();
+      }
     }
     fetchProduct()
-}, [params.id, router])
+  }, [params.id, router])
 
   const displayPrice = useMemo(() => {
     const price = targetVariation?.price ?? product?.basePrice;
     return (parseFloat(price?.toString() ?? "0"))?.toFixed(2);
   }, [targetVariation, product?.basePrice]);
 
+  const handleAddToCart = async () => {
+    if (loading) {
+      showToast("info", "Please wait...");
+      return;
+    }
+
+    if (!user) {
+      showToast("error", "Please login to add items to cart");
+      router.push('/signin');
+      return;
+    }
+
+    if (!product) {
+      showToast("error", "Product not found");
+      return;
+    }
+
+    setIsAddingToCart(true);
+    try {
+      const updatedCart = await addToCart(product, targetVariation || null, quantity, customText, user?.id);
+      if (updatedCart) {
+        showToast("success", "Product added to cart successfully");
+        loadUserFromToken();
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      showToast("error", "Failed to add product to cart");
+    } finally {
+      setIsAddingToCart(false);
+    }
+  };
+
   if (!product) {
-    return <Loading/>
+    return <Loading />
   }
 
 
@@ -166,10 +202,16 @@ function Product () {
               required={false}
               rows={5}
               cols={45}
-              onChangeFunction={(e) => {setCustomText(e.target.value)}}
+              onChangeFunction={(e) => { setCustomText(e.target.value) }}
             />
 
-            <button className='add_to_cart_button border_button'>Add to Cart</button>
+            <button
+              className='add_to_cart_button border_button'
+              onClick={handleAddToCart}
+              disabled={isAddingToCart}
+            >
+              {isAddingToCart ? 'Adding to Cart...' : 'Add to Cart'}
+            </button>
 
             <section className='minimizable_sections_container'>
               <MinimizableLayout title='Product details' isActiveInit={true} children={
@@ -177,9 +219,9 @@ function Product () {
               } />
 
               <MinimizableLayout isActiveInit={false} title='Reviews' children={
-              //  place then reviews component here
-              <>
-              </>
+                //  place then reviews component here
+                <>
+                </>
               } />
 
               <MinimizableLayout isActiveInit={false} title='Refund policy' children={
@@ -193,7 +235,7 @@ function Product () {
           </section>
         </section>
 
-        <Recommendations product={product}/>
+        <Recommendations product={product} />
 
 
       </main>

@@ -127,8 +127,8 @@ export interface CartType {
   userId: number;
   createdAt: Date;
   updatedAt: Date;
-  user?: UserType;
-  items?: CartItemType[];
+  user: UserType;
+  items: CartItemType[];
 }
 
 export interface CartItemType {
@@ -139,7 +139,7 @@ export interface CartItemType {
   quantity: number;
   customText?: string | null;
   cart?: CartType;
-  product?: ProductType;
+  product: ProductType;
   variation?: ProductVariationType | null;
 }
 

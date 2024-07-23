@@ -1,12 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { NavDropdown, Search } from '../'
+import { Loading, NavDropdown, Search } from '../'
 import "./_navbar.scss"
 import Image from 'next/image'
 import { cartIcon } from "../../assets";
 import Link from 'next/link';
 import clsx from 'clsx';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { useAuth } from '@/hooks/useAuth'
 
 const navLinks = [
   { name: 'HOME', href: '/' },
@@ -16,16 +17,19 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { name: 'INSTAGRAM', href: '/' },
-  { name: 'FACEBOOK', href: '/store' },
-  { name: 'TIKTOK', href: '/#aboutus' },
-  { name: 'YOUTUBE', href: '/#contactus' },
+  { name: 'INSTAGRAM', href: '/instagram' },
+  { name: 'FACEBOOK', href: '/facebook' },
+  { name: 'TIKTOK', href: '/tiktok' },
+  { name: 'YOUTUBE', href: '/youtube' },
 ];
 
 function NavBar() {
   const pathname = usePathname();
   const [currentHash, setCurrentHash] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // Getting the userData
+  const { user, loading} = useAuth();
+
 
   useEffect(() => {
     const handleHashChange = () => setCurrentHash(window.location.hash);
@@ -49,6 +53,10 @@ function NavBar() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  if (loading){
+    return <Loading/>
+  }
+
   return (
     <nav className='nav_main_container'>
       <section className='nav_top_sub_container'>
@@ -63,11 +71,11 @@ function NavBar() {
 
 
         <section className='nav_dropdown_cart_container'>
-          <NavDropdown />
+          <NavDropdown user={user}/>
 
           <section className='nav_badge_cart_container'>
-            <p className='nav_badge'>{4}</p>
-            <Image src={cartIcon} alt='cart icon' height={24} width={24} />
+            <p className='nav_badge'>{user?.cart?.items?.length}</p>
+            <Image src={cartIcon} alt='cart icon' height={24} width={24} title='Cart'/>
           </section>
 
           <div className='nav_mobile_menu' onClick={toggleMobileMenu}>
