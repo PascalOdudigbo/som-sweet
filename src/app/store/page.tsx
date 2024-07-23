@@ -1,5 +1,5 @@
 'use client'
-import { NavChildFooterLayout, Product } from '@/components'
+import { Loading, NavChildFooterLayout, Product } from '@/components'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import "./_store.scss"
@@ -59,7 +59,7 @@ function Store() {
   }, [discounts]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   return (

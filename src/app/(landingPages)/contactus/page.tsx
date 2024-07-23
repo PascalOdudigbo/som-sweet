@@ -2,13 +2,21 @@
 import React, { useState } from 'react'
 import "./_contactus.scss"
 import { FormInput, TextArea } from '@/components'
+import { sendContactEmail, ContactDetails } from '@/utils/contactPageUtils'
 
 function ContactUs() {
-  //Declaring state variables for controlled form inputs
-  const [name, setName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
-  const [message, setMessage] = useState<string>("")
-  console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
+  const [contactDetails, setContactDetails] = useState<ContactDetails>({
+    name: "",
+    email: "",
+    message: ""
+  })
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    await sendContactEmail(contactDetails)
+    // Reset form after submission
+    setContactDetails({ name: "", email: "", message: "" })
+  }
 
   return (
     <main id="contactus" className='contactus_main_container page_container flex_column_center'>
@@ -16,39 +24,38 @@ function ContactUs() {
         <section className='contactus_text_form_container flex_column'>
           <section className='top_text_section flex_column'>
             <h1 className='top_text_section_title'>GET IN TOUCH</h1>
-            <p className='top_text_section_text'>Welcome to Sum Sweet, your go-to cake bakery in the UK! We are passionate about creating delicious and beautifully crafted cakes for all occasions. Whether it's a birthday, wedding, or any special celebration, our team is here to sweeten your moments with our delectable treats.</p>
+            <p className='top_text_section_text'>Welcome to Som' Sweet, your go-to cake bakery in the UK! We are passionate about creating delicious and beautifully crafted cakes for all occasions. Whether it's a birthday, wedding, or any special celebration, our team is here to sweeten your moments with our delectable treats.</p>
           </section>
 
-          <form className='contactus_form flex_column'>
+          <form className='contactus_form flex_column' onSubmit={handleSubmit}>
             <FormInput
               label='Name'
               inputType='text'
-              inputValue={name}
+              inputValue={contactDetails.name}
               required={true}
               readonly={false}
-              onChangeFunction={(e) => {setName(e.target.value)}}
+              onChangeFunction={(e) => setContactDetails({ ...contactDetails, name: e.target.value })}
             />
 
             <FormInput
               label='Email'
-              inputType='text'
-              inputValue={email}
+              inputType='email'
+              inputValue={contactDetails.email}
               required={true}
               readonly={false}
-              onChangeFunction={(e) => {setEmail(e.target.value)}}
+              onChangeFunction={(e) => setContactDetails({ ...contactDetails, email: e.target.value })}
             />
 
             <TextArea
               label='Message'
-              inputValue={message}
+              inputValue={contactDetails.message}
               required={true}
               rows={5}
               cols={45}
-              onChangeFunction={(e) => {setMessage(e.target.value)}}
+              onChangeFunction={(e) => setContactDetails({ ...contactDetails, message: e.target.value })}
             />
 
-            <button className='contactus_button border_button'>SEND MESSAGE</button>
-
+            <button type="submit" className='contactus_button border_button'>SEND MESSAGE</button>
           </form>
         </section>
 
@@ -73,7 +80,7 @@ function ContactUs() {
         </section>
       </section>
 
-      <iframe title="Som Sweet's Location" className='contactus_map' src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=52.40790039969724,-1.4965874000000001`}/>
+      <iframe title="Som' Sweet's Location" className='contactus_map' src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=52.40790039969724,-1.4965874000000001`} />
     </main>
   )
 }
