@@ -1,83 +1,126 @@
 .aboutus_main_container {
+    padding: 40px 20px;
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1200px;
+
     @keyframes left_to_right {
         from {
-            position: absolute;
-            top:0;
-            left: 0;
+            opacity: 0;
+            transform: translateX(-50px);
         }
-
         to {
-            position: relative;
-            top:auto;
-            left: auto;
+            opacity: 1;
+            transform: translateX(0);
         }
-
     }
 
     .aboutus_page_title {
         font-family: var(--font-questrial);
-        font-size: 30px;
+        font-size: clamp(24px, 4vw, 30px);
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: lighter;
     }
 
-    .aboutus_subsection1 {
+    .aboutus_subsection {
         width: 100%;
         margin-top: 30px;
-        justify-content: space-evenly;
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
 
-        .aboutus_img1 {
-            width: 480px;
-            height: 680px;
-            object-fit: scale-down;
+        &:last-child {
+            margin-bottom: 5%;
         }
 
-        .top_text_section {
-            width: 40%;
+        .aboutus_img {
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            aspect-ratio: 480 / 680;
+            object-fit: cover;
+        }
 
-            .top_text_section_title {
-                font-size: 40px;
-                text-align: right;
+        .text_section {
+            width: 50%;
+
+            &_title {
+                font-size: clamp(24px, 4vw, 40px);
+                margin-bottom: 20px;
             }
 
-            .top_text_section_text {
+            &_text {
                 font-family: var(--font-questrial);
-                font-size: 28px;
-                text-align: right;
-                animation-name: left_to_right;
-                animation-duration: 4s;
+                font-size: clamp(14px, 2.5vw, 28px);
+                animation: left_to_right 1s ease-out;
             }
         }
 
+        &:nth-child(odd) {
+            flex-direction: row-reverse;
 
+            .text_section {
+                text-align: right;
+            }
+        }
     }
+}
 
-    .aboutus_subsection2 {
+/* Media Queries */
+@media screen and (max-width: 767px) {
+    .aboutus_main_container {
+        padding: 30px 15px;
         width: 100%;
-        margin-top: 30px;
-        margin-bottom: 5%;
-        justify-content: space-evenly;
 
-        .aboutus_img2 {
-            width: 480px;
-            height: 680px;
-            object-fit: scale-down;
-        }
+        .aboutus_subsection {
+            flex-direction: column !important;
+            gap: 20px;
 
-        .bottom_text_section {
-            width: 40%;
-
-            .bottom_text_section_title {
-                font-size: 40px;
-                text-align: left;
-                
+            .aboutus_img {
+                max-width: 100%;
             }
 
-            .bottom_text_section_text {
-                font-family: var(--font-questrial);
-                font-size: 28px;
-                text-align: left;
+            .text_section {
+                width: 100%;
+                text-align: left !important;
+
+                &_title {
+                    text-align: left;
+                }
+
+                &_text {
+                    font-size: clamp(14px, 3vw, 20px);
+                }
             }
         }
+    }
+}
 
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .aboutus_main_container {
+        width: 90%;
 
+        .aboutus_subsection {
+            gap: 30px;
+
+            .text_section {
+                width: 55%;
+
+                &_text {
+                    font-size: clamp(14px, 2.5vw, 24px);
+                }
+            }
+
+            .aboutus_img {
+                max-width: 45%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    .aboutus_main_container {
+        width: 85%;
     }
 }

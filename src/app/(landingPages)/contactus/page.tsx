@@ -66,7 +66,7 @@ function ContactUs() {
             <p className='contact_section_text'>Sunday: Closed</p>
           </section>
 
-          <section className='footer_contact_container'>
+          <section className='contact_container'>
             <h1 className='contact_section_title'>OUR LOCATION</h1>
             <p className='contact_section_text'>GL4 5XL, Old Rothman Road, Glasgow</p>
           </section>

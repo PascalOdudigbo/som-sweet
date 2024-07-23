@@ -1,52 +1,67 @@
-.product_main_container{
-    width: 360px;
+.product_main_container {
+    width: 100%;
     background-color: var(--color-white);
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
 
-    .product_image{
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    .product_image {
         width: 100%;
-        height: 260px;
-        margin-bottom: 15px;
-        object-fit: cover; 
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
     }
 
-    .product_name{
+    .product_content {
+        padding: 15px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product_name {
         font-family: var(--font-inter);
         color: var(--color-black);
         font-weight: 800;
-        font-size: 18px;
-        text-align: left;
-        margin-left: 4px;
-        margin-right: 4px;
+        font-size: clamp(16px, 2.5vw, 18px);
         margin-bottom: 10px;
     }
 
-    .product_description{
+    .product_description {
         font-family: var(--font-questrial);
-        margin-left: 4px;
-        margin-right: 4px;
         color: var(--color-dark_grey);
-        text-align: left;
+        font-size: clamp(14px, 2vw, 16px);
         margin-bottom: 10px;
+        flex-grow: 1;
     }
 
-    .product_price{
+    .product_price {
         font-family: var(--font-inter);
         color: var(--color-dark_grey);
         font-weight: 800;
-        font-size: 16px;
-        text-align: left;
-        margin-left: 4px;
-        margin-right: 4px;
-        margin-top: auto;
-        margin-bottom: 20px;
+        font-size: clamp(15px, 2vw, 16px);
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 480px) {
+    .product_main_container {
+        max-width: 100%;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .product_main_container {
+        max-width: 400px;
+        margin: 0 auto;
     }
 }

@@ -21,11 +21,16 @@ function Footer() {
         </section>
 
         <section className='footer_contact_container'>
-          <h1 className='footer_section_title playfair_shadow_title'>PHONE</h1>
-          <p className='footer_phone'>+44793870248</p>
+          <section className='footer_section_text_container'>
+            <h1 className='footer_section_title playfair_shadow_title'>PHONE</h1>
+            <p className='footer_phone'>+44793870248</p>
+          </section>
 
-          <h1 className='footer_section_title playfair_shadow_title'>OUR LOCATION</h1>
-          <p className='footer_location'>GL4 5XL, Old Rothman Road, Glasgow</p>
+          <section className='footer_section_text_container'>
+            <h1 className='footer_section_title playfair_shadow_title'>OUR LOCATION</h1>
+            <p className='footer_location'>GL4 5XL, Old Rothman Road, Glasgow</p>
+          </section>
+
         </section>
 
       </section>

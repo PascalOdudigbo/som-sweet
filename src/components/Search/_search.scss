@@ -1,5 +1,5 @@
 .search_main_container {
-    width: px;
+    width: fit-content;
     height: 40px;
     background-color: var(--color-white);
     border-radius: 5px;
@@ -13,6 +13,7 @@
     .search_input {
         border: none;
         height: 32px;
+        width: 240px;
         margin-left: 4px;
         margin-right: 4px;
         font-family: var(--font-openSans);

@@ -199,12 +199,14 @@ a {
     border: none;
     font-family: var(--font-questrial);
     font-size: 14px;
+    font-weight: 700;
     box-shadow: 1px 1px 1px var(--color-black);
 
     &:hover {
         background-color: var(--color-cerulean);
         color: white;
-        font-weight: 800;
+        font-size: 16px;
+        font-weight: 900;
     }
 }
 

@@ -1,22 +1,28 @@
 .contactus_main_container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 
     .contactus_subsections_container {
         width: 100%;
         margin-top: 30px;
-        justify-content: space-evenly;
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
 
         .contactus_text_form_container {
-            width: 40%;
-
+            width: 50%;
 
             .top_text_section {
                 width: 100%;
                 text-align: left;
+                margin-bottom: 30px;
 
                 .top_text_section_title {
                     font-family: var(--font-questrial);
                     color: var(--color-black);
-                    font-size: 30px;
+                    font-size: clamp(24px, 5vw, 40px);
                     font-weight: lighter;
                     margin-bottom: 15px;
                 }
@@ -24,44 +30,106 @@
                 .top_text_section_text {
                     font-family: var(--font-questrial);
                     color: var(--color-black);
-                    font-size: 28px;
+                    font-size: clamp(14px, 2.5vw, 28px);
                 }
             }
 
             .contactus_form {
-                width: 380px;
+                width: 100%;
+                max-width: 380px;
                 margin-top: 30px;
 
                 .contactus_button {
                     margin-top: 15px;
-                    align-self: left;
+                    align-self: flex-start;
                 }
             }
         }
 
         .contactus_details_subsection {
-            width: 480px;
+            width: 40%;
             font-family: var(--font-questrial);
+            display: flex;
+            flex-direction: column;
             justify-content: space-between;
             text-align: right;
 
             .contact_section_title {
-                font-size: 24px;
+                font-size: clamp(20px, 3vw, 24px);
                 margin-bottom: 10px;
+
                 font-weight: 100;
             }
 
             .contact_section_text {
-                font-size: 20px;
+                font-size: clamp(16px, 2.5vw, 20px);
             }
         }
     }
 
     .contactus_map {
-        width: 80%;
+        width: 100%;
         height: 300px;
         border-radius: 15px;
         margin-top: 10%;
         margin-bottom: 10%;
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 767px) {
+    .contactus_main_container {
+        width: 100%;
+        padding: 30px 15px;
+
+        .contactus_subsections_container {
+            flex-direction: column;
+            gap: 30px;
+
+            .contactus_text_form_container,
+            .contactus_details_subsection {
+                width: 100%;
+
+                .contact_container {
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .contactus_details_subsection {
+                text-align: left;
+                margin-top: 30px;
+            }
+        }
+
+        .contactus_map {
+            margin-top: 8%;
+            margin-bottom: 8%;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .contactus_main_container {
+        width: 90%;
+
+        .contactus_subsections_container {
+            gap: 30px;
+
+            .contactus_text_form_container,
+            .contactus_details_subsection {
+                width: 48%;
+            }
+
+            .contactus_form {
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    .contactus_main_container {
+        width: 85%;
     }
 }

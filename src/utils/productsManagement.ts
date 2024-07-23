@@ -150,3 +150,17 @@ export async function getRecommendedProducts(productId: number): Promise<Product
     throw error;
   }
 }
+
+export async function getLatestProducts(limit: number = 4): Promise<ProductType[]> {
+  try {
+    const response = await fetch(`/api/products/latest?limit=${limit}`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`Failed to fetch latest products: ${errorData.error || response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error in getLatestProducts:', error);
+    throw error;
+  }
+}

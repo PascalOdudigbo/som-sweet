@@ -1,74 +1,136 @@
-.footer_main_container{
+.footer_main_container {
     width: 100%;
-    height: 380px;
+    min-height: 380px;
     background-color: var(--color-periwinkle);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
-    .footer_section_title{
-        font-size: 30px;
+    .footer_section_title {
+        font-size: clamp(24px, 4vw, 30px);
+        margin-bottom: 15px;
     }
     
-    .footer_sub_container{
-        height: 234px;
+    .footer_sub_container {
         width: 100%;
+        max-width: 1200px;
+        display: flex;
         justify-content: space-between;
+        gap: 20px;
 
-        .opening_hours_container{
+        .opening_hours_container,
+        .footer_contact_container {
             width: 290px;
-            margin-left: 40px;
 
-            .opening_hour{
+            .opening_hour,
+            .footer_phone,
+            .footer_location {
                 font-family: var(--font-inter);
-                font-size: 20px;
+                font-size: clamp(16px, 2.5vw, 20px);
                 color: var(--color-white);
                 margin-bottom: 5px;
                 text-shadow: 1px 1px 1px var(--color-black);
             }
         }
 
-        .footer_links_contaner{ 
-            height: 134px;
+        .footer_links_contaner { 
+            display: flex;
+            flex-direction: column;
             justify-content: space-between;
             color: var(--color-white);
 
-            .footer_link{
+            .footer_link {
                 font-family: var(--font-inter);
                 font-size: 15px;
-                    text-shadow: 1px 1px 1px var(--color-black);
+                text-shadow: 1px 1px 1px var(--color-black);
+                margin-bottom: 10px;
 
-                &:hover{
+                &:hover {
                     color: var(--color-cerulean);
                     text-shadow: 1px 1px 1px var(--color-white);
                 }
             }
-            
-        }
-
-        .footer_contact_container{
-            width: 290px;
-            margin-right: 40px;
-            
-            .footer_phone{
-                margin-bottom: 20px;
-                font-family: var(--font-inter);
-                font-size: 20px;
-                color: var(--color-white);
-                text-shadow: 1px 1px 1px var(--color-black);
-            }
-
-            .footer_location{
-                margin-bottom: 20px;
-                font-family: var(--font-inter);
-                font-size: 20px;
-                color: var(--color-white);
-                text-shadow: 1px 1px 1px var(--color-black);
-            }
         }
     }
 
-    .footer_copyright{
+    .footer_copyright {
         font-family: var(--font-inter);
         font-size: 15px;
         color: var(--color-white);
         margin-top: 40px;
+        text-align: center;
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 767px) {
+    .footer_main_container {
+        padding: 30px 15px;
+
+        .footer_sub_container {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+
+            .opening_hours_container,
+            .footer_contact_container {
+                width: 100%;
+                max-width: 290px;
+                text-align: left;
+                margin: 0;
+
+                .footer_section_text_container{
+                    margin-bottom: 30px;
+                    text-align: right;
+                }
+            }
+
+
+
+            .footer_links_contaner {
+                width: 100%;
+                max-width: 290px;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .footer_main_container {
+        .footer_sub_container {
+            flex-wrap: wrap;
+            // justify-content: center;
+            gap: 40px;
+
+            .opening_hours_container,
+            .footer_contact_container {
+                width: calc(50% - 20px);
+                max-width: 290px;
+            }
+
+            .footer_links_contaner {
+                width: 100%;
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+                order: 3;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .footer_main_container {
+        .footer_sub_container {
+            .opening_hours_container {
+                margin-left: 0;
+            }
+
+            .footer_contact_container {
+                margin-right: 0;
+            }
+        }
     }
 }
