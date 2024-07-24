@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 import { CartType, ProductType, ProductVariationType } from '@/utils/allModelTypes'
 import { getCart, addToCart, removeFromCart, updateCartItemQuantity } from '@/utils/cartManagement'
 import { useAuth } from './AuthProvider'
+import { showToast } from '@/utils/toast'
 
 interface CartContextType {
   cart: CartType | null
@@ -53,7 +54,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   const clearCart = () => {
-    setCart(null)
+    if (user && cart) {
+      Promise.all(cart.items.map(item => removeFromCart(user.id, item.id)))
+        .then(() => {
+          setCart(null)
+          showToast('info', 'Cart cleared!')
+        })
+        .catch((error) => {
+          console.error('Failed to clear cart:', error)
+          showToast('error', 'Failed to clear cart. Please try again.')
+        })
+    }
+
   }
 
   return (

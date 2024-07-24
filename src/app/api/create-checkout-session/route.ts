@@ -3,7 +3,6 @@ import Stripe from 'stripe';
 import { verifyToken } from '@/utils/auth';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    //   apiVersion: '2023-10-16',
     apiVersion: "2024-06-20",
 });
 
@@ -31,7 +30,7 @@ export async function POST(req: NextRequest) {
                     quantity: item.quantity,
                 })),
                 mode: 'payment',
-                success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}`,
+                success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/order-confirmation?session_id={CHECKOUT_SESSION_ID}&orderId=${orderId.toString()}`,
                 cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
                 metadata: {
                     orderId: orderId.toString(),

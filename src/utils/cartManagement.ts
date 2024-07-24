@@ -87,12 +87,9 @@ export async function removeFromCart(userId: number, itemId: number): Promise<Ca
       throw new Error(errorData.error || 'Failed to remove item from cart');
     }
     
-    const updatedCart: CartType = await response.json();
-    showToast('success', 'Item removed from cart');
-    return updatedCart;
+    return response.json();
   } catch (error) {
     console.error('Error removing item from cart:', error);
-    showToast('error', 'Failed to remove item from cart');
     throw error;
   }
 }

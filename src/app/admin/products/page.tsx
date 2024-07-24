@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { ProductRow, Search } from '@/components'
+import { Loading, ProductRow, Search } from '@/components'
 import Link from 'next/link'
 import { ProductType } from '@/utils/allModelTypes';
 import "./_products.scss"
@@ -41,7 +41,7 @@ function Products() {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <Loading/>;
     }
 
     return (

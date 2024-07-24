@@ -41,10 +41,10 @@ function SignIn() {
 
   useEffect(() => {
     setMounted(true);
-    if (user) {
-      user.role?.name.toLowerCase() === "customer" && router.push("/store");
-      user.role?.name.toLowerCase() === "administrator" && router.push("/admin/dashboard/")
-    }
+    // if (user) {
+    //   user.role?.name.toLowerCase() === "customer" && router.push("/store");
+    //   user.role?.name.toLowerCase() === "administrator" && router.push("/admin/dashboard/")
+    // }
   }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,7 +52,8 @@ function SignIn() {
     setIsLoading(true);
 
     try {
-      const user = await login(email, password); // Use the login function from the auth context
+      // Using the login function from the auth context
+      const user = await login(email, password);
       if (user) {
         showToast('success', 'Signed in successfully');
         user.role?.name.toLowerCase() === "customer" && router.push("/store");

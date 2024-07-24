@@ -170,6 +170,7 @@ model Order {
   shippingAddress   Address     @relation(fields: [shippingAddressId], references: [id])
   orderItems        OrderItem[]
   payment           Payment?
+  refunds       Refund[]
 }
 
 model OrderItem {
@@ -216,4 +217,16 @@ model SocialMedia {
   name       String
   url        String
   business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model Refund {
+  id            Int      @id @default(autoincrement())
+  orderId       Int
+  order         Order    @relation(fields: [orderId], references: [id])
+  amount        Float
+  reason        String
+  status        String   @default("Pending") // Pending, Approved, Rejected, Processed
+  stripeRefundId String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }

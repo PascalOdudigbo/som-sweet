@@ -1,4 +1,3 @@
-"use client"
 import Image from 'next/image'
 import React, { FC } from 'react'
 import { profileIcon, upIcon } from "../../../assets";
@@ -6,7 +5,6 @@ import "./_navDropdown.scss";
 import Link from 'next/link';
 import { UserType } from '@/utils/allModelTypes';
 import { useAuth } from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
 
 type DropdownItemProps = {
   text: string;
@@ -38,7 +36,6 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
   ];
 
   const {logout} = useAuth();
-  const router = useRouter()
 
   const DropdownItem: FC<DropdownItemProps> = ({ text, path }) => (
     <Link className='nav_dropdown_item flex_row_center' href={path ?? ""}>
@@ -69,9 +66,9 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
           {!user?.id && navLinks.map((link, index) => 
             link.name.toLowerCase() !== "logout" 
               ? <DropdownItem key={index} text={link.name} path={link.href} />
-              : <DropdownLogoutItem key={index} text={link.name} path={link.href} onClick={()=>{logout(); router.push("/")}}/>
+              : <DropdownLogoutItem key={index} text={link.name} path={link.href} onClick={()=>{logout()}}/>
           )}
-          {user?.id && <DropdownLogoutItem text="Log Out" onClick={()=>{logout(); router.push("/")}}/>}
+          {user?.id && <DropdownLogoutItem text="Log Out" onClick={()=>{logout()}}/>}
         </section>
       </section>
     </div>

@@ -1,6 +1,7 @@
 // app/api/staff/route.ts
 import db from '@/db/db';
 import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
 
 export async function GET(request: Request) {
   try {
@@ -18,8 +19,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const staffData = await request.json();
+    const hashedPassword = await bcrypt.hash(staffData.password, 10);
+    const modifiedStaffData = {...staffData, password: hashedPassword}
+    
     const newStaff = await db.user.create({
-      data: staffData,
+      data: modifiedStaffData,
       include: { role: true },
     });
     return NextResponse.json(newStaff, { status: 201 });

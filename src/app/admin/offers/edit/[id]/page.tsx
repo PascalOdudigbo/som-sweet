@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FormInput } from '@/components'
+import { FormInput, Loading } from '@/components'
 import { DiscountType } from '@/utils/allModelTypes'
 import { IconContext } from 'react-icons'
 import { BsImageFill } from "react-icons/bs"
@@ -78,7 +78,7 @@ function EditOffer({ params }: { params: { id: string } }) {
           }
       }
 
-    if (!discount) return <div>Loading...</div>
+    if (!discount) return <Loading/>
 
     return (
         <div className='edit_offer_wrapper'>

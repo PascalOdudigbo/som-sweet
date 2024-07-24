@@ -10,20 +10,22 @@
             margin-left: 20px;
 
             .welcome_text {
-                font-size: 72px;
+                font-size: 82px;
                 margin-bottom: 15px;
             }
 
             .welcome_subtext {
                 font-size: 24px;
                 margin-bottom: 15px;
-                font-family: var(--font-inter);
+                font-family: var(--font-questrial);                
                 font-weight: 800;
                 color: var(--color-white);
             }
 
             .welcome_shop_button {
                 width: 120px;
+                align-content: center;
+                text-align: center;
             }
         }
 
@@ -69,11 +71,12 @@
                 text-align: center;
 
                 .welcome_text {
-                    font-size: 48px;
+                    font-size: 58px;
                 }
 
                 .welcome_subtext {
-                    font-size: 20px;
+                    font-size: 22px;
+                    font-weight: 400;
                 }
 
                 .welcome_shop_button {

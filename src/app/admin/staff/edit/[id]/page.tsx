@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Checkbox, Dropdown, FormInput } from '@/components'
+import { Checkbox, Dropdown, FormInput, Loading } from '@/components'
 import { UserType, RoleType } from '@/utils/allModelTypes'
 import { getStaffById, updateStaff, getAllRoles } from '@/utils/staffManagement'
 import { showToast } from '@/utils/toast'
@@ -62,7 +62,7 @@ function EditStaff({ params }: { params: { id: string } }) {
     }
   }
 
-  if (!staff) return <div>Loading...</div>
+  if (!staff) return <Loading/>
 
   return (
     <div className='edit_staff_wrapper'>

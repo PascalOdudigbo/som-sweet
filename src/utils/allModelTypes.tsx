@@ -202,3 +202,14 @@ export interface SocialMediaType {
   url: string;
   business?: BusinessType;
 }
+
+export interface RefundType {
+  id: number;
+  orderId: number;
+  amount: number;
+  reason: string;
+  status: string;
+  stripeRefundId: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}

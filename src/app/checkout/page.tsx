@@ -68,7 +68,7 @@ function Checkout() {
       const order: Partial<OrderType> = {
         userId: user.id,
         total: cart.items.reduce((sum, item) => sum + item.quantity * (item.variation?.price || item.product.basePrice), 0),
-        status: 'Pending',
+        status: 'Unpaid',
         shippingAddressId: selectedAddress.id,
         orderItems: cart?.items?.map(item => ({
           productId: item.productId,
@@ -99,6 +99,7 @@ function Checkout() {
       const session = await response.json()
 
       if (session.error) {
+        console.log(session.error)
         throw new Error(session.error)
       }
 
@@ -242,7 +243,7 @@ function Checkout() {
               .toFixed(2)}
           </p>
         </section>
-        <button className={"custom_large_button proceed_to_payment"} onClick={handleCheckout} >
+        <button className={"custom_large_button proceed_to_payment"} onClick={handleCheckout} disabled={!selectedAddress}>
           Proceed to Payment
         </button>
       </main>

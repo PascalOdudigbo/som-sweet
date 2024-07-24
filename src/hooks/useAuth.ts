@@ -2,10 +2,13 @@
 import { useState, useEffect } from 'react';
 import { UserType } from '@/utils/allModelTypes';
 import { parseJwt } from '@/utils/userManagement';
+import { useRouter } from 'next/navigation';
 
 export function useAuth() {
   const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter()
+
 
   async function loadUserFromToken() {
     if (typeof window !== 'undefined') {
@@ -69,6 +72,8 @@ export function useAuth() {
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
+    router.push("/")
+    
   };
 
   return { user, loading, login, logout, loadUserFromToken };

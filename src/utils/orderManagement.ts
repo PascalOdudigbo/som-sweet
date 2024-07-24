@@ -20,7 +20,7 @@ export async function createOrder(order: Omit<OrderType, 'id'>): Promise<OrderTy
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to create order');
     }
-    showToast('success', 'Order created successfully');
+    showToast('info', 'Stripe payment loading');
     return response.json();
   } catch (error) {
     console.error('Error creating order:', error);
@@ -49,6 +49,32 @@ export async function getOrderById(userId: number, id: number): Promise<OrderTyp
   } catch (error) {
     console.error('Error fetching order:', error);
     showToast('error', 'Failed to fetch order');
+    throw error;
+  }
+}
+
+export async function getUserOrders(userId: number): Promise<OrderType[]> {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const response = await fetch(`/api/orders/user/${userId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch user orders');
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching user orders:', error);
+    showToast('error', 'Failed to fetch orders');
     throw error;
   }
 }

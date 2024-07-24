@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { FormInput } from '@/components'
+import { FormInput, Loading } from '@/components'
 import { ProductVariationType } from '@/utils/allModelTypes'
 import { getProductVariationById, updateProductVariation } from '@/utils/productVariationManagement'
 import { showToast } from '@/utils/toast'
@@ -52,7 +52,7 @@ function EditVariation({ params }: { params: { id: string, variationId: string }
     }
 
     if (!variation) {
-        return <div>Loading...</div>
+        return <Loading/>
     }
 
     return (

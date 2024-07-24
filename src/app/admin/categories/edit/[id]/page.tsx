@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { FormInput } from '@/components'
+import { FormInput, Loading } from '@/components'
 import { CategoryType } from '@/utils/allModelTypes'
 import { IconContext } from 'react-icons'
 import { BsImageFill } from "react-icons/bs"
@@ -68,7 +68,7 @@ function EditCategory({ params }: { params: { id: string } }) {
         }
     }
 
-    if (!category) return <div>Loading...</div>
+    if (!category) return <Loading/>
 
     return (
         <div className='edit_category_wrapper'>
