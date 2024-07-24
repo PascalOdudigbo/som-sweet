@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { cartIcon } from "../../assets";
 import Link from 'next/link';
 import clsx from 'clsx';
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 
 const navLinks = [
@@ -28,7 +28,9 @@ function NavBar() {
   const [currentHash, setCurrentHash] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // Getting the userData
-  const { user, loading} = useAuth();
+  const { user, loading } = useAuth();
+  // Router variable function
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -53,14 +55,14 @@ function NavBar() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  if (loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />
   }
 
   return (
     <nav className='nav_main_container'>
       <section className='nav_top_sub_container'>
-        <h3 className='nav_site_title'>Som' Sweet</h3>
+        <h3 className='nav_site_title' onClick={() => { router.push("/") }}>Som' Sweet</h3>
 
         <section className='search_container'>
           <Search />
@@ -71,11 +73,11 @@ function NavBar() {
 
 
         <section className='nav_dropdown_cart_container'>
-          <NavDropdown user={user}/>
+          <NavDropdown user={user} />
 
-          <section className='nav_badge_cart_container'>
-            <p className='nav_badge'>{user?.cart?.items?.length}</p>
-            <Image src={cartIcon} alt='cart icon' height={24} width={24} title='Cart'/>
+          <section className='nav_badge_cart_container' onClick={() => { router.push("/cart") }}>
+            <p className='nav_badge'>{user?.cart?.items?.length ?? 0}</p>
+            <Image src={cartIcon} alt='cart icon' height={24} width={24} title='Cart' />
           </section>
 
           <div className='nav_mobile_menu' onClick={toggleMobileMenu}>

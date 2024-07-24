@@ -1,0 +1,113 @@
+.cart_item_wrapper {
+    width: 100%;
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    overflow: hidden;
+    text-align: left;
+
+    .product_image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .item_details {
+        padding: 15px;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .name_and_price_wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .item_name {
+        font-family: var(--font-inter);
+        font-weight: 800;
+        font-size: clamp(16px, 2.5vw, 18px);
+        color: var(--color-black);
+    }
+
+    .item_price {
+        font-family: var(--font-inter);
+        font-weight: 800;
+        font-size: clamp(15px, 2vw, 16px);
+        color: var(--color-dark_grey);
+    }
+
+    .item_variation,
+    .item_custom_text {
+        font-family: var(--font-questrial);
+        font-size: clamp(14px, 2vw, 16px);
+        color: var(--color-dark_grey);
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
+    .quantity_and_remove_wrapper {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: auto;
+    }
+
+    .quantity_wrapper {
+        gap: 10px;
+    }
+
+    .quantity_btn {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: var(--color-periwinkle);
+        border: none;
+        font-family: var(--font-inter);
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--color-black);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--color-cerulean);
+            color: var(--color-white);
+        }
+    }
+
+    .quantity {
+        font-family: var(--font-inter);
+        font-weight: 600;
+        font-size: 16px;
+        color: var(--color-black);
+    }
+
+    .remove_btn {
+        width: auto;
+        height: auto;
+        padding: 8px 16px;
+        font-size: 14px;
+
+        &:hover {
+            background-color: var(--color-red);
+            color: var(--color-white);
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .cart_item_wrapper {
+
+        .product_image {
+            height: 200px;
+        }
+
+        .item_details {
+            flex: 1;
+            text-align: left;
+        }
+    }
+}

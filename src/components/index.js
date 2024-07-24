@@ -23,8 +23,7 @@ export {default as DropdownCheckbox} from "./DropdownCheckbox/DropdownCheckbox";
 export {default as StaffRow} from "./StaffRow/StaffRow";
 export {default as RoleRow} from "./RoleRow/RoleRow";
 export {default as Loading} from "./Loading/Loading";
-export {default as AuthProvider} from "../contexts/AuthProvider";
-
+export {default as CartItem} from "./CartItem/CartItem";
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

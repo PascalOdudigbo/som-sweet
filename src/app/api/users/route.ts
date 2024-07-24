@@ -24,7 +24,11 @@ export async function GET(req: NextRequest) {
           include: {
             orderItems: {
               include: {
-                product: true,
+                product: {
+                  include: {
+                    images: true,
+                  },
+                },
                 variation: true,
               },
             },
@@ -34,15 +38,27 @@ export async function GET(req: NextRequest) {
         },
         reviews: {
           include: {
-            product: true,
+            product: {
+              include: {
+                images: true,
+              },
+            },
           },
         },
-        wishlist: true,
+        wishlist: {
+          include: {
+            images: true,
+          },
+        },
         cart: {
           include: {
             items: {
               include: {
-                product: true,
+                product: {
+                  include: {
+                    images: true,
+                  },
+                },
                 variation: true,
               },
             },
@@ -64,7 +80,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to fetch user' }, { status: 500 });
   }
 }
-
 export async function POST(req: NextRequest) {
   try {
     const { username, email, password, roleId } = await req.json();

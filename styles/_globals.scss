@@ -201,6 +201,7 @@ a {
     font-size: 14px;
     font-weight: 700;
     box-shadow: 1px 1px 1px var(--color-black);
+    color: var(--color-black);
 
     &:hover {
         background-color: var(--color-cerulean);
@@ -298,7 +299,7 @@ a {
     .border_button,
     .custom_button,
     .border_button_void {
-        // width: 100%;
+        min-width: 140px;
         height: 35px;
         width: max-content;
         padding: 12px;
@@ -333,7 +334,7 @@ a {
     .border_button,
     .custom_button,
     .border_button_void {
-        width: 110px;
+        width: 140px;
         height: 42px;
         font-size: 13px;
     }

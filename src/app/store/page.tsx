@@ -1,12 +1,12 @@
 'use client'
-import { Loading, NavChildFooterLayout, Product } from '@/components'
+import { Loading, NavChildFooterLayout, Product, Search } from '@/components'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import "./_store.scss"
 import { CategoryType, DiscountType, ProductType } from '../../utils/allModelTypes'
 import Category from '@/components/Category/Category'
 import { filterIcon } from '@/assets'
-import { getAllProducts } from '@/utils/productsManagement'
+import { getAllProducts, searchProducts } from '@/utils/productsManagement'
 import { getAllCategories } from '@/utils/categoryManagement'
 import { showToast } from '@/utils/toast'
 import { getAllDiscounts } from '@/utils/discountManagement'
@@ -15,8 +15,11 @@ function Store() {
   const [discounts, setDiscounts] = useState<DiscountType[]>([])
   const [targetDiscount, setTargetDiscount] = useState<DiscountType | null>(null)
   const [categories, setCategories] = useState<CategoryType[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([])
+  const [searchTerm, setSearchTerm] = useState<string>("")
   const [products, setProducts] = useState<ProductType[]>([])
   const [viewAllCategories, setViewAllCategories] = useState<boolean>(false)
+  const [targetCategory, setTargetCategory] = useState<CategoryType | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -28,6 +31,7 @@ function Store() {
           getAllDiscounts()
         ]);
         setProducts(fetchedProducts);
+        setFilteredProducts(fetchedProducts);
         setCategories(fetchedCategories);
         setDiscounts(fetchedDiscounts);
         if (fetchedDiscounts.length > 0) {
@@ -58,8 +62,28 @@ function Store() {
     return () => clearInterval(intervalId); // Clear interval on component unmount
   }, [discounts]);
 
+  useEffect(() => {
+    const filtered = searchProducts(searchTerm, products);
+    setFilteredProducts(filtered);
+  }, [searchTerm, products]);
+
+  useEffect(() => {
+    if (targetCategory) {
+      const filteredProducts = products.filter(product => product?.category?.id === targetCategory?.id)
+      setFilteredProducts(filteredProducts)
+    }
+  }, [targetCategory, categories])
+
+  const handleSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
+  const handleCategoryFilter = (category: CategoryType) => {
+    setTargetCategory(category)
+  }
+
   if (isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
@@ -88,7 +112,7 @@ function Store() {
           <div className='categories_container'>
             {categories.map((category, index) => (
               (!viewAllCategories && index < 4 || viewAllCategories) && (
-                <Category key={category.id} category={category} />
+                <Category key={category.id} category={category} onClick={() => { handleCategoryFilter(category) }} />
               )
             ))}
           </div>
@@ -100,8 +124,12 @@ function Store() {
             <Image className='filter_icon' src={filterIcon} alt='filter icon' title='Filter' />
           </div>
 
+          <div className="search_wrapper">
+            <Search onSearch={handleSearch} />
+          </div>
+
           <div className='products_container'>
-            {products.map(product => (
+            {filteredProducts.map(product => (
               <Product key={product.id} product={product} />
             ))}
           </div>

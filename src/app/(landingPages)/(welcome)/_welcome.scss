@@ -44,14 +44,14 @@
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .welcome_main_container {
-        min-height:70vh;
+        min-height:100vh;
 
         .welcome_text_and_image_container {
             justify-content: center;
             flex-direction: column;
-            height: 70vh;
+            height: 100vh;
             width: 100%;
-            background-image: url('../../../assets/images/loginBg1.png');
+            background-image: url('../../../assets/images/loginBg3.png');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
