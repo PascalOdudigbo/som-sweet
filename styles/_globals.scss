@@ -193,6 +193,7 @@ a {
 
 .border_button {
     width: 120px;
+    min-width: max-content;
     height: 45px;
     border-radius: 5px;
     background-color: var(--color-periwinkle);
@@ -215,6 +216,7 @@ a {
 
 .custom_button {
     width: 120px;
+    min-width: max-content;
     height: 45px;
     background-color: var(--color-periwinkle);
     border: none;
@@ -299,8 +301,9 @@ a {
     .border_button,
     .custom_button,
     .border_button_void {
-        min-width: 140px;
-        height: 35px;
+
+        min-width: max-content;
+        height: 38px;
         width: max-content;
         padding: 12px;
         font-size: 12px;
@@ -334,6 +337,7 @@ a {
     .border_button,
     .custom_button,
     .border_button_void {
+        min-width: max-content;
         width: 140px;
         height: 42px;
         font-size: 13px;
@@ -360,6 +364,7 @@ a {
     .border_button,
     .custom_button,
     .border_button_void {
+        min-width: max-content;
         width: 115px;
         height: 43px;
     }

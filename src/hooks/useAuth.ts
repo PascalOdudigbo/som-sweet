@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react';
 import { UserType } from '@/utils/allModelTypes';
 import { parseJwt } from '@/utils/userManagement';

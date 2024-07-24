@@ -1,13 +1,17 @@
+"use client"
 import Image from 'next/image'
 import React, { FC } from 'react'
 import { profileIcon, upIcon } from "../../../assets";
 import "./_navDropdown.scss";
 import Link from 'next/link';
 import { UserType } from '@/utils/allModelTypes';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'next/navigation';
 
 type DropdownItemProps = {
   text: string;
-  path: string;
+  path?: string;
+  onClick?: () => void;
 }
 
 type DropdownProps = {
@@ -15,7 +19,6 @@ type DropdownProps = {
 }
 
 const NavDropdown: FC<DropdownProps> = ({user}) => {
-  console.log(user)
   const navLinksUser = [
     { name: 'My Orders', href: '/orders' },
     { name: 'My Addresses', href: `/addresses/${user?.id}` },
@@ -31,19 +34,22 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
   const navLinks = [
     { name: 'Sign In', href: '/signin' },
     { name: 'Sign Up', href: `/signup` },
-    { name: 'Logout', href: '/logout' }
+    { name: 'Logout', href: '/' }
   ];
 
+  const {logout} = useAuth();
+  const router = useRouter()
+
   const DropdownItem: FC<DropdownItemProps> = ({ text, path }) => (
-    <Link className='nav_dropdown_item flex_row_center' href={path}>
+    <Link className='nav_dropdown_item flex_row_center' href={path ?? ""}>
       {text}
     </Link>
   );
 
-  const DropdownLogoutItem: FC<DropdownItemProps> = ({ text, path }) => (
-    <Link className='nav_dropdown_logout_item flex_row_center' href={path}>
+  const DropdownLogoutItem: FC<DropdownItemProps> = ({ text, onClick }) => (
+    <p className='nav_dropdown_logout_item flex_row_center' onClick={onClick}>
       {text}
-    </Link>
+    </p>
   );
 
   return (
@@ -63,9 +69,9 @@ const NavDropdown: FC<DropdownProps> = ({user}) => {
           {!user?.id && navLinks.map((link, index) => 
             link.name.toLowerCase() !== "logout" 
               ? <DropdownItem key={index} text={link.name} path={link.href} />
-              : <DropdownLogoutItem key={index} text={link.name} path={link.href} />
+              : <DropdownLogoutItem key={index} text={link.name} path={link.href} onClick={()=>{logout(); router.push("/")}}/>
           )}
-          {user?.id && <DropdownLogoutItem text="Log Out" path="/logout" />}
+          {user?.id && <DropdownLogoutItem text="Log Out" onClick={()=>{logout(); router.push("/")}}/>}
         </section>
       </section>
     </div>

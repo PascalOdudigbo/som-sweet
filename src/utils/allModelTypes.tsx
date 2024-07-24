@@ -165,8 +165,8 @@ export interface OrderItemType {
   quantity: number;
   price: number;
   customText?: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
   order?: OrderType;
   product?: ProductType;
   variation?: ProductVariationType | null;

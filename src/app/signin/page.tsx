@@ -37,20 +37,28 @@ function SignIn() {
 
   const router = useRouter();
   // Use the login function from the auth context
-  const { login } = useAuth(); 
+  const { user, login } = useAuth();
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    if (user) {
+      user.role?.name.toLowerCase() === "customer" && router.push("/store");
+      user.role?.name.toLowerCase() === "administrator" && router.push("/admin/dashboard/")
+    }
+  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      await login(email, password); // Use the login function from the auth context
-      showToast('success', 'Signed in successfully');
-      router.push('/'); // Or wherever you want to redirect after successful login
+      const user = await login(email, password); // Use the login function from the auth context
+      if (user) {
+        showToast('success', 'Signed in successfully');
+        user.role?.name.toLowerCase() === "customer" && router.push("/store");
+        user.role?.name.toLowerCase() === "administrator" && router.push("/admin/dashboard/")
+      }
+
     } catch (error) {
       console.error('Sign in failed:', error);
       showToast('error', 'Failed to sign in. Please check your credentials and try again.');
@@ -60,7 +68,7 @@ function SignIn() {
   };
 
   if (!mounted) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (

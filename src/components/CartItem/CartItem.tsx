@@ -3,8 +3,6 @@
 import React from 'react'
 import Image from 'next/image'
 import { CartItemType } from '@/utils/allModelTypes'
-import { useAuth } from '@/hooks/useAuth'
-import { removeFromCart, updateCartItemQuantity } from '@/utils/cartManagement'
 import './_cart_item.scss'
 
 type CartItemProps = {
@@ -14,9 +12,6 @@ type CartItemProps = {
 }
 
 function CartItem({ item, onRemove, onUpdateQuantity }: CartItemProps) {
-  const { user } = useAuth()
-  console.log(item)
-
   const handleQuantityChange = async (change: number) => {
     const newQuantity = item.quantity + change
     if (newQuantity < 1) {

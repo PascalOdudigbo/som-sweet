@@ -1,5 +1,4 @@
 .signUp_main_container {
-
     .signUp_form_and_image_container {
         position: relative;
         background-color: var(--color-lavenderPink);
@@ -35,7 +34,6 @@
             margin-bottom: 45px;
         }
 
-
         .forgot_password_link {
             margin-top: 10px;
             font-family: var(--font-questrial);
@@ -60,26 +58,74 @@
             margin-top: 30px;
         }
 
-
-        .form_text_center {
-            width: 100%;
-            margin-top: 30px;
-            font-family: var(--font-questrial);
-            font-size: 18px;
-            text-align: center;
-            justify-self: center;
-        }
-
         .sign_up_button{
             margin-top: 30px;
             &:hover{
                 background-color: #FFBEE6;
-
             }
         }
-
     }
 
+    // Media Queries
+    @media (max-width: 1200px) {
+        .signUp_form_and_image_container {
+            width: 90%;
 
+            .form_wrapper {
+                width: 60%;
+            }
+        }
+    }
 
+    @media (max-width: 992px) {
+        .signUp_form_and_image_container {
+            .form_wrapper {
+                width: 70%;
+                margin-right: 0;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .signUp_form_and_image_container {
+            width: 100%;
+            min-height: 100vh;
+
+            .form_wrapper {
+                width: 80%;
+                height: 90%;
+                max-width: none;
+                border-radius: 20px;
+            }
+
+            .form {
+                width: 85%;
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        .signUp_form_and_image_container {
+            .form_wrapper {
+                width: 90%;
+                height: 95%;
+            }
+
+            .form {
+                width: 90%;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+
+            .forgot_password_link,
+            .form_text_center {
+                font-size: 16px;
+            }
+
+            .sign_in_button,
+            .sign_up_button {
+                margin-top: 20px;
+            }
+        }
+    }
 }
