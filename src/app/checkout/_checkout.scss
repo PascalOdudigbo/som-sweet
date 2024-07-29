@@ -1,88 +1,93 @@
-.checkout_container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 2rem 0;
-  
-    h1 {
-      font-family: var(--font-questrial);
-      font-size: 2rem;
-      margin-bottom: 1.6rem;
-    }
-  
+.checkout_main_container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+
+  .section_title {
+    font-size: clamp(24px, 5vw, 40px);
+    margin-bottom: 1.5rem;
+    text-align: left;
+    font-weight: lighter;
+  }
+
+  .checkout_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     .address_section, .order_summary {
-      margin-bottom: 2rem;
-  
-      h2 {
+      background-color: var(--color-white);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      h2, h3 {
         font-family: var(--font-questrial);
-        font-size: 1.5rem;
-        margin-bottom: 1.2rem;
-      }
-  
-      h3 {
-        font-size: 1.3rem;
-        margin: 1rem 0;
-      }
-  
-      select {
-        width: 100%;
-        padding: 0.5rem;
         margin-bottom: 1rem;
-        font-family: var(--font-questrial);
+        font-weight: lighter;
       }
-  
-      button {
-        padding: 0.5rem 1rem;
-       
+
+      .custom_button {
         margin-top: 1rem;
-        
       }
     }
-  
+
     .cart_item {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 0;
       border-bottom: 1px solid var(--color-grey);
-  
+
       p {
         font-family: var(--font-questrial);
       }
-
-      .total_price{
-        font-weight: 800;
-        margin-top: 10px;
-      }
     }
-  
-    .proceed_to_payment {
+
+    .total_price {
+      font-weight: 800;
+      margin-top: 1rem;
+      text-align: right;
       font-size: 1.2rem;
+    }
+
+    .stripe_form {
       margin-top: 2rem;
 
-      &:disabled {
-        background-color: var(--color-grey);
-        cursor: not-allowed;
+      .CardElement {
+        border: 1px solid var(--color-grey);
+        padding: 1rem;
+        border-radius: 4px;
+      }
+
+      .proceed_to_payment {
+        margin-top: 1rem;
+        width: 100%;
+
+        &:disabled {
+          background-color: var(--color-grey);
+          cursor: not-allowed;
+        }
       }
     }
   }
-  
-  @media (max-width: 768px) {
-    .checkout_container {
-      width: 90%;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    .checkout_container {
-      width: 95%;
-  
+}
+
+@media screen and (max-width: 768px) {
+  .checkout_main_container {
+    width: 95%;
+
+    .checkout_content {
       .cart_item {
         flex-direction: column;
         align-items: flex-start;
-  
+
         p {
           margin-bottom: 0.5rem;
         }
       }
     }
   }
+}

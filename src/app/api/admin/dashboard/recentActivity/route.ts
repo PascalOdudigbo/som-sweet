@@ -1,4 +1,4 @@
-// api/admin-dashboard/recentActivity
+// api/admin/dashboard/recentActivity
 import { NextResponse } from 'next/server';
 import { getRecentActivity } from '@/utils/adminDashboard';
 

@@ -1,4 +1,4 @@
-// /api/admin-dashboard/staff
+// /api/admin/dashboard/staff
 import { NextResponse } from 'next/server';
 import { getStaffStats } from '@/utils/adminDashboard';
 

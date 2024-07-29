@@ -1,3 +1,4 @@
+// /api/orders/
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/db/db';
 import { verifyToken } from '@/utils/auth';
@@ -22,7 +23,11 @@ export async function GET(
         id: parseInt(params.id),
         userId: parseInt(params.userId)
       },
-      include: { orderItems: true }
+      include: { orderItems: {
+        include: {
+          product: true
+        }
+      } }
     });
 
     if (!order) {

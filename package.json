@@ -6,7 +6,8 @@
     "dev": "PORT=4000 next dev && sass --watch --update --style=expanded styles/scss:styles/css",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -23,18 +24,25 @@
     "react-dom": "^18",
     "react-icons": "^5.2.1",
     "react-toastify": "^10.0.5",
+    "sharp": "^0.33.4",
     "stripe": "^16.4.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
     "@types/bcryptjs": "^2.4.6",
+    "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "prisma": "^5.17.0",
     "sass": "^1.77.6",
+    "ts-jest": "^29.2.3",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }

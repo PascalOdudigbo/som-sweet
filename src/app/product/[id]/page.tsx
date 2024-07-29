@@ -30,12 +30,14 @@ const ProductImage: React.FC<ProductImageProps> = ({ image, isActive, productNam
   }, [isActive]);
 
   return (
-    <img
+    <Image
       key={image.id}
       className={imageClass}
       src={image?.imageUrl?.toString()}
       alt={productName}
       onClick={handleClick}
+      height={200}
+      width={200}
     />
   );
 };
@@ -158,7 +160,7 @@ function Product() {
       <main className='product_container page_container flex_column_center'>
         <section className='images_and_data_container flex_row center'>
           <section className='product_images_container flex_column_center'>
-            <img className='product_target_image' src={targetImage} alt={product?.description ?? product?.name} title={product?.name} />
+            <Image className='product_target_image' src={targetImage} alt={product?.description ?? product?.name} title={product?.name} height={200} width={200} />
             <section className='product_images_container flex_row_center'>
               {
                 //mapping through the product images
@@ -214,19 +216,22 @@ function Product() {
             </button>
 
             <section className='minimizable_sections_container'>
-              <MinimizableLayout title='Product details' isActiveInit={true} children={
+              <MinimizableLayout title='Product details' isActiveInit={true}>
                 <pre className='preformatted_text'>{product?.description}</pre>
-              } />
+              </MinimizableLayout>
 
-              <MinimizableLayout isActiveInit={false} title='Reviews' children={
-                //  place then reviews component here
+
+              <MinimizableLayout isActiveInit={false} title='Reviews'>
+              {/* place then reviews component here */}
                 <>
                 </>
-              } />
+              </MinimizableLayout>
 
-              <MinimizableLayout isActiveInit={false} title='Refund policy' children={
+
+
+              <MinimizableLayout isActiveInit={false} title='Refund policy'>
                 <pre className='preformatted_text'>{businessRefundPolicy}</pre>
-              } />
+              </MinimizableLayout>
             </section>
 
 

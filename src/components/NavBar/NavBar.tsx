@@ -62,7 +62,7 @@ function NavBar() {
   return (
     <nav className='nav_main_container'>
       <section className='nav_top_sub_container'>
-        <h3 className='nav_site_title' onClick={() => { router.push("/") }}>Som' Sweet</h3>
+        <h3 className='nav_site_title' onClick={() => { router.push("/") }}>{"Som' Sweet"}</h3>
 
         <section className='search_container'>
           <Search />

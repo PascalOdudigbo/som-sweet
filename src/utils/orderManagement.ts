@@ -1,7 +1,7 @@
 import { OrderType } from './allModelTypes';
 import { showToast } from './toast';
 
-export async function createOrder(order: Omit<OrderType, 'id'>): Promise<OrderType> {
+export async function createOrder(orderData: { paymentIntentId: string, shippingAddressId: number }): Promise<OrderType> {
   try {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -14,17 +14,17 @@ export async function createOrder(order: Omit<OrderType, 'id'>): Promise<OrderTy
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(order),
+      body: JSON.stringify(orderData),
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.error || 'Failed to create order');
     }
-    showToast('info', 'Stripe payment loading');
+
     return response.json();
   } catch (error) {
     console.error('Error creating order:', error);
-    showToast('error', 'Failed to create order');
     throw error;
   }
 }

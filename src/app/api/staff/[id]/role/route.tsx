@@ -1,4 +1,4 @@
-// app/api/staff/[id]/role
+// /api/staff/[id]/role
 import db from '@/db/db';
 import { NextResponse } from 'next/server';
 

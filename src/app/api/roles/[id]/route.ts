@@ -1,4 +1,4 @@
-// app/api/roles/[id]/route.ts
+// /api/roles/[id]/
 
 import db from '@/db/db';
 import { NextResponse } from 'next/server';

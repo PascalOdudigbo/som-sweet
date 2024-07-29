@@ -1,31 +1,27 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { NavChildFooterLayout, Loading } from '@/components'
-import { getOrderById } from '@/utils/orderManagement'
+import { getOrderById, updateOrderStatus } from '@/utils/orderManagement'
 import { useAuth } from '@/hooks/useAuth'
 import { OrderType } from '@/utils/allModelTypes'
 import './_order_confirmation.scss'
-import { useCart } from '@/contexts/CartProvider'
 
 function OrderConfirmation() {
   const [order, setOrder] = useState<OrderType | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const searchParams = useSearchParams()
-  const { user, loadUserFromToken } = useAuth()
-  const { clearCart } = useCart()
+  const params = useParams()
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchOrder = async () => {
       if (user) {
-        const sessionId = searchParams.get('session_id')
-        const orderId = searchParams.get('orderId')
-        
+        const orderId = params.id;
+
         if (orderId) {
           try {
-            loadUserFromToken()
-            const fetchedOrder = await getOrderById(user.id, parseInt(orderId))
+            const fetchedOrder = await getOrderById(user.id, parseInt(orderId.toString()))
             setOrder(fetchedOrder)
           } catch (error) {
             console.error('Failed to fetch order:', error)
@@ -36,7 +32,7 @@ function OrderConfirmation() {
     }
 
     fetchOrder()
-  }, [user, searchParams])
+  }, [user, params])
 
   if (isLoading || !order) return <Loading />
 

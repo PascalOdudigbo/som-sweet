@@ -15,7 +15,6 @@ function MyOrders() {
   useEffect(() => {
     const fetchOrders = async () => {
       if (user) {
-        console.log(user)
         try {
           const fetchedOrders = await getUserOrders(user.id)
           console.log(fetchedOrders)
@@ -45,7 +44,7 @@ function MyOrders() {
               <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
               <p>Status: {order.status}</p>
               <p>Total: £{order.total.toFixed(2)}</p>
-              <Link href={`/order-confirmation/?orderId=${order.id}`} className='view_details_button'>View Details</Link>
+              <Link href={`/order-confirmation/${order.id}`} className='view_details_button'>View Details</Link>
               {order.status !== 'Refunded' && (
                 <Link href={`/request-refund/${order.id}`} className='request_refund_button'>Request Refund</Link>
               )}

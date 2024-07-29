@@ -1,4 +1,4 @@
-// app/api/products/[productId]/variations
+// /api/products/[id]/variations
 
 import { NextResponse } from 'next/server';
 import db from '@/db/db';

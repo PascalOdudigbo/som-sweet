@@ -1,3 +1,4 @@
+// /api/users/signup/
 import { NextResponse } from 'next/server';
 import db from '@/db/db';
 import bcrypt from 'bcryptjs';
@@ -25,7 +26,6 @@ export async function POST(request: Request) {
     if (!customerRole) {
       return NextResponse.json({ error: 'Customer role not found' }, { status: 500 });
     }
-    console.log(customerRole)
     // Create new user
     const newUser = await db.user.create({
       data: {

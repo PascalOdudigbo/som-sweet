@@ -1,4 +1,4 @@
-// app/api/staff/[id]/toggle-active
+// /api/staff/[id]/toggle-active
 import db from '@/db/db';
 import { NextResponse } from 'next/server';
 

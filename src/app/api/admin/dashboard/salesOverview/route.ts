@@ -1,4 +1,4 @@
-// /api/adminDashboard/salesOverview
+// /api/admin/dashboard/salesOverview
 import { NextResponse } from 'next/server';
 import { getSalesOverview } from '@/utils/adminDashboard';
 

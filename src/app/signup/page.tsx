@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { showToast } from '@/utils/toast';
 import { signUp } from '@/utils/userManagement';
+import { EmailDetails, sendEmail } from '@/utils/emailJS';
 
 const FormInputWithIcon = dynamic(
   () => import('@/components/FormInputWithIcon/FormInputWithIcon'),
@@ -56,6 +57,15 @@ function SignUp() {
       const username = `${firstName} ${lastName}`.trim();
       await signUp({ username, email, password });
       showToast('success', 'Account created successfully');
+      const emailDetails: EmailDetails={
+        emailTitle: `Som' Sweet: Registration Successful!`,
+        username: username,
+        emailTo: email,
+        notice: `This email was intended for ${username}, if you're not the intended recipient please disregerd or delete it`,
+        emailBody: `Welcome to the best bakery the UK, we're thrilled to have you patronize us ${firstName}, your account is all setup and ready for use.`
+
+      }
+      await sendEmail(emailDetails, "info", "Confirmation email sent!")
       router.push('/signin');
     } catch (error) {
       console.error('Signup failed:', error);

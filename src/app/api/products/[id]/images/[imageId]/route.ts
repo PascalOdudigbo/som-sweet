@@ -1,7 +1,7 @@
+// /api/products/[Id]/images/[imageId]/
 import db from "@/db/db";
 import { NextResponse } from "next/server";
 
-// app/api/products/[Id]/images/[Id]/route.ts
 export async function DELETE(request: Request, { params }: { params: { id: string, imageId: string } }) {
   try {
     await db.productImage.delete({

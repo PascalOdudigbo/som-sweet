@@ -72,7 +72,7 @@ function Store() {
       const filteredProducts = products.filter(product => product?.category?.id === targetCategory?.id)
       setFilteredProducts(filteredProducts)
     }
-  }, [targetCategory, categories])
+  }, [products, targetCategory, categories])
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);

@@ -1,4 +1,4 @@
-// /api/adminDashboard/order
+// /api/admin/dashboard/order
 import { NextResponse } from 'next/server';
 import { getOrderStats } from '@/utils/adminDashboard';
 

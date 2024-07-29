@@ -7,7 +7,11 @@ import "./_offer_products.scss"
 import { showToast } from '@/utils/toast'
 import { getProductsForDiscount, removeProductFromDiscount } from '@/utils/discountManagement';
 
-function OfferProducts({ discountId }: { discountId: number }) {
+interface OfferProductsType  {
+    discountId: number;
+}
+
+function OfferProducts({discountId}: OfferProductsType) {
     const [products, setProducts] = useState<ProductType[]>([]);
     const [categories, setCategories] = useState<CategoryType[]>([])
     const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);

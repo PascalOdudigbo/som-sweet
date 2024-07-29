@@ -21,16 +21,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     if (user) {
+      const fetchCart = async () => {
+        if (user) {
+          const userCart = await getCart(user.id)
+          setCart(userCart)
+        }
+      }
       fetchCart()
     }
   }, [user])
 
-  const fetchCart = async () => {
-    if (user) {
-      const userCart = await getCart(user.id)
-      setCart(userCart)
-    }
-  }
 
   const addItem = async (product: ProductType, variation: ProductVariationType | null, quantity: number, customText: string) => {
     if (user) {

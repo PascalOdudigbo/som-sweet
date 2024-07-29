@@ -1,4 +1,4 @@
-// app/api/products/[id]/variations/[variationId]/route.ts
+// /api/products/[id]/variations/[variationId]/
 
 import { NextResponse } from 'next/server';
 import db from '@/db/db';

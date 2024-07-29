@@ -35,16 +35,16 @@ export async function getStaffStats() {
 // Customer data
 export async function getCustomerStats() {
   const totalCustomers = await db.user.count({
-    where: { role: { name: 'customer' } }
+    where: { role: { name: 'Customer' } }
   });
   const newThisMonth = await db.user.count({
     where: {
-      role: { name: 'customer' },
+      role: { name: 'Customer' },
       createdAt: { gte: new Date(new Date().setDate(1)) } // First day of current month
     }
   });
   const pendingApprovals = await db.user.count({
-    where: { role: { name: 'customer' }, active: false }
+    where: { role: { name: 'Customer' }, active: false }
   });
 
   return { totalCustomers, newThisMonth, pendingApprovals };
@@ -96,7 +96,7 @@ export async function getRecentActivity() {
   });
 
   const recentOrder = await db.order.findFirst({
-    where: { status: 'Shipped' },
+    where: { status: 'Pending' },
     orderBy: { updatedAt: 'desc' },
     select: { id: true }
   });

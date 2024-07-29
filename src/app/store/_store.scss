@@ -84,7 +84,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .shop_main_container {
         .shop_offers_container,
         .shop_categories_container,
@@ -101,18 +101,18 @@
     }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
     .shop_main_container {
         .categories_container{
             grid-template-columns: repeat(4, 1fr);
         }
         .products_container {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 }
 
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
     .shop_main_container {
         .categories_container,
         .products_container {

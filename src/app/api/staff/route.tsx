@@ -1,4 +1,4 @@
-// app/api/staff/route.ts
+// /api/staff/route.ts
 import db from '@/db/db';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';

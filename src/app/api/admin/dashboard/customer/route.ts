@@ -1,4 +1,4 @@
-// app/api/adminDashboard/customer/route.ts
+// app/api/admin/dashboard/customer/
 import { NextResponse } from 'next/server';
 import { getCustomerStats } from '@/utils/adminDashboard';
 

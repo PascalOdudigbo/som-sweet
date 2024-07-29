@@ -1,3 +1,4 @@
+// /api/products/[id]/delete-or-deactivate
 import { NextResponse } from 'next/server';
 import db from '@/db/db';
 import { deleteCloudinaryImage } from '@/utils/cloudinary';

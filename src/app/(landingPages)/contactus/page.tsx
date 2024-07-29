@@ -24,7 +24,7 @@ function ContactUs() {
         <section className='contactus_text_form_container flex_column'>
           <section className='top_text_section flex_column'>
             <h1 className='top_text_section_title'>GET IN TOUCH</h1>
-            <p className='top_text_section_text'>Welcome to Som' Sweet, your go-to cake bakery in the UK! We are passionate about creating delicious and beautifully crafted cakes for all occasions. Whether it's a birthday, wedding, or any special celebration, our team is here to sweeten your moments with our delectable treats.</p>
+            <p className='top_text_section_text'>{"Welcome to Som' Sweet, your go-to cake bakery in the UK! We are passionate about creating delicious and beautifully crafted cakes for all occasions. Whether it's a birthday, wedding, or any special celebration, our team is here to sweeten your moments with our delectable treats."}</p>
           </section>
 
           <form className='contactus_form flex_column' onSubmit={handleSubmit}>
