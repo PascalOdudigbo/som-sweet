@@ -106,3 +106,90 @@ export async function updateOrderStatus(userId: number, id: number, status: stri
     throw error;
   }
 }
+
+export async function getAllOrders(): Promise<OrderType[]> {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const response = await fetch('/api/admin/orders', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch orders');
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching all orders:', error);
+    showToast('error', 'Failed to fetch orders');
+    throw error;
+  }
+}
+
+export async function deleteUnpaidAndPendingOrders(): Promise<void> {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const response = await fetch('/api/admin/orders/delete-unpaid', {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to delete unpaid and pending orders');
+    }
+
+    const result = await response.json();
+    showToast('success', result.message);
+  } catch (error) {
+    console.error('Error deleting unpaid and pending orders:', error);
+    showToast('error', 'Failed to delete unpaid and pending orders');
+    throw error;
+  }
+}
+
+
+
+export async function updateOrderStatusAdmin(orderId: number, newStatus: string): Promise<OrderType> {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const response = await fetch(`/api/admin/orders`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ orderId, status: newStatus }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to update order status');
+    }
+
+    const updatedOrder = await response.json();
+    showToast('success', `Order #${orderId} status updated to ${newStatus}`);
+    return updatedOrder;
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    showToast('error', 'Failed to update order status');
+    throw error;
+  }
+}

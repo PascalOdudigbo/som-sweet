@@ -16,7 +16,7 @@ function Footer() {
         <section className='footer_links_contaner flex_column_center'>
           <Link className='footer_link' href="/store">Store</Link>
           <Link className='footer_link' href="/#aboutus">About Us</Link>
-          <Link className='footer_link' href="">Store Policies</Link>
+          <Link className='footer_link' href="/store-policies">Store Policies</Link>
           <Link className='footer_link' href="/#contactus">Contact Us</Link>
         </section>
 

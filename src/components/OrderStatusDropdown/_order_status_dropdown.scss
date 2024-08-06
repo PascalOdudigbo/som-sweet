@@ -1,0 +1,16 @@
+.order_status_dropdown {
+    .dropdown_wrapper {
+      min-width: 120px;
+    }
+  
+    .dropdown_button {
+      padding: 0.5rem;
+      font-size: 0.9em;
+      font-family: var(--font-questrial);
+    }
+  
+    .dropdown_items {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  }

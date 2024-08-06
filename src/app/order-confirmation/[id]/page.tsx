@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { NavChildFooterLayout, Loading } from '@/components'
-import { getOrderById, updateOrderStatus } from '@/utils/orderManagement'
+import { getOrderById } from '@/utils/orderManagement'
 import { useAuth } from '@/hooks/useAuth'
 import { OrderType } from '@/utils/allModelTypes'
 import './_order_confirmation.scss'
@@ -59,7 +59,7 @@ function OrderConfirmation() {
         <div className='refund_policy'>
           <h3>Refund Policy</h3>
           <p>You can request a refund prior to receiving your order. Please read our full refund policy for more details.</p>
-          <Link href="/policies/#refunds" className='refund_policy_link'>Read Full Refund Policy</Link>
+          <Link href="/store-policies/#refunds" className='refund_policy_link'>Read Full Refund Policy</Link>
         </div>
         <Link href="/orders" className='view_orders_button custom_large_button'>View All Orders</Link>
       </main>

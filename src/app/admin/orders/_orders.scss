@@ -1,0 +1,79 @@
+// app/admin/orders/_ordersManagement.scss
+.orders_management_wrapper {
+    padding: 2rem;
+  
+    .orders_management_header {
+      width: 96%;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: space-between;
+  
+      h2 {
+        font-size: clamp(24px, 5vw, 40px);
+      }
+    }
+  
+    .search_wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 97%;
+      height: 90px;
+      padding: 0.2em 1em;
+      background-color: var(--color-purple);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .orders_table {
+      margin-left: auto;
+      margin-right: auto;
+      width: 96%;
+  
+      .table_headers_wrapper {
+        border-radius: 5px;
+  
+        .table_header {
+          font-family: var(--font-inter);
+          height: 10px;
+          padding: 10px;
+          background-color: var(--color-lavenderPink);
+          font-size: 0.9em;
+          font-weight: 900;
+          color: #444;
+        }
+      }
+    }
+  
+    .no_orders_text {
+      text-transform: capitalize;
+      color: var(--color-grey);
+      width: 100%;
+      text-align: center;
+      font-size: 2em;
+      margin-top: 40px;
+      font-family: var(--font-inter);
+    }
+  }
+  
+  // components/OrderRow/_orderRow.scss
+  
+  
+  // components/OrderStatusDropdown/_orderStatusDropdown.scss
+  .order_status_dropdown {
+    .dropdown_wrapper {
+      min-width: 120px;
+    }
+  
+    .dropdown_button {
+      padding: 0.5rem;
+      font-size: 0.9em;
+      font-family: var(--font-questrial);
+    }
+  
+    .dropdown_items {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+  }

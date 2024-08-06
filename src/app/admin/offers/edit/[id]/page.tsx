@@ -169,7 +169,7 @@ function EditOffer({ params }: { params: { id: string } }) {
                 </div>
             </form>
 
-            <OfferProducts discountId={discount.id}/>
+            <OfferProducts/>
         </div>
     )
 }

@@ -168,3 +168,13 @@ export const handleImageFileChangeEditDiscount = (
     });
   }
 };
+
+export function searchDiscounts(searchTerm: string, discounts: DiscountType[]): DiscountType[] {
+  if (searchTerm === "") {
+    return discounts;
+  } else {
+    return discounts.filter(discount => 
+      discount.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+}

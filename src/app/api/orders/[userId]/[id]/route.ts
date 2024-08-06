@@ -25,7 +25,8 @@ export async function GET(
       },
       include: { orderItems: {
         include: {
-          product: true
+          product: true,
+          variation: true,
         }
       } }
     });

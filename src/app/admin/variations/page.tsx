@@ -6,18 +6,21 @@ import { ProductVariationType } from '@/utils/allModelTypes';
 import "./_variations.scss"
 import { showToast } from '@/utils/toast'
 import { getProductVariations } from '@/utils/productVariationManagement';
+import { useParams, usePathname } from 'next/navigation';
 
-function Variations({ productId }: { productId: number }) {
+function Variations() {
     const [variations, setVariations] = useState<ProductVariationType[]>([]);
     const [filteredVariations, setFilteredVariations] = useState<ProductVariationType[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
-
+    const routeParams = useParams()
+    const productId = routeParams.id
+    
     useEffect(() => {
         async function fetchVariations() {
             try {
                 setIsLoading(true);
-                const fetchedVariations = await getProductVariations(productId);
+                const fetchedVariations = await getProductVariations(parseInt(productId.toString()));
                 setVariations(fetchedVariations);
                 setFilteredVariations(fetchedVariations);
             } catch (error) {
@@ -73,7 +76,7 @@ function Variations({ productId }: { productId: number }) {
                             key={variation.id}
                             variation={variation}
                             setVariations={setVariations}
-                            productId={productId}
+                            productId={parseInt(productId.toString())}
                         />
                     ))}
                 </tbody>

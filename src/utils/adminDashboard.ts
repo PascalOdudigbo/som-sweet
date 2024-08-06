@@ -81,7 +81,7 @@ export async function getOfferStats() {
 // Order data
 export async function getOrderStats() {
   const totalOrders = await db.order.count();
-  const pendingOrders = await db.order.count({ where: { status: 'Pending' } });
+  const pendingOrders = await db.order.count({ where: { status: 'Paid' } });
   const shippedOrders = await db.order.count({ where: { status: 'Shipped' } });
 
   return { totalOrders, pendingOrders, shippedOrders };

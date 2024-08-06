@@ -1,0 +1,119 @@
+// app/admin/refunds/_refunds.scss
+
+.refunds_management_wrapper {
+    padding: 2rem;
+  
+    .section_title {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .search_wrapper {
+      margin-bottom: 1rem;
+    }
+  
+    .refunds_table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+  
+      th, td {
+        border: 1px solid var(--color-grey);
+        padding: 0.5rem;
+        text-align: left;
+      }
+  
+      th {
+        background-color: var(--color-lavenderPink);
+        font-weight: bold;
+      }
+  
+      tr:not(.expanded_details) {
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+  
+        &:hover {
+          background-color: var(--color-periwinkle);
+        }
+      }
+  
+      .expanded_details {
+        background-color: var(--color-lavenderPink);
+  
+        td {
+          padding: 1rem;
+        }
+  
+        h3, h4 {
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+  
+        ul {
+          list-style-type: none;
+          padding-left: 0;
+        }
+  
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+  
+      .approve_button, .deny_button {
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+  
+      .approve_button {
+        background-color: var(--color-periwinkle);
+        color: white;
+  
+        &:hover {
+          background-color: var(--color-cerulean);
+        }
+      }
+  
+      .deny_button {
+        background-color: var(--color-lavenderPink);
+        color: var(--color-black);
+  
+        &:hover {
+          background-color: var(--color-red);
+          color: white;
+        }
+      }
+    }
+  
+    .no_refunds_text {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      color: var(--color-grey);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .refunds_management_wrapper {
+      .refunds_table {
+        font-size: 0.9rem;
+  
+        th, td {
+          padding: 0.3rem;
+        }
+  
+        .approve_button, .deny_button {
+          padding: 0.3rem 0.6rem;
+          font-size: 0.8rem;
+        }
+  
+        .expanded_details {
+          td {
+            padding: 0.5rem;
+          }
+        }
+      }
+    }
+  }

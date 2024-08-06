@@ -24,6 +24,9 @@ export {default as StaffRow} from "./StaffRow/StaffRow";
 export {default as RoleRow} from "./RoleRow/RoleRow";
 export {default as Loading} from "./Loading/Loading";
 export {default as CartItem} from "./CartItem/CartItem";
+export {default as OrderRow} from "./OrderRow/OrderRow";
+export {default as OrderStatusDropdown} from "./OrderStatusDropdown/OrderStatusDropdown";
+export { default as Pagination } from './Pagination/Pagination';
 
 //Layouts
 export {default as NavChildFooterLayout} from "./layouts/NavChildrenFooterLayout";

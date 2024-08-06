@@ -6,12 +6,12 @@ import { CategoryType, ProductType } from '@/utils/allModelTypes';
 import "./_offer_products.scss"
 import { showToast } from '@/utils/toast'
 import { getProductsForDiscount, removeProductFromDiscount } from '@/utils/discountManagement';
+import { useParams } from 'next/navigation'
 
-interface OfferProductsType  {
-    discountId: number;
-}
+export default function OfferProductsPage() {
+    const params = useParams()
+    const discountId = parseInt(params.id.toString() || '0', 10)
 
-function OfferProducts({discountId}: OfferProductsType) {
     const [products, setProducts] = useState<ProductType[]>([]);
     const [categories, setCategories] = useState<CategoryType[]>([])
     const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
@@ -20,6 +20,7 @@ function OfferProducts({discountId}: OfferProductsType) {
 
     useEffect(() => {
         async function fetchProducts() {
+            if (discountId === 0) return;
             try {
                 setIsLoading(true);
                 const fetchedProducts = await getProductsForDiscount(discountId);
@@ -33,8 +34,7 @@ function OfferProducts({discountId}: OfferProductsType) {
             }
         }
 
-          // Fetch categories from API
-          async function fetchCategories() {
+        async function fetchCategories() {
             try {
                 const response = await fetch('/api/categories');
                 const data = await response.json();
@@ -112,5 +112,3 @@ function OfferProducts({discountId}: OfferProductsType) {
         </main>
     )
 }
-
-export default OfferProducts

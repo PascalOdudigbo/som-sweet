@@ -56,6 +56,33 @@ export async function requestRefund(orderId: number, amount: number, reason: str
   }
 }
 
+export async function getAllRefunds(): Promise<RefundType[]> {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const response = await fetch('/api/refunds', {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to fetch refunds');
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error('Error fetching refunds:', error);
+    showToast('error', 'Failed to fetch refunds');
+    throw error;
+  }
+}
+
+
 export async function approveRefund(refundId: number): Promise<RefundType> {
   try {
     const token = localStorage.getItem('token');
@@ -70,13 +97,14 @@ export async function approveRefund(refundId: number): Promise<RefundType> {
       },
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to approve refund');
+      throw new Error(data.error || 'Failed to approve refund');
     }
 
     showToast('success', 'Refund approved successfully');
-    return response.json();
+    return data;
   } catch (error) {
     console.error('Error approving refund:', error);
     showToast('error', 'Failed to approve refund');
@@ -84,4 +112,31 @@ export async function approveRefund(refundId: number): Promise<RefundType> {
   }
 }
 
-// ... (keep other existing functions)
+
+export async function denyRefund(refundId: number): Promise<RefundType> {
+  try {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+
+    const response = await fetch(`/api/refunds/${refundId}/deny`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to deny refund');
+    }
+
+    showToast('info', 'Refund request denied');
+    return response.json();
+  } catch (error) {
+    console.error('Error denying refund:', error);
+    showToast('error', 'Failed to deny refund');
+    throw error;
+  }
+}

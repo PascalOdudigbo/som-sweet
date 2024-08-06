@@ -1,0 +1,46 @@
+.order_row {
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--color-grey);
+      font-family: var(--font-questrial);
+    }
+  
+    .view_details_button {
+      background-color: var(--color-periwinkle);
+      color: var(--color-black);
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-questrial);
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: var(--color-cerulean);
+        color: var(--color-white);
+      }
+    }
+  }
+  
+  .order_details_row {
+    td {
+      padding: 1rem;
+      background-color: var(--color-lavenderPink);
+      font-family: var(--font-questrial);
+    }
+  
+    h4 {
+      margin-bottom: 0.5rem;
+      font-family: var(--font-inter);
+      font-weight: 600;
+    }
+  
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+  
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }

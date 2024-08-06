@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { DiscountType } from '@/utils/allModelTypes'
-import { getAllDiscounts, deleteDiscount } from '@/utils/discountManagement'
+import { getAllDiscounts, deleteDiscount, searchDiscounts } from '@/utils/discountManagement'
 import { showToast } from '@/utils/toast'
 import "./_offers.scss"
-import { OfferRow, Search } from '@/components'
+import { Loading, OfferRow, Search } from '@/components'
 
 function Offers() {
     const [discounts, setDiscounts] = useState<DiscountType[]>([])
@@ -38,21 +38,18 @@ function Offers() {
         }
     }
 
-    const handleDelete = async (id: number) => {
-        if (window.confirm('Are you sure you want to delete this discount?')) {
-            try {
-                await deleteDiscount(id)
-                setDiscounts(discounts.filter(discount => discount.id !== id))
-                showToast('success', 'Discount deleted successfully')
-            } catch (error) {
-                console.error('Failed to delete discount:', error)
-                showToast('error', 'Failed to delete discount')
-            }
-        }
-    }
+    useEffect(() => {
+        const filtered = searchDiscounts(searchTerm, discounts);
+        setFilteredDiscounts(filtered);
+    }, [searchTerm, discounts]);
+
+    const handleSearch = (term: string) => {
+        setSearchTerm(term);
+    };
+
 
     if (isLoading) {
-        return <div className="loading">Loading...</div>
+        return <Loading/>;
     }
 
     return (
@@ -63,7 +60,7 @@ function Offers() {
             </header>
 
             <div className="search_wrapper">
-                <Search />
+                <Search onSearch={handleSearch}/>
             </div>
 
             {filteredDiscounts.length > 0 ? (
@@ -86,7 +83,6 @@ function Offers() {
                                 key={discount.id}
                                 discount={discount}
                                 setDiscounts={setDiscounts}
-                                onDelete={handleDelete}
                             />
                         ))}
                     </tbody>

@@ -1,0 +1,36 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  
+    ul {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+    }
+  
+    li {
+      margin: 0 0.5rem;
+  
+      &.active button {
+        background-color: var(--color-cerulean);
+        color: var(--color-white);
+      }
+    }
+  
+    button {
+      background-color: var(--color-periwinkle);
+      border: none;
+      color: var(--color-black);
+      cursor: pointer;
+      font-family: var(--font-questrial);
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: var(--color-cerulean);
+        color: var(--color-white);
+      }
+    }
+  }

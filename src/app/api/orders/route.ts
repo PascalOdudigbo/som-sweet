@@ -37,7 +37,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cart not found' }, { status: 404 });
     }
 
-    
     const order = await prisma.order.create({
       data: {
         userId,
